@@ -6,7 +6,17 @@
 import scrapy
 
 
-class AviationdataItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class AirlineItem(scrapy.Item):
+    name = scrapy.Field()
+    iata = scrapy.Field()
+    icao = scrapy.Field()
+    callsign = scrapy.Field()
+    country_id = scrapy.Field()
+    remark = scrapy.Field()
+    link = scrapy.Field()           # Wikipedia-link to airline
+
+class CountryItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    link = scrapy.Field()           # Wikipedia-link for country
+    flag_url = scrapy.Field()       # Flag-Image-URL

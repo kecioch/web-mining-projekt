@@ -1,0 +1,6158 @@
+[
+{
+  "name": "Abaeté Aviação",
+  "iata": "E4",
+  "icao": "ABJ",
+  "callsign": "ABAETE",
+  "country_id": "Brasilien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Abaeté_Aviação"
+},
+{
+  "name": "Abelag Aviation",
+  "iata": "W9",
+  "icao": "AAB",
+  "callsign": "ABG",
+  "country_id": "Belgien",
+  "remark": "C (Business- u. Ambulanzflüge)",
+  "link": "https://de.wikipedia.org/wiki/Abelag_Aviation"
+},
+{
+  "name": "ABS Jets",
+  "iata": "–",
+  "icao": "ABP",
+  "callsign": "BAIR",
+  "country_id": "Tschechien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/ABS_Jets"
+},
+{
+  "name": "Abu Dhabi Aviation",
+  "iata": "–",
+  "icao": "AXU",
+  "callsign": "–",
+  "country_id": "Vereinigte_Arabische_Emirate",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Abu_Dhabi_Aviation"
+},
+{
+  "name": "ACM Air Charter",
+  "iata": "–",
+  "icao": "BVR",
+  "callsign": "BAVARIAN",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/ACM_Air_Charter"
+},
+{
+  "name": "Aegean Airlines",
+  "iata": "A3",
+  "icao": "AEE",
+  "callsign": "AEGEAN",
+  "country_id": "Griechenland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aegean_Airlines"
+},
+{
+  "name": "Aer Arann Islands",
+  "iata": "RE",
+  "icao": "REA",
+  "callsign": "AER ARANN",
+  "country_id": "Irland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Aer_Arann_Islands"
+},
+{
+  "name": "Aer Lingus",
+  "iata": "EI",
+  "icao": "EIN",
+  "callsign": "SHAMROCK",
+  "country_id": "Irland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Aer_Lingus"
+},
+{
+  "name": "Aero Charter",
+  "iata": "DW",
+  "icao": "UCR",
+  "callsign": "CHARTER UKRAINE",
+  "country_id": "Ukraine",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Aero_Charter"
+},
+{
+  "name": "Aero Contractors (Nigeria)",
+  "iata": "AJ",
+  "icao": "NIG",
+  "callsign": "AEROLINE",
+  "country_id": "Nigeria",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aero_Contractors_(Nigeria)"
+},
+{
+  "name": "Aero-Dienst",
+  "iata": "–",
+  "icao": "ADN",
+  "callsign": "AERODIENST",
+  "country_id": "Deutschland",
+  "remark": "P (auch Ambulanzflüge)",
+  "link": "https://de.wikipedia.org/wiki/Aero-Dienst"
+},
+{
+  "name": "Aero-Service",
+  "iata": "BF",
+  "icao": "RSR",
+  "callsign": "CONGOSERV",
+  "country_id": "Republik_Kongo",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aero-Service"
+},
+{
+  "name": "Aerogaviota",
+  "iata": "KG",
+  "icao": "GTV",
+  "callsign": "AEROGAVIOTA",
+  "country_id": "Kuba",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Aerogaviota"
+},
+{
+  "name": "Aeroitalia",
+  "iata": "XZ",
+  "icao": "AEZ",
+  "callsign": "AEROITALIA",
+  "country_id": "Italien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aeroitalia"
+},
+{
+  "name": "Aeroitalia Regional",
+  "iata": "KS",
+  "icao": "KON",
+  "callsign": "AIR CONNECT",
+  "country_id": "Rumänien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aeroitalia_Regional"
+},
+{
+  "name": "AeroRescue",
+  "iata": "–",
+  "icao": "RES",
+  "callsign": "Search",
+  "country_id": "Australien",
+  "remark": "Search and Rescue",
+  "link": "https://de.wikipedia.org/wiki/AeroRescue"
+},
+{
+  "name": "Aerostar Airlines",
+  "iata": "–",
+  "icao": "UAR",
+  "callsign": "AEROSTAR",
+  "country_id": "Ukraine",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Aerostar_Airlines"
+},
+{
+  "name": "Aerovías Dap",
+  "iata": "–",
+  "icao": "DAP",
+  "callsign": "DAP",
+  "country_id": "Chile",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Aerovías_Dap"
+},
+{
+  "name": "Aeroflot",
+  "iata": "SU",
+  "icao": "AFL",
+  "callsign": "AEROFLOT",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aeroflot"
+},
+{
+  "name": "Aerolíneas Argentinas",
+  "iata": "AR",
+  "icao": "ARG",
+  "callsign": "ARGENTINA",
+  "country_id": "Argentinien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aerolíneas_Argentinas"
+},
+{
+  "name": "Aerolitoral",
+  "iata": "5D",
+  "icao": "SLI",
+  "callsign": "COSTERA",
+  "country_id": "Mexiko",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aerolitoral"
+},
+{
+  "name": "Aeroméxico",
+  "iata": "AM",
+  "icao": "AMX",
+  "callsign": "AEROMEXICO",
+  "country_id": "Mexiko",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aeroméxico"
+},
+{
+  "name": "Aerotours",
+  "iata": "–",
+  "icao": "ATU",
+  "callsign": "BERLIN SKY",
+  "country_id": "Deutschland",
+  "remark": "C/S/T",
+  "link": "https://de.wikipedia.org/wiki/Aerotours"
+},
+{
+  "name": "Afit",
+  "iata": "–",
+  "icao": "KIE",
+  "callsign": "TWEETY",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Afit"
+},
+{
+  "name": "Africa Charter Airline",
+  "iata": "–",
+  "icao": "FSK",
+  "callsign": "AFRICAN SKY",
+  "country_id": "Südafrika",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Africa_Charter_Airline"
+},
+{
+  "name": "African Express Airways",
+  "iata": "XU",
+  "icao": "AXK",
+  "callsign": "EXPRESS JET",
+  "country_id": "Kenia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/African_Express_Airways"
+},
+{
+  "name": "Afriqiyah Airways",
+  "iata": "8U",
+  "icao": "AAW",
+  "callsign": "AFRIQIYAH",
+  "country_id": "Datei:Flag_of_Libya.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Afriqiyah_Airways"
+},
+{
+  "name": "Air Algérie",
+  "iata": "AH",
+  "icao": "DAH",
+  "callsign": "AIR ALGERIE",
+  "country_id": "Algerien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Algérie"
+},
+{
+  "name": "Air Alliance Express",
+  "iata": "–",
+  "icao": "AYY",
+  "callsign": "LUPUS",
+  "country_id": "Deutschland",
+  "remark": "C/S",
+  "link": "https://de.wikipedia.org/wiki/Air_Alliance_Express"
+},
+{
+  "name": "Air Alsie",
+  "iata": "6I",
+  "icao": "MMD",
+  "callsign": "MERMAID",
+  "country_id": "Dänemark",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Air_Alsie"
+},
+{
+  "name": "Air Antilles",
+  "iata": "3S",
+  "icao": "GUY",
+  "callsign": "GREEN BIRD",
+  "country_id": "Guadeloupe",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Antilles"
+},
+{
+  "name": "Air Arabia",
+  "iata": "G9",
+  "icao": "ABY",
+  "callsign": "ARABIA",
+  "country_id": "Vereinigte_Arabische_Emirate",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Air_Arabia"
+},
+{
+  "name": "Air Arabia Egypt",
+  "iata": "E5",
+  "icao": "RBG",
+  "callsign": "AIR ARABIA",
+  "country_id": "Ägypten",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Air_Arabia_Egypt"
+},
+{
+  "name": "Air Arabia Maroc",
+  "iata": "3O",
+  "icao": "MAC",
+  "callsign": "AIR ARABIA",
+  "country_id": "Marokko",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Air_Arabia_Maroc"
+},
+{
+  "name": "AirAsia",
+  "iata": "AK",
+  "icao": "AXM",
+  "callsign": "ASIAN EXPRESS",
+  "country_id": "Malaysia",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/AirAsia"
+},
+{
+  "name": "Air Astana",
+  "iata": "KC",
+  "icao": "KZR",
+  "callsign": "ASTANALINE",
+  "country_id": "Kasachstan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Astana"
+},
+{
+  "name": "Air Astra",
+  "iata": "2A",
+  "icao": "AWA",
+  "callsign": "CAPELLA",
+  "country_id": "Bangladesch",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Astra"
+},
+{
+  "name": "Air Atlanta Icelandic",
+  "iata": "CC",
+  "icao": "ABD",
+  "callsign": "ATLANTA",
+  "country_id": "Island",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Air_Atlanta_Icelandic"
+},
+{
+  "name": "Air Austral",
+  "iata": "UU",
+  "icao": "REU",
+  "callsign": "REUNION",
+  "country_id": "Réunion",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Austral"
+},
+{
+  "name": "Air Baltic",
+  "iata": "BT",
+  "icao": "BTI",
+  "callsign": "AIRBALTIC",
+  "country_id": "Lettland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Baltic"
+},
+{
+  "name": "Air Belgium (2016)",
+  "iata": "KF",
+  "icao": "ABB",
+  "callsign": "AIR BELGIUM",
+  "country_id": "Belgien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Air_Belgium_(2016)"
+},
+{
+  "name": "airblue",
+  "iata": "PA[1]",
+  "icao": "ABQ",
+  "callsign": "PAKBLUE",
+  "country_id": "Pakistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Airblue"
+},
+{
+  "name": "Airfast Indonesia",
+  "iata": "FS",
+  "icao": "AFE",
+  "callsign": "AIRFAST",
+  "country_id": "Indonesien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Airfast_Indonesia"
+},
+{
+  "name": "Air Botswana",
+  "iata": "BP",
+  "icao": "BOT",
+  "callsign": "BOTSWANA",
+  "country_id": "Botswana",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Botswana"
+},
+{
+  "name": "Air Bucharest",
+  "iata": "–",
+  "icao": "BUR",
+  "callsign": "AIR BUCHAREST",
+  "country_id": "Rumänien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Air_Bucharest"
+},
+{
+  "name": "Air Burkina",
+  "iata": "2J",
+  "icao": "VBW",
+  "callsign": "BURKINA",
+  "country_id": "Burkina_Faso",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Burkina"
+},
+{
+  "name": "Air Busan",
+  "iata": "BX",
+  "icao": "ABL",
+  "callsign": "AIR BUSAN",
+  "country_id": "Südkorea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Busan"
+},
+{
+  "name": "Air Cairo",
+  "iata": "SM",
+  "icao": "MSC",
+  "callsign": "AIR CAIRO",
+  "country_id": "Ägypten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Cairo"
+},
+{
+  "name": "Air Calédonie",
+  "iata": "TY",
+  "icao": "TPC",
+  "callsign": "AIRCAL",
+  "country_id": "Neukaledonien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Calédonie"
+},
+{
+  "name": "Air Cambodia",
+  "iata": "K6",
+  "icao": "KHV",
+  "callsign": "CAMBODIA AIR",
+  "country_id": "Kambodscha",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Cambodia"
+},
+{
+  "name": "Air Canada",
+  "iata": "AC",
+  "icao": "ACA",
+  "callsign": "AIR CANADA",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Canada"
+},
+{
+  "name": "Air Canada Rouge",
+  "iata": "RV",
+  "icao": "ROU",
+  "callsign": "ROUGE",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Canada_Rouge"
+},
+{
+  "name": "Air Caraïbes",
+  "iata": "TX",
+  "icao": "FWI",
+  "callsign": "FRENCH WEST",
+  "country_id": "Guadeloupe",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Caraïbes"
+},
+{
+  "name": "Air Creebec",
+  "iata": "YN",
+  "icao": "CRQ",
+  "callsign": "CREE",
+  "country_id": "Kanada",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Air_Creebec"
+},
+{
+  "name": "Air Chathams",
+  "iata": "CV",
+  "icao": "CVA",
+  "callsign": "CHATHAM",
+  "country_id": "Neuseeland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Chathams"
+},
+{
+  "name": "Air China",
+  "iata": "CA",
+  "icao": "CCA",
+  "callsign": "AIR CHINA",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_China"
+},
+{
+  "name": "Air Class Líneas Aéreas",
+  "iata": "QD",
+  "icao": "QCL",
+  "callsign": "ACLA",
+  "country_id": "Uruguay",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Air_Class_Líneas_Aéreas"
+},
+{
+  "name": "Air Corsica",
+  "iata": "XK",
+  "icao": "CCM",
+  "callsign": "CORSICA",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Corsica"
+},
+{
+  "name": "Air Côte d’Ivoire",
+  "iata": "HF",
+  "icao": "VRE",
+  "callsign": "COTE D'IVOIRE",
+  "country_id": "Elfenbeinküste",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Côte_d’Ivoire"
+},
+{
+  "name": "Air Do",
+  "iata": "HD",
+  "icao": "ADO",
+  "callsign": "AIR DO",
+  "country_id": "Japan",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Air_Do"
+},
+{
+  "name": "Air Dolomiti",
+  "iata": "EN",
+  "icao": "DLA",
+  "callsign": "DOLOMITI",
+  "country_id": "Italien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Dolomiti"
+},
+{
+  "name": "Air Europa",
+  "iata": "UX",
+  "icao": "AEA",
+  "callsign": "EUROPA",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Europa"
+},
+{
+  "name": "Air Europa Express",
+  "iata": "X5",
+  "icao": "OVA",
+  "callsign": "AERONOVA",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Europa_Express"
+},
+{
+  "name": "Air Excel",
+  "iata": "–",
+  "icao": "XLL",
+  "callsign": "–",
+  "country_id": "Tansania",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Excel"
+},
+{
+  "name": "AirExplore",
+  "iata": "ED",
+  "icao": "AXE",
+  "callsign": "GALILEO",
+  "country_id": "Slowakei",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/AirExplore"
+},
+{
+  "name": "Air France",
+  "iata": "AF",
+  "icao": "AFR",
+  "callsign": "AIR FRANCE",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_France"
+},
+{
+  "name": "Air France Hop",
+  "iata": "A5",
+  "icao": "HOP",
+  "callsign": "AIR HOP",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_France_Hop"
+},
+{
+  "name": "AirGO Private Airline",
+  "iata": "–",
+  "icao": "XGO",
+  "callsign": "PASTIS",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/AirGO_Private_Airline"
+},
+{
+  "name": "Air Greenland",
+  "iata": "GL",
+  "icao": "GRL",
+  "callsign": "GREENLANDAIR",
+  "country_id": "Grönland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Greenland"
+},
+{
+  "name": "Air Guilin",
+  "iata": "GT",
+  "icao": "CGH",
+  "callsign": "WELKIN",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Guilin"
+},
+{
+  "name": "Air Hamburg",
+  "iata": "HH",
+  "icao": "AHO",
+  "callsign": "AIR HAMBURG",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Air_Hamburg"
+},
+{
+  "name": "Air Independence",
+  "iata": "–",
+  "icao": "DLY oder JTV",
+  "callsign": "DAILY",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Air_Independence"
+},
+{
+  "name": "Air India",
+  "iata": "AI",
+  "icao": "AIC",
+  "callsign": "AIR INDIA",
+  "country_id": "Indien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_India"
+},
+{
+  "name": "Air India Express",
+  "iata": "IX",
+  "icao": "AXB",
+  "callsign": "EXPRESS INDIA",
+  "country_id": "Indien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Air_India_Express"
+},
+{
+  "name": "Air India Regional",
+  "iata": "9I",
+  "icao": "LLR",
+  "callsign": "ALLIED",
+  "country_id": "Indien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_India_Regional"
+},
+{
+  "name": "Air Inuit",
+  "iata": "3H",
+  "icao": "AIE",
+  "callsign": "AIR INUIT",
+  "country_id": "Kanada",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Air_Inuit"
+},
+{
+  "name": "Air Japan",
+  "iata": "NQ",
+  "icao": "AJX",
+  "callsign": "AIR JAPAN",
+  "country_id": "Japan",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Air_Japan"
+},
+{
+  "name": "Air Kiribati",
+  "iata": "IK",
+  "icao": "AKL",
+  "callsign": "KIRIBATI",
+  "country_id": "Kiribati",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Kiribati"
+},
+{
+  "name": "Air Koryo",
+  "iata": "JS",
+  "icao": "KOR",
+  "callsign": "AIR KORYO",
+  "country_id": "Nordkorea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Koryo"
+},
+{
+  "name": "Air Kyrgyzstan",
+  "iata": "QH",
+  "icao": "LYN",
+  "callsign": "ALTYN AVIA",
+  "country_id": "Datei:Flag_of_Kyrgyzstan.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Kyrgyzstan"
+},
+{
+  "name": "Air Libya",
+  "iata": "7Q",
+  "icao": "TLR",
+  "callsign": "AIR LIBYA",
+  "country_id": "Datei:Flag_of_Libya.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Libya"
+},
+{
+  "name": "Airlink (Südafrika)",
+  "iata": "4Z",
+  "icao": "LNK",
+  "callsign": "LINK",
+  "country_id": "Südafrika",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Airlink_(Südafrika)"
+},
+{
+  "name": "Air Link",
+  "iata": "DR",
+  "icao": "UNK",
+  "callsign": "UNK",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Link"
+},
+{
+  "name": "Air Macau",
+  "iata": "NX",
+  "icao": "AMU",
+  "callsign": "AIR MACAU",
+  "country_id": "Macau",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Air_Macau"
+},
+{
+  "name": "Air Marshall Islands",
+  "iata": "CW",
+  "icao": "MRS",
+  "callsign": "MARSHALL ISLANDS",
+  "country_id": "Marshallinseln",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Marshall_Islands"
+},
+{
+  "name": "Air Mauritius",
+  "iata": "MK",
+  "icao": "MAU",
+  "callsign": "AIRMAURITIUS",
+  "country_id": "Mauritius",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Mauritius"
+},
+{
+  "name": "Air Mediterranean",
+  "iata": "MV",
+  "icao": "MAR",
+  "callsign": "HELLASMED",
+  "country_id": "Griechenland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Air_Mediterranean"
+},
+{
+  "name": "Air Moldova",
+  "iata": "9U",
+  "icao": "MLD",
+  "callsign": "AIR MOLDOVA",
+  "country_id": "Republik_Moldau",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Moldova"
+},
+{
+  "name": "Air Montenegro",
+  "iata": "ZQ",
+  "icao": "MNE",
+  "callsign": "MOUNT EAGLE",
+  "country_id": "Montenegro",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Montenegro"
+},
+{
+  "name": "Air New Zealand",
+  "iata": "NZ",
+  "icao": "ANZ",
+  "callsign": "NEW ZEALAND",
+  "country_id": "Neuseeland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_New_Zealand"
+},
+{
+  "name": "Air Niugini",
+  "iata": "PX",
+  "icao": "ANG",
+  "callsign": "NIUGINI",
+  "country_id": "Papua-Neuguinea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Niugini"
+},
+{
+  "name": "Air North",
+  "iata": "4N",
+  "icao": "ANT",
+  "callsign": "AIR NORTH",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_North"
+},
+{
+  "name": "Airnorth",
+  "iata": "TL",
+  "icao": "ANO",
+  "callsign": "TOPEND",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Airnorth"
+},
+{
+  "name": "Air Nostrum",
+  "iata": "YW",
+  "icao": "ANE",
+  "callsign": "NOSTRUM AIR",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Nostrum"
+},
+{
+  "name": "Air Panarea",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Italien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Panarea"
+},
+{
+  "name": "Air Philippines",
+  "iata": "2P",
+  "icao": "GAP",
+  "callsign": "ORIENT PACIFIC",
+  "country_id": "Philippinen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Philippines"
+},
+{
+  "name": "Air Rarotonga",
+  "iata": "GZ",
+  "icao": "RAR",
+  "callsign": null,
+  "country_id": "Cookinseln",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Rarotonga"
+},
+{
+  "name": "Air Saint-Pierre",
+  "iata": "PJ",
+  "icao": "SPM",
+  "callsign": "SAINT-PIERRE",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Saint-Pierre"
+},
+{
+  "name": "Air Seoul",
+  "iata": "RS",
+  "icao": "ASV",
+  "callsign": "AIR SEOUL",
+  "country_id": "Südkorea",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Air_Seoul"
+},
+{
+  "name": "Air Serbia",
+  "iata": "JU",
+  "icao": "ASL",
+  "callsign": "AIR SERBIA",
+  "country_id": "Serbien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Serbia"
+},
+{
+  "name": "Air Seychelles",
+  "iata": "HM",
+  "icao": "SEY",
+  "callsign": "SEYCHELLES",
+  "country_id": "Seychellen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Seychelles"
+},
+{
+  "name": "Air Sunshine",
+  "iata": "YI",
+  "icao": "RSI",
+  "callsign": "AIR SUNSHINE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Sunshine"
+},
+{
+  "name": "Air Tahiti",
+  "iata": "VT",
+  "icao": "VTA",
+  "callsign": "AIR TAHITI",
+  "country_id": "Französisch-Polynesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Tahiti"
+},
+{
+  "name": "Air Tahiti Nui",
+  "iata": "TN",
+  "icao": "THT",
+  "callsign": "TAHITI AIRLINES",
+  "country_id": "Französisch-Polynesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Tahiti_Nui"
+},
+{
+  "name": "Air Tindi",
+  "iata": "8T",
+  "icao": "TID",
+  "callsign": "TINDI",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Tindi"
+},
+{
+  "name": "Air Transat",
+  "iata": "TS",
+  "icao": "TSC",
+  "callsign": "TRANSAT",
+  "country_id": "Kanada",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Air_Transat"
+},
+{
+  "name": "Air Travel",
+  "iata": "A6",
+  "icao": "HTU",
+  "callsign": "HONGLAND",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Travel"
+},
+{
+  "name": "Air Urga",
+  "iata": "3N",
+  "icao": "URG",
+  "callsign": "URGA",
+  "country_id": "Ukraine",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Air_Urga"
+},
+{
+  "name": "Air Vanuatu",
+  "iata": "NF",
+  "icao": "AVN",
+  "callsign": "AIR VAN",
+  "country_id": "Vanuatu",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Vanuatu"
+},
+{
+  "name": "Air West (Sudan)",
+  "iata": "–",
+  "icao": "AWZ",
+  "callsign": "–",
+  "country_id": "Sudan",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Air_West"
+},
+{
+  "name": "Air Wisconsin",
+  "iata": "ZW",
+  "icao": "AWI",
+  "callsign": "AIR WISCONSIN",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Wisconsin"
+},
+{
+  "name": "Air Zimbabwe",
+  "iata": "UM",
+  "icao": "AZW",
+  "callsign": "AIR ZIMBABWE",
+  "country_id": "Simbabwe",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Air_Zimbabwe"
+},
+{
+  "name": "AirAsia X",
+  "iata": "D7",
+  "icao": "XAX",
+  "callsign": "XANADU",
+  "country_id": "Malaysia",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/AirAsia_X"
+},
+{
+  "name": "Aircalin",
+  "iata": "SB",
+  "icao": "ACI",
+  "callsign": "AIRCALIN",
+  "country_id": "Neukaledonien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aircalin"
+},
+{
+  "name": "Airlines of Tasmania",
+  "iata": "FO",
+  "icao": "ATM",
+  "callsign": "AIRTAS",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Airlines_of_Tasmania"
+},
+{
+  "name": "AIS Airlines",
+  "iata": "IS",
+  "icao": "PNX",
+  "callsign": "SPINNER",
+  "country_id": "Niederlande",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/AIS_Airlines"
+},
+{
+  "name": "AJet",
+  "iata": "VF",
+  "icao": "TKJ",
+  "callsign": "ANATOLIA",
+  "country_id": "Türkei",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/AJet_(Fluggesellschaft)"
+},
+{
+  "name": "Akasa Air",
+  "iata": "QP",
+  "icao": "AKJ",
+  "callsign": "AKASA AIR",
+  "country_id": "Indien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Akasa_Air"
+},
+{
+  "name": "Aklak Air",
+  "iata": "6L",
+  "icao": "AKK",
+  "callsign": "AKLAK",
+  "country_id": "Kanada",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Aklak_Air"
+},
+{
+  "name": "Alaska Airlines",
+  "iata": "AS",
+  "icao": "ASA",
+  "callsign": "ALASKA",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Alaska_Airlines"
+},
+{
+  "name": "Alaska Central Express",
+  "iata": "KO",
+  "icao": "AER",
+  "callsign": "ACE AIR",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Alaska_Central_Express"
+},
+{
+  "name": "Albatros Airlines",
+  "iata": "GO",
+  "icao": "GAL",
+  "callsign": "ERRANTE",
+  "country_id": "Venezuela",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Albatros_Airlines"
+},
+{
+  "name": "Albinati Aeronautics",
+  "iata": "–",
+  "icao": "LUC",
+  "callsign": "ALBI",
+  "country_id": "Schweiz",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Albinati_Aeronautics"
+},
+{
+  "name": "Alexandria Airlines",
+  "iata": "XH oder DQ",
+  "icao": "KHH",
+  "callsign": "–",
+  "country_id": "Ägypten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Alexandria_Airlines"
+},
+{
+  "name": "Alidaunia",
+  "iata": "D4",
+  "icao": "LID",
+  "callsign": "–",
+  "country_id": "Italien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Alidaunia"
+},
+{
+  "name": "Alk Airlines",
+  "iata": "–",
+  "icao": "VBB",
+  "callsign": "AIR LUBO",
+  "country_id": "Bulgarien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Alk_Airlines"
+},
+{
+  "name": "Allegiant Air",
+  "iata": "G4",
+  "icao": "AAY",
+  "callsign": "ALLEGIANT",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Allegiant_Air"
+},
+{
+  "name": "Alliance Airlines",
+  "iata": "QQ",
+  "icao": "UTY",
+  "callsign": "UNITY",
+  "country_id": "Australien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Alliance_Airlines"
+},
+{
+  "name": "ANA All Nippon Airways",
+  "iata": "NH",
+  "icao": "ANA",
+  "callsign": "ALL NIPPON",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/All_Nippon_Airways"
+},
+{
+  "name": "AlMasria Universal Airlines",
+  "iata": "UJ",
+  "icao": "LMU",
+  "callsign": "ALMASRIA",
+  "country_id": "Ägypten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/AlMasria_Universal_Airlines"
+},
+{
+  "name": "Alpine Flight Service",
+  "iata": "–",
+  "icao": "IGA",
+  "callsign": "–",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Alpine_Flight_Service"
+},
+{
+  "name": "Alrosa Airlines",
+  "iata": "6R",
+  "icao": "DRU",
+  "callsign": "MIRNY",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Alrosa_Airlines"
+},
+{
+  "name": "Alsie Express",
+  "iata": "6I",
+  "icao": "MMD",
+  "callsign": "MERMAID",
+  "country_id": "Dänemark",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Alsie_Express"
+},
+{
+  "name": "Amas Bolivia",
+  "iata": "Z8",
+  "icao": "AZN",
+  "callsign": "AMAZONAS",
+  "country_id": "Bolivien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Amas_Bolivia?action=edit&redlink=1"
+},
+{
+  "name": "AMC Airlines",
+  "iata": "YJ",
+  "icao": "AMV",
+  "callsign": "AMC AIRLINES",
+  "country_id": "Ägypten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/AMC_Airlines"
+},
+{
+  "name": "Amelia",
+  "iata": "BR",
+  "icao": "AIA",
+  "callsign": "Amelia",
+  "country_id": "Frankreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Amelia_(Fluggesellschaft)"
+},
+{
+  "name": "American Airlines",
+  "iata": "AA",
+  "icao": "AAL",
+  "callsign": "AMERICAN",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/American_Airlines"
+},
+{
+  "name": "American Eagle",
+  "iata": "MQ",
+  "icao": "EGF",
+  "callsign": "EAGLE FLIGHT",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/American_Eagle_(Fluggesellschaft)"
+},
+{
+  "name": "Ameristar Jet Charter",
+  "iata": "7Z",
+  "icao": "AJI",
+  "callsign": "AMERISTAR",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Ameristar_Jet_Charter"
+},
+{
+  "name": "Andes Líneas Aéreas",
+  "iata": "OY",
+  "icao": "ANS",
+  "callsign": "AEROANDES",
+  "country_id": "Argentinien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Andes_Líneas_Aéreas"
+},
+{
+  "name": "Angola Air Charter",
+  "iata": "C3",
+  "icao": "AGO",
+  "callsign": "ANGOLA CHARTER",
+  "country_id": "Angola",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Angola_Air_Charter"
+},
+{
+  "name": "Animawings",
+  "iata": "A2",
+  "icao": "AWG",
+  "callsign": "Anima Wings",
+  "country_id": "Rumänien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Animawings"
+},
+{
+  "name": "Arajet",
+  "iata": "DM",
+  "icao": "DWI",
+  "callsign": "DOMINICAN",
+  "country_id": "Dominikanische_Republik",
+  "remark": "B, P",
+  "link": "https://de.wikipedia.org/wiki/Arajet"
+},
+{
+  "name": "Arab Wings",
+  "iata": "SI",
+  "icao": "AWS",
+  "callsign": "ARAB WINGS",
+  "country_id": "Jordanien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Arab_Wings"
+},
+{
+  "name": "Arcus-Air",
+  "iata": "ZE",
+  "icao": "AZE",
+  "callsign": "ARCUS AIR",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Arcus-Air"
+},
+{
+  "name": "Aria Air",
+  "iata": "–",
+  "icao": "IRX",
+  "callsign": "ARIA",
+  "country_id": "Iran",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aria_Air"
+},
+{
+  "name": "Ariana Afghan Airlines",
+  "iata": "FG",
+  "icao": "AFG",
+  "callsign": "ARIANA",
+  "country_id": "Afghanistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Ariana_Afghan_Airlines"
+},
+{
+  "name": "Arik Air Limited",
+  "iata": "W3",
+  "icao": "ARA",
+  "callsign": "ARIK AIR",
+  "country_id": "Nigeria",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Arik_Air"
+},
+{
+  "name": "Arkia Israeli Airlines",
+  "iata": "IZ",
+  "icao": "AIZ",
+  "callsign": "ARKIA",
+  "country_id": "Israel",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Arkia_Israeli_Airlines"
+},
+{
+  "name": "Aruba Airlines",
+  "iata": "AG",
+  "icao": "ARU",
+  "callsign": "ARUBA",
+  "country_id": "Datei:Flag_of_Aruba.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aruba_Airlines"
+},
+{
+  "name": "Ascend Airways Malaysia",
+  "iata": "–",
+  "icao": "AYG",
+  "callsign": "ASTRA",
+  "country_id": "Malaysia",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Ascend_Airways_Malaysia?action=edit&redlink=1"
+},
+{
+  "name": "Asiana Airlines",
+  "iata": "OZ",
+  "icao": "AAR",
+  "callsign": "ASIANA",
+  "country_id": "Südkorea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Asiana_Airlines"
+},
+{
+  "name": "Askari Aviation Services",
+  "iata": "4K",
+  "icao": "AAS",
+  "callsign": "AL-AAS",
+  "country_id": "Pakistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Askari_Aviation_Services"
+},
+{
+  "name": "Asky Airlines",
+  "iata": "KP",
+  "icao": "SKK",
+  "callsign": "ASKY",
+  "country_id": "Togo",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Asky_Airlines"
+},
+{
+  "name": "ASL Airlines France",
+  "iata": "5O",
+  "icao": "FPO",
+  "callsign": "FRENCH POST",
+  "country_id": "Frankreich",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/ASL_Airlines_France"
+},
+{
+  "name": "ASL Airlines Ireland",
+  "iata": "AG",
+  "icao": "ABR",
+  "callsign": "CONTRACT",
+  "country_id": "Irland",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/ASL_Airlines_Ireland"
+},
+{
+  "name": "Asman Airlines",
+  "iata": "MN",
+  "icao": "KGN",
+  "callsign": "MANAS BIRD",
+  "country_id": "Datei:Flag_of_Kyrgyzstan.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Asman_Airlines"
+},
+{
+  "name": "ASTA Linhas Aéreas",
+  "iata": "0A",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Brasilien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/ASTA_Linhas_Aéreas"
+},
+{
+  "name": "Atlantic Airways",
+  "iata": "RC",
+  "icao": "FLI",
+  "callsign": "FAROELINE",
+  "country_id": "Färöer",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Atlantic_Airways"
+},
+{
+  "name": "Atlas Air Service",
+  "iata": "–",
+  "icao": "ATL",
+  "callsign": "AIR BREMEN",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Atlas_Air_Service"
+},
+{
+  "name": "Amjet Executive",
+  "iata": "–",
+  "icao": "AMJ",
+  "callsign": "AMJET EXEC",
+  "country_id": "Griechenland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Amjet_Executive"
+},
+{
+  "name": "Aurigny Air Services",
+  "iata": "GR",
+  "icao": "AUR",
+  "callsign": "AYLINE",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aurigny_Air_Services"
+},
+{
+  "name": "Aurora Airlines",
+  "iata": "HZ",
+  "icao": "SHU",
+  "callsign": "AURORA",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aurora_Airlines_(Russland)"
+},
+{
+  "name": "Austrian Airlines",
+  "iata": "OS",
+  "icao": "AUA",
+  "callsign": "AUSTRIAN",
+  "country_id": "Österreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Austrian_Airlines"
+},
+{
+  "name": "Avanti Air",
+  "iata": "AX",
+  "icao": "ATV",
+  "callsign": "AVANTI AIR",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Avanti_Air"
+},
+{
+  "name": "Avelo Airlines",
+  "iata": "XP",
+  "icao": "VXP",
+  "callsign": "AVELLO",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Avelo_Airlines"
+},
+{
+  "name": "Avianca",
+  "iata": "AV",
+  "icao": "AVA",
+  "callsign": "AVIANCA",
+  "country_id": "Kolumbien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Avianca"
+},
+{
+  "name": "Avianca Ecuador",
+  "iata": "2K",
+  "icao": "GLG",
+  "callsign": "AVIANCA ECUADOR",
+  "country_id": "Ecuador",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Avianca_Ecuador"
+},
+{
+  "name": "Aviastar Mandiri",
+  "iata": "MV",
+  "icao": "VIT",
+  "callsign": "AVIASTAR",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Aviastar_Mandiri"
+},
+{
+  "name": "Avion Express",
+  "iata": "X9",
+  "icao": "NVD",
+  "callsign": "NORDVIND",
+  "country_id": "Litauen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Avion_Express"
+},
+{
+  "name": "Avion Express Brasil",
+  "iata": "Z3",
+  "icao": "AEB",
+  "callsign": "AVION EXPRESS",
+  "country_id": "Brasilien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Avion_Express_Brasil"
+},
+{
+  "name": "Avion Express Malta",
+  "iata": "4X",
+  "icao": "MLH",
+  "callsign": "SOUTH WIND",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Avion_Express_Malta"
+},
+{
+  "name": "Avior Airlines",
+  "iata": "9V",
+  "icao": "ROI",
+  "callsign": "AVIOR",
+  "country_id": "Venezuela",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Avior_Airlines"
+},
+{
+  "name": "Axis Aviation Austria",
+  "iata": "–",
+  "icao": "BQB",
+  "callsign": "ICE",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Axis_Aviation_Austria"
+},
+{
+  "name": "Axis Aviation San Marino",
+  "iata": "–",
+  "icao": "AXS",
+  "callsign": "AXIS",
+  "country_id": "San_Marino",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Axis_Aviation_San_Marino"
+},
+{
+  "name": "Azerbaijan Airlines",
+  "iata": "J2",
+  "icao": "AHY",
+  "callsign": "AZAL",
+  "country_id": "Aserbaidschan",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Azerbaijan_Airlines"
+},
+{
+  "name": "Azimuth",
+  "iata": "A4",
+  "icao": "AZO",
+  "callsign": "AZIMUTH-DON",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Azimuth_(Fluggesellschaft)"
+},
+{
+  "name": "Azores Airlines",
+  "iata": "S4",
+  "icao": "RZO",
+  "callsign": "AIR AZORES",
+  "country_id": "Portugal",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Azores_Airlines"
+},
+{
+  "name": "Azul Linhas Aéreas",
+  "iata": "AD",
+  "icao": "AZU",
+  "callsign": "AZUL",
+  "country_id": "Brasilien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Azul_Linhas_Aéreas"
+},
+{
+  "name": "Azman Air",
+  "iata": "–",
+  "icao": "AZM",
+  "callsign": "AZMAN AIR",
+  "country_id": "Nigeria",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Azman_Air"
+},
+{
+  "name": "BA CityFlyer",
+  "iata": "CJ",
+  "icao": "CFE",
+  "callsign": "FLYER",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/BA_CityFlyer"
+},
+{
+  "name": "Badr Airlines",
+  "iata": "J4",
+  "icao": "BDR",
+  "callsign": "BADR AIR",
+  "country_id": "Sudan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Badr_Airlines"
+},
+{
+  "name": "Bahamasair",
+  "iata": "UP",
+  "icao": "BHS",
+  "callsign": "BAHAMAS",
+  "country_id": "Bahamas",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Bahamasair"
+},
+{
+  "name": "Bairline",
+  "iata": "–",
+  "icao": "BRJ",
+  "callsign": "BAIRLINE",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Bairline"
+},
+{
+  "name": "Baltic Seaplane",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Baltic_Seaplane"
+},
+{
+  "name": "Bangkok Airways",
+  "iata": "PG",
+  "icao": "BKP",
+  "callsign": "BANGKOK AIR",
+  "country_id": "Thailand",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Bangkok_Airways"
+},
+{
+  "name": "BBN Airlines Indonesia",
+  "iata": "7B",
+  "icao": "BBL",
+  "callsign": "IRON BIRD",
+  "country_id": "Indonesien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/BBN_Airlines_Indonesia?action=edit&redlink=1"
+},
+{
+  "name": "BBN Airlines Thailand",
+  "iata": "–",
+  "icao": "THB",
+  "callsign": "BLUE WINGS",
+  "country_id": "Thailand",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/BBN_Airlines_Thailand?action=edit&redlink=1"
+},
+{
+  "name": "BBN Airlines Türkiye",
+  "iata": "B5",
+  "icao": "BBT",
+  "callsign": "Big Blue",
+  "country_id": "Türkei",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/BBN_Airlines_Türkiye"
+},
+{
+  "name": "Bearskin Airlines",
+  "iata": "JV",
+  "icao": "BLS",
+  "callsign": "BEARSKIN",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Bearskin_Airlines"
+},
+{
+  "name": "Beijing Capital Airlines",
+  "iata": "JD",
+  "icao": "CBJ",
+  "callsign": "CAPITAL JET",
+  "country_id": "Volksrepublik_China",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Beijing_Capital_Airlines"
+},
+{
+  "name": "Belavia Belarusian Airlines",
+  "iata": "B2",
+  "icao": "BRU",
+  "callsign": "BELAVIA",
+  "country_id": "Belarus",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Belavia_Belarusian_Airlines"
+},
+{
+  "name": "Bemidji Airlines",
+  "iata": "CH",
+  "icao": "BMJ",
+  "callsign": "BEMIDJI",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Bemidji_Airlines"
+},
+{
+  "name": "Berjaya Air",
+  "iata": "J8",
+  "icao": "BVT",
+  "callsign": "BERJAYA AIR",
+  "country_id": "Malaysia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Berjaya_Air"
+},
+{
+  "name": "BH Air",
+  "iata": "8H",
+  "icao": "BGH",
+  "callsign": "BALKAN HOLIDAYS",
+  "country_id": "Bulgarien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/BH_Air"
+},
+{
+  "name": "BHS Aviation",
+  "iata": "–",
+  "icao": "DCS",
+  "callsign": "TWIN STAR",
+  "country_id": "Deutschland",
+  "remark": "P Business-Helikopter (Kooperation DC Aviation)",
+  "link": "https://de.wikipedia.org/wiki/BHS_Aviation"
+},
+{
+  "name": "Biman Bangladesh Airlines",
+  "iata": "BG",
+  "icao": "BBC",
+  "callsign": "BANGLADESH",
+  "country_id": "Bangladesch",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Biman_Bangladesh_Airlines"
+},
+{
+  "name": "Binter Canarias",
+  "iata": "NT",
+  "icao": "IBB",
+  "callsign": "BINTER",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Binter_Canarias"
+},
+{
+  "name": "Blue Air",
+  "iata": "0B",
+  "icao": "JOR",
+  "callsign": "BLUE TRANSPORT",
+  "country_id": "Rumänien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Blue_Air"
+},
+{
+  "name": "Blue Sky Aviation (Kenia)",
+  "iata": "–",
+  "icao": "SBK",
+  "callsign": "MAWINGU",
+  "country_id": "Kenia",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Blue_Sky_Aviation_(Kenia)"
+},
+{
+  "name": "Blue Wing Airlines",
+  "iata": "–",
+  "icao": "BWI",
+  "callsign": "BLUE TAIL",
+  "country_id": "Suriname",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Blue_Wing_Airlines"
+},
+{
+  "name": "Bluebird Airways",
+  "iata": "BZ",
+  "icao": "BBG",
+  "callsign": "BLUEBIRD",
+  "country_id": "Griechenland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Bluebird_Airways"
+},
+{
+  "name": "BMW Flugdienst",
+  "iata": "–",
+  "icao": "BMW",
+  "callsign": "BMW-FLIGHT",
+  "country_id": "Deutschland",
+  "remark": "Werksflugverkehr",
+  "link": "https://de.wikipedia.org/wiki/BMW_Flugdienst"
+},
+{
+  "name": "Boliviana de Aviación",
+  "iata": "OB",
+  "icao": "BOV",
+  "callsign": "BOLIVIANA",
+  "country_id": "Bolivien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Boliviana_de_Aviación"
+},
+{
+  "name": "Bonza Aviation",
+  "iata": "AB",
+  "icao": "BNZ",
+  "callsign": "BONZA",
+  "country_id": "Australien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Bonza_Aviation"
+},
+{
+  "name": "Boutique Air",
+  "iata": "4B",
+  "icao": "BTQ",
+  "callsign": "BOUTIQUE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C,P",
+  "link": "https://de.wikipedia.org/wiki/Boutique_Air"
+},
+{
+  "name": "Braathens Regional Aviation",
+  "iata": "TF",
+  "icao": "SCW",
+  "callsign": "SCANWING",
+  "country_id": "Schweden",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Braathens_Regional_Aviation"
+},
+{
+  "name": "British Airways",
+  "iata": "BA",
+  "icao": "BAW",
+  "callsign": "SPEEDBIRD",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/British_Airways"
+},
+{
+  "name": "Brussels Airlines",
+  "iata": "SN",
+  "icao": "BEL",
+  "callsign": "BEE-LINE",
+  "country_id": "Belgien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Brussels_Airlines"
+},
+{
+  "name": "Buddha Air",
+  "iata": "U4",
+  "icao": "BHA",
+  "callsign": "BUDDHA AIR",
+  "country_id": "Nepal",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Buddha_Air"
+},
+{
+  "name": "Buffalo Airways",
+  "iata": "J4",
+  "icao": "BFL",
+  "callsign": "BUFFALO",
+  "country_id": "Kanada",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Buffalo_Airways"
+},
+{
+  "name": "Bul Air",
+  "iata": "LB",
+  "icao": "BVL",
+  "callsign": "BULGARY",
+  "country_id": "Bulgarien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Bul_Air"
+},
+{
+  "name": "Bulgaria Air",
+  "iata": "FB",
+  "icao": "LZB",
+  "callsign": "FLYING BULGARIA",
+  "country_id": "Bulgarien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Bulgaria_Air"
+},
+{
+  "name": "Bulgarian Air Charter",
+  "iata": "1T",
+  "icao": "BUC",
+  "callsign": "BULGARIAN CHARTER",
+  "country_id": "Bulgarien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Bulgarian_Air_Charter"
+},
+{
+  "name": "Businesswings",
+  "iata": "–",
+  "icao": "JMP",
+  "callsign": "JUMP RUN",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Businesswings"
+},
+{
+  "name": "Cabo Verde Airlines",
+  "iata": "VR",
+  "icao": "TCV",
+  "callsign": "CABO VERDE",
+  "country_id": "Kap_Verde",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cabo_Verde_Airlines"
+},
+{
+  "name": "Calm Air",
+  "iata": "MO",
+  "icao": "CAV",
+  "callsign": "CALM AIR",
+  "country_id": "Kanada",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Calm_Air"
+},
+{
+  "name": "Camair-Co",
+  "iata": "QC",
+  "icao": "CRD",
+  "callsign": "CAM AIR",
+  "country_id": "Kamerun",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Camair-Co"
+},
+{
+  "name": "Cambodia Airways",
+  "iata": "KR",
+  "icao": "KME",
+  "callsign": "GIGANT IBIS",
+  "country_id": "Kambodscha",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cambodia_Airways"
+},
+{
+  "name": "Cambodia Bayon Airlines",
+  "iata": "BD",
+  "icao": "BYC",
+  "callsign": "BAYON AIR",
+  "country_id": "Kambodscha",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cambodia_Bayon_Airlines"
+},
+{
+  "name": "Canadian North",
+  "iata": "5T",
+  "icao": "ANX",
+  "callsign": "NORTERRA",
+  "country_id": "Kanada",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Canadian_North"
+},
+{
+  "name": "Canarias Airlines",
+  "iata": "–",
+  "icao": "RSC",
+  "callsign": "CANAIR",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Canarias_Airlines"
+},
+{
+  "name": "Canary Fly",
+  "iata": "PM",
+  "icao": "CNF",
+  "callsign": "CANARY FLY",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Canary_Fly"
+},
+{
+  "name": "Cape Air",
+  "iata": "9K",
+  "icao": "KAP",
+  "callsign": "CAIR",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cape_Air"
+},
+{
+  "name": "Caribbean Airlines",
+  "iata": "BW",
+  "icao": "BWA",
+  "callsign": "CARIBBEAN AIRLINES",
+  "country_id": "Trinidad_und_Tobago",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Caribbean_Airlines"
+},
+{
+  "name": "Carpatair",
+  "iata": "V3",
+  "icao": "KRP",
+  "callsign": "CARPATAIR",
+  "country_id": "Rumänien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Carpatair"
+},
+{
+  "name": "Caspian Airlines",
+  "iata": "RV",
+  "icao": "CPN",
+  "callsign": "CASPIAN",
+  "country_id": "Iran",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Caspian_Airlines"
+},
+{
+  "name": "Cat Aviation",
+  "iata": "–",
+  "icao": "CAZ",
+  "callsign": "EUROCAT",
+  "country_id": "Schweiz",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Cat_Aviation"
+},
+{
+  "name": "Cathay Pacific",
+  "iata": "CX",
+  "icao": "CPA",
+  "callsign": "CATHAY",
+  "country_id": "Hongkong",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Cathay_Pacific"
+},
+{
+  "name": "Cathelicopters",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cathelicopters"
+},
+{
+  "name": "Cayman Airways",
+  "iata": "KX",
+  "icao": "CAY",
+  "callsign": "CAYMAN",
+  "country_id": "Cayman_Islands",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cayman_Airways"
+},
+{
+  "name": "Cebgo",
+  "iata": "DG",
+  "icao": "SRQ",
+  "callsign": "SEAIR",
+  "country_id": "Philippinen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cebgo"
+},
+{
+  "name": "Cebu Pacific",
+  "iata": "5J",
+  "icao": "CEB",
+  "callsign": "CEBU AIR",
+  "country_id": "Philippinen",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Cebu_Pacific"
+},
+{
+  "name": "CEIBA Intercontinental",
+  "iata": "G2",
+  "icao": "CBA",
+  "callsign": "CEIBA LINE",
+  "country_id": "Äquatorialguinea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/CEIBA_Intercontinental"
+},
+{
+  "name": "Central Mongolia Airways",
+  "iata": "–",
+  "icao": "CEM",
+  "callsign": "–",
+  "country_id": "Mongolei",
+  "remark": "C (nur Hubschrauber)",
+  "link": "https://de.wikipedia.org/wiki/Central_Mongolia_Airways"
+},
+{
+  "name": "Central Mountain Air",
+  "iata": "9M",
+  "icao": "GLR",
+  "callsign": "GLACIER",
+  "country_id": "Kanada",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Central_Mountain_Air"
+},
+{
+  "name": "Chair Airlines",
+  "iata": "GM",
+  "icao": "GSW",
+  "callsign": "EIGER",
+  "country_id": "Schweiz",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Chair_Airlines"
+},
+{
+  "name": "Chalair Aviation",
+  "iata": "CE",
+  "icao": "CLG",
+  "callsign": "Chalair",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Chalair_Aviation"
+},
+{
+  "name": "Chengdu Airlines",
+  "iata": "EU",
+  "icao": "UEA",
+  "callsign": "JINGXIU",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Chengdu_Airlines"
+},
+{
+  "name": "China Airlines",
+  "iata": "CI",
+  "icao": "CAL",
+  "callsign": "DYNASTY",
+  "country_id": "Republik_China_(Taiwan)",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/China_Airlines"
+},
+{
+  "name": "China Eastern Airlines",
+  "iata": "MU",
+  "icao": "CES",
+  "callsign": "CHINA EASTERN",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/China_Eastern_Airlines"
+},
+{
+  "name": "China Express Airlines",
+  "iata": "G5",
+  "icao": "HXA",
+  "callsign": "CHINA EXPRESS",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/China_Express_Airlines"
+},
+{
+  "name": "China Southern Airlines",
+  "iata": "CZ",
+  "icao": "CSN",
+  "callsign": "CHINA SOUTHERN",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/China_Southern_Airlines"
+},
+{
+  "name": "Citilink",
+  "iata": "QG",
+  "icao": "CTV",
+  "callsign": "SUPERGREEN",
+  "country_id": "Indonesien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Citilink"
+},
+{
+  "name": "CityJet",
+  "iata": "WX",
+  "icao": "BCY",
+  "callsign": "CITY-IRELAND",
+  "country_id": "Irland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cityjet_(Irland)"
+},
+{
+  "name": "Clic Air",
+  "iata": "VE",
+  "icao": "EFY",
+  "callsign": "EASYFLY",
+  "country_id": "Kolumbien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Clic_Air"
+},
+{
+  "name": "Cobham",
+  "iata": "NC",
+  "icao": "NJS",
+  "callsign": "NATIONAL JETEX",
+  "country_id": "Australien",
+  "remark": "P+/R",
+  "link": "https://de.wikipedia.org/wiki/National_Jet_Express"
+},
+{
+  "name": "Comlux",
+  "iata": "NC",
+  "icao": "CLA",
+  "callsign": "COMLUX",
+  "country_id": "Schweiz",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Comlux"
+},
+{
+  "name": "CommutAir",
+  "iata": "C5",
+  "icao": "UCA",
+  "callsign": "COMMUTAIR",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/CommutAir"
+},
+{
+  "name": "Condor Flugdienst",
+  "iata": "DE",
+  "icao": "CFG",
+  "callsign": "CONDOR",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Condor_Flugdienst"
+},
+{
+  "name": "Contour Airlines",
+  "iata": "LF",
+  "icao": "VTE",
+  "callsign": "VOLUNTEER",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Contour_Airlines"
+},
+{
+  "name": "Conviasa",
+  "iata": "V0",
+  "icao": "VCV",
+  "callsign": "CONVIASA",
+  "country_id": "Venezuela",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Conviasa"
+},
+{
+  "name": "Copa Airlines",
+  "iata": "CM",
+  "icao": "CMP",
+  "callsign": "COPA",
+  "country_id": "Panama",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Copa_Airlines"
+},
+{
+  "name": "Copa Airlines Colombia",
+  "iata": "P5",
+  "icao": "RBP",
+  "callsign": "AEROREPUBLICA",
+  "country_id": "Kolumbien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Copa_Airlines_Colombia"
+},
+{
+  "name": "Copenhagen Air Taxi",
+  "iata": "–",
+  "icao": "CAT",
+  "callsign": "AIRCAT",
+  "country_id": "Dänemark",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Copenhagen_Air_Taxi"
+},
+{
+  "name": "Corendon Airlines",
+  "iata": "XC",
+  "icao": "CAI",
+  "callsign": "CORENDON",
+  "country_id": "Türkei",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Corendon_Airlines"
+},
+{
+  "name": "Corendon Dutch Airlines",
+  "iata": "CD",
+  "icao": "CND",
+  "callsign": "DUTCH CORENDON",
+  "country_id": "Niederlande",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Corendon_Dutch_Airlines"
+},
+{
+  "name": "Corsair International",
+  "iata": "SS",
+  "icao": "CRL",
+  "callsign": "CORSAIR",
+  "country_id": "Frankreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Corsair_International"
+},
+{
+  "name": "Costa Airlines",
+  "iata": "–",
+  "icao": "COT",
+  "callsign": "COAIR",
+  "country_id": "Venezuela",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Costa_Airlines"
+},
+{
+  "name": "Croatia Airlines",
+  "iata": "OU",
+  "icao": "CTN",
+  "callsign": "CROATIA",
+  "country_id": "Kroatien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Croatia_Airlines"
+},
+{
+  "name": "CSA Czech Airlines",
+  "iata": "OK",
+  "icao": "CSA",
+  "callsign": "CSA LINES",
+  "country_id": "Tschechien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Czech_Airlines"
+},
+{
+  "name": "Cubana",
+  "iata": "CU",
+  "icao": "CUB",
+  "callsign": "CUBANA",
+  "country_id": "Kuba",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Cubana"
+},
+{
+  "name": "Daallo Airlines",
+  "iata": "D3",
+  "icao": "DAO",
+  "callsign": "DALO AIRLINES",
+  "country_id": "Somalia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Daallo_Airlines"
+},
+{
+  "name": "Dalian Airlines",
+  "iata": "CA",
+  "icao": "CCD",
+  "callsign": "XIANGJIAN",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Dalian_Airlines"
+},
+{
+  "name": "DAT",
+  "iata": "DX",
+  "icao": "DTR",
+  "callsign": "DANISH",
+  "country_id": "Dänemark",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/DAT_A/S"
+},
+{
+  "name": "DAT LT",
+  "iata": "R6",
+  "icao": "DNU",
+  "callsign": "DANU",
+  "country_id": "Litauen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/DAT_LT"
+},
+{
+  "name": "DC Aviation",
+  "iata": "–",
+  "icao": "DCS",
+  "callsign": "TWIN STAR",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/DC_Aviation"
+},
+{
+  "name": "Delta Air Lines",
+  "iata": "DL",
+  "icao": "DAL",
+  "callsign": "DELTA",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Delta_Air_Lines"
+},
+{
+  "name": "Denver Air Connection",
+  "iata": "–",
+  "icao": "LYM",
+  "callsign": "KEY LIME",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P, C",
+  "link": "https://de.wikipedia.org/wiki/Denver_Air_Connection"
+},
+{
+  "name": "Dexter Air Taxi",
+  "iata": "–",
+  "icao": "DXT",
+  "callsign": "DEXTER",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Dexter_Air_Taxi"
+},
+{
+  "name": "Directflight",
+  "iata": "–",
+  "icao": "DCT",
+  "callsign": "AIRTASK",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Directflight"
+},
+{
+  "name": "Discover Airlines",
+  "iata": "4Y",
+  "icao": "OCN",
+  "callsign": "OCEAN",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Discover_Airlines"
+},
+{
+  "name": "Divi Divi Air",
+  "iata": "DI",
+  "icao": "DVR",
+  "callsign": "DIVI AIR",
+  "country_id": "Datei:Flag_of_Curaçao.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Divi_Divi_Air"
+},
+{
+  "name": "Donghai Airlines",
+  "iata": "DZ",
+  "icao": "EPA",
+  "callsign": "DONGHAI AIR",
+  "country_id": "Volksrepublik_China",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Donghai_Airlines"
+},
+{
+  "name": "Drukair",
+  "iata": "KB",
+  "icao": "DRK",
+  "callsign": "ROYAL BHUTAN",
+  "country_id": "Bhutan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Drukair"
+},
+{
+  "name": "Eagle Air (Uganda)",
+  "iata": "H7",
+  "icao": "EGU",
+  "callsign": "AFRICAN EAGLE",
+  "country_id": "Uganda",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Eagle_Air_(Uganda)"
+},
+{
+  "name": "Eastar Jet",
+  "iata": "ZE",
+  "icao": "ESR",
+  "callsign": "EASTARJET",
+  "country_id": "Südkorea",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Eastar_Jet"
+},
+{
+  "name": "Eastern Air Express",
+  "iata": "–",
+  "icao": "BBQ",
+  "callsign": "EASTERN EXPRESS",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Eastern_Air_Express"
+},
+{
+  "name": "Eastern Australia Airlines",
+  "iata": "QF",
+  "icao": "EAQ",
+  "callsign": "EASTERN",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Eastern_Australia_Airlines"
+},
+{
+  "name": "East Wing",
+  "iata": "–",
+  "icao": "EWZ",
+  "callsign": "–",
+  "country_id": "Kasachstan",
+  "remark": "C/R/S",
+  "link": "https://de.wikipedia.org/wiki/East_Wing_(Fluggesellschaft)"
+},
+{
+  "name": "EasyJet Europe",
+  "iata": "U2",
+  "icao": "EZY",
+  "callsign": "ALPINE",
+  "country_id": "Österreich",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/EasyJet_Europe"
+},
+{
+  "name": "EasyJet Switzerland",
+  "iata": "DS",
+  "icao": "EZS",
+  "callsign": "TOPSWISS",
+  "country_id": "Schweiz",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/EasyJet_Switzerland"
+},
+{
+  "name": "EasyJet",
+  "iata": "U2",
+  "icao": "EZY",
+  "callsign": "EASY",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/EasyJet"
+},
+{
+  "name": "Edelweiss Air",
+  "iata": "WK",
+  "icao": "EDW",
+  "callsign": "EDELWEISS",
+  "country_id": "Schweiz",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Edelweiss_Air"
+},
+{
+  "name": "EFD Eisele Flugdienst",
+  "iata": "–",
+  "icao": "EFD",
+  "callsign": "EVERFLIGHT",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/EFD_Eisele_Flugdienst"
+},
+{
+  "name": "Egypt Air",
+  "iata": "MS",
+  "icao": "MSR",
+  "callsign": "EGYPTAIR",
+  "country_id": "Ägypten",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Egypt_Air"
+},
+{
+  "name": "El Al",
+  "iata": "LY",
+  "icao": "ELY",
+  "callsign": "EL AL",
+  "country_id": "Israel",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/El_Al"
+},
+{
+  "name": "Electra Airways",
+  "iata": "−",
+  "icao": "EAF",
+  "callsign": "ELECTRA",
+  "country_id": "Bulgarien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Electra_Airways"
+},
+{
+  "name": "Emerald Airlines",
+  "iata": "EA",
+  "icao": "EAI",
+  "callsign": "GEMSTONE",
+  "country_id": "Irland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Emerald_Airlines"
+},
+{
+  "name": "Emirates",
+  "iata": "EK",
+  "icao": "UAE",
+  "callsign": "EMIRATES",
+  "country_id": "Vereinigte_Arabische_Emirate",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Emirates"
+},
+{
+  "name": "Endeavor Air",
+  "iata": "9E",
+  "icao": "FLG",
+  "callsign": "FLAGSHIP",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Endeavor_Air"
+},
+{
+  "name": "Enter Air",
+  "iata": "E4",
+  "icao": "ENT",
+  "callsign": "ENTER",
+  "country_id": "Polen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Enter_Air"
+},
+{
+  "name": "Eritrean Airlines",
+  "iata": "B8",
+  "icao": "ERT",
+  "callsign": "ERITREAN",
+  "country_id": "Eritrea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Eritrean_Airlines"
+},
+{
+  "name": "Ethiopian Airlines",
+  "iata": "ET",
+  "icao": "ETH",
+  "callsign": "ETHIOPIAN",
+  "country_id": "Äthiopien",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Ethiopian_Airlines"
+},
+{
+  "name": "Etihad Airways",
+  "iata": "EY",
+  "icao": "ETD",
+  "callsign": "ETIHAD",
+  "country_id": "Vereinigte_Arabische_Emirate",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Etihad_Airways"
+},
+{
+  "name": "Euro-Asia Air",
+  "iata": "6Z",
+  "icao": "EAK",
+  "callsign": "EAKAZ",
+  "country_id": "Kasachstan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Euro-Asia_Air"
+},
+{
+  "name": "EuroAtlantic Airways",
+  "iata": "MM",
+  "icao": "MMZ",
+  "callsign": "EUROATLANTIC",
+  "country_id": "Portugal",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/EuroAtlantic_Airways"
+},
+{
+  "name": "Eurowings",
+  "iata": "EW",
+  "icao": "EWG",
+  "callsign": "EUROWINGS",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Eurowings"
+},
+{
+  "name": "Eurowings Europe",
+  "iata": "E6",
+  "icao": "EWL",
+  "callsign": "BLACK PEARL",
+  "country_id": "Malta",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Eurowings_Europe_(Malta)"
+},
+{
+  "name": "EVA Air",
+  "iata": "BR",
+  "icao": "EVA",
+  "callsign": "EVA",
+  "country_id": "Republik_China_(Taiwan)",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/EVA_Air"
+},
+{
+  "name": "Everts Air",
+  "iata": "3Z",
+  "icao": "VTS",
+  "callsign": "EVERTS",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Everts_Air"
+},
+{
+  "name": "ExecuJet Aviation Group",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "ExecuJet Aviation Group#AOC",
+  "country_id": "Schweiz",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/ExecuJet_Aviation_Group"
+},
+{
+  "name": "Eznis Airways",
+  "iata": "–",
+  "icao": "EZA",
+  "callsign": "EZA",
+  "country_id": "Mongolei",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Eznis_Airways"
+},
+{
+  "name": "Federal Air",
+  "iata": "–",
+  "icao": "FDR",
+  "callsign": "FEDAIR",
+  "country_id": "Südafrika",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Federal_Air"
+},
+{
+  "name": "Fiji Airways",
+  "iata": "FJ",
+  "icao": "FJI",
+  "callsign": "PACIFIC",
+  "country_id": "Fidschi",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Fiji_Airways"
+},
+{
+  "name": "Finistair",
+  "iata": "–",
+  "icao": "FTR",
+  "callsign": "FINISTAIR",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Finistair"
+},
+{
+  "name": "Finnair",
+  "iata": "AY",
+  "icao": "FIN",
+  "callsign": "FINNAIR",
+  "country_id": "Finnland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Finnair"
+},
+{
+  "name": "Firefly",
+  "iata": "FY",
+  "icao": "FMM",
+  "callsign": "FIREFLY",
+  "country_id": "Malaysia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Firefly_(Fluggesellschaft)"
+},
+{
+  "name": "Flamingo Air",
+  "iata": "–",
+  "icao": "FMR",
+  "callsign": "FLAMINGO AIR",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Flamingo_Air"
+},
+{
+  "name": "Fleet Air International",
+  "iata": "–",
+  "icao": "FRF",
+  "callsign": "FAIRFLEET",
+  "country_id": "Ungarn",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Fleet_Air_International"
+},
+{
+  "name": "Flexflight",
+  "iata": "W2",
+  "icao": "TIX",
+  "callsign": "MATRIX",
+  "country_id": "Dänemark",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Flexflight"
+},
+{
+  "name": "FLN Frisia-Luftverkehr",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/FLN_Frisia-Luftverkehr"
+},
+{
+  "name": "Fly540",
+  "iata": "5H",
+  "icao": "FFV",
+  "callsign": "SWIFT TANGO",
+  "country_id": "Kenia",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Fly540"
+},
+{
+  "name": "Fly All Ways",
+  "iata": "–",
+  "icao": "FAW",
+  "callsign": "Fly All Ways",
+  "country_id": "Suriname",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Fly_All_Ways"
+},
+{
+  "name": "Fly Arystan",
+  "iata": "KC",
+  "icao": "KZR",
+  "callsign": "–",
+  "country_id": "Kasachstan",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Fly_Arystan"
+},
+{
+  "name": "Fly Baghdad Airlines",
+  "iata": "IF",
+  "icao": "FBA",
+  "callsign": "IRAQ EXPRESS",
+  "country_id": "Irak",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Fly_Baghdad_Airlines"
+},
+{
+  "name": "Flydubai",
+  "iata": "FZ",
+  "icao": "FDB",
+  "callsign": "SKYDUBAI",
+  "country_id": "Vereinigte_Arabische_Emirate",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Flydubai"
+},
+{
+  "name": "Flying Group",
+  "iata": "–",
+  "icao": "FYG",
+  "callsign": "FLYING GROUP",
+  "country_id": "Belgien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Flying_Group"
+},
+{
+  "name": "Fly Jinnah",
+  "iata": "9P",
+  "icao": "FJL",
+  "callsign": "OKAAB",
+  "country_id": "Pakistan",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Fly_Jinnah"
+},
+{
+  "name": "Fly Lili",
+  "iata": "FL",
+  "icao": "LIL",
+  "callsign": "LILIES",
+  "country_id": "Rumänien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Fly_Lili"
+},
+{
+  "name": "FlyMontserrat",
+  "iata": "5M",
+  "icao": null,
+  "callsign": "MONTSERRAT",
+  "country_id": "Montserrat",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/FlyMontserrat"
+},
+{
+  "name": "Flynas",
+  "iata": "XY",
+  "icao": "KNE",
+  "callsign": "NAS EXPRESS",
+  "country_id": "Saudi-Arabien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Flynas"
+},
+{
+  "name": "Fly Tyrol",
+  "iata": "–",
+  "icao": "FTY",
+  "callsign": "–",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Fly_Tyrol"
+},
+{
+  "name": "Freebird Airlines",
+  "iata": "FH",
+  "icao": "FHY",
+  "callsign": "FREE BIRD",
+  "country_id": "Türkei",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Freebird_Airlines"
+},
+{
+  "name": "French Bee",
+  "iata": "BF",
+  "icao": "FBU",
+  "callsign": "FRENCH BEE",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/French_Bee"
+},
+{
+  "name": "Frontier Airlines",
+  "iata": "F9",
+  "icao": "FFT",
+  "callsign": "FRONTIER oder FRONTIER FLIGHT",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Frontier_Airlines"
+},
+{
+  "name": "Frost Air",
+  "iata": "–",
+  "icao": "FRO",
+  "callsign": "FROST",
+  "country_id": "Dänemark",
+  "remark": "C/S",
+  "link": "https://de.wikipedia.org/wiki/Frost_Air"
+},
+{
+  "name": "Fuji Dream Airlines",
+  "iata": "JH",
+  "icao": "FDA",
+  "callsign": "FUJI DREAM",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Fuji_Dream_Airlines"
+},
+{
+  "name": "GainJet Aviation",
+  "iata": "–",
+  "icao": "GNJ",
+  "callsign": "GAIN JET",
+  "country_id": "Griechenland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/GainJet_Aviation"
+},
+{
+  "name": "Garuda Indonesia",
+  "iata": "GA",
+  "icao": "GIA",
+  "callsign": "INDONESIA",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Garuda_Indonesia"
+},
+{
+  "name": "Georgian Airways",
+  "iata": "A9",
+  "icao": "TGZ",
+  "callsign": "TAMASI",
+  "country_id": "Georgien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Georgian_Airways"
+},
+{
+  "name": "German Airways",
+  "iata": "WH",
+  "icao": "GER",
+  "callsign": "GERMAN EAGLE",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/German_Airways"
+},
+{
+  "name": "Gestair",
+  "iata": "GS",
+  "icao": "GES",
+  "callsign": "GESTAIR",
+  "country_id": "Spanien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Gestair"
+},
+{
+  "name": "GetJet Airlines",
+  "iata": "GW",
+  "icao": "GJT",
+  "callsign": "GETJET",
+  "country_id": "Litauen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/GetJet_Airlines"
+},
+{
+  "name": "GFD Gesellschaft für Flugzieldarstellung",
+  "iata": "–",
+  "icao": "GFD",
+  "callsign": "KITE",
+  "country_id": "Deutschland",
+  "remark": "Übungsflüge",
+  "link": "https://de.wikipedia.org/wiki/GFD_Gesellschaft_für_Flugzieldarstellung"
+},
+{
+  "name": "Global Aviation",
+  "iata": "GE",
+  "icao": "GBB",
+  "callsign": "GLOBE",
+  "country_id": "Südafrika",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Global_Aviation"
+},
+{
+  "name": "GlobeAir",
+  "iata": "–",
+  "icao": "GAC",
+  "callsign": "DREAMTEAM",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/GlobeAir"
+},
+{
+  "name": "GoAir",
+  "iata": "G8",
+  "icao": "GOW",
+  "callsign": "GO AIR",
+  "country_id": "Indien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/GoAir"
+},
+{
+  "name": "GoJet Airlines",
+  "iata": "G7",
+  "icao": "GJS",
+  "callsign": "LINDBERGH",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/GoJet_Airlines"
+},
+{
+  "name": "Gol Linhas Aéreas",
+  "iata": "G3",
+  "icao": "GLO",
+  "callsign": "GOL TRANSPORTE",
+  "country_id": "Brasilien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Gol_Linhas_Aéreas"
+},
+{
+  "name": "GP Aviation",
+  "iata": "IV",
+  "icao": "GPX",
+  "callsign": "IVORY",
+  "country_id": "Bulgarien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/GP_Aviation"
+},
+{
+  "name": "Grand China Air",
+  "iata": "CN",
+  "icao": "GDC",
+  "callsign": "GRAND CHINA",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Grand_China_Air"
+},
+{
+  "name": "Grand Cru Airlines",
+  "iata": "–",
+  "icao": "AGE",
+  "callsign": "–",
+  "country_id": "Litauen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Grand_Cru_Airlines"
+},
+{
+  "name": "Grant Aviation",
+  "iata": "GV",
+  "icao": "GUN",
+  "callsign": "HOOT",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Grant_Aviation"
+},
+{
+  "name": "Grossmann Jet Service",
+  "iata": "–",
+  "icao": "GSJ",
+  "callsign": "GROSSJET",
+  "country_id": "Tschechien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Grossmann_Jet_Service"
+},
+{
+  "name": "Gulf Air",
+  "iata": "GF",
+  "icao": "GFA",
+  "callsign": "GULF AIR",
+  "country_id": "Bahrain",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Gulf_Air"
+},
+{
+  "name": "GullivAir",
+  "iata": "G2",
+  "icao": "GBG",
+  "callsign": "VAGABOND",
+  "country_id": "Bulgarien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/GullivAir"
+},
+{
+  "name": "Gum Air",
+  "iata": "–",
+  "icao": "GUM",
+  "callsign": "GUM AIR",
+  "country_id": "Suriname",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Gum_Air"
+},
+{
+  "name": "GX Airlines",
+  "iata": "GP",
+  "icao": "CBG",
+  "callsign": "GREEN CITY",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/GX_Airlines"
+},
+{
+  "name": "Hahn Air Lines",
+  "iata": "HR",
+  "icao": "HHN",
+  "callsign": "ROOSTER",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Hahn_Air_Lines"
+},
+{
+  "name": "Hainan Airlines",
+  "iata": "HU",
+  "icao": "CHH",
+  "callsign": "HAINAN",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Hainan_Airlines"
+},
+{
+  "name": "Harbour Air",
+  "iata": "H3",
+  "icao": "–",
+  "callsign": "HARBOUR AIR",
+  "country_id": "Kanada",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Harbour_Air"
+},
+{
+  "name": "Hawaiian Airlines",
+  "iata": "HA",
+  "icao": "HAL",
+  "callsign": "HAWAIIAN",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Hawaiian_Airlines"
+},
+{
+  "name": "Heliswiss Ibérica",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Heliswiss_Ibérica"
+},
+{
+  "name": "Helvetic Airways",
+  "iata": "2L",
+  "icao": "OAW",
+  "callsign": "HELVETIC",
+  "country_id": "Schweiz",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Helvetic_Airways"
+},
+{
+  "name": "Henan Airlines",
+  "iata": "VD",
+  "icao": "KPA",
+  "callsign": "KUNPENG",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Henan_Airlines"
+},
+{
+  "name": "Heston Airlines",
+  "iata": "HN",
+  "icao": "HS",
+  "callsign": "HESTON",
+  "country_id": "Litauen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Heston_Airlines"
+},
+{
+  "name": "HK Express",
+  "iata": "UO",
+  "icao": "HKE",
+  "callsign": "HONGKONG SHUTTLE",
+  "country_id": "Hongkong",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/HK_Express"
+},
+{
+  "name": "Holiday Europe",
+  "iata": "5Q",
+  "icao": "HES",
+  "callsign": "Holiday Europe",
+  "country_id": "Bulgarien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Holiday_Europe"
+},
+{
+  "name": "Horizon Air",
+  "iata": "QX",
+  "icao": "QXE",
+  "callsign": "HORIZON AIR",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Horizon_Air"
+},
+{
+  "name": "Hong Kong Airlines",
+  "iata": "HX",
+  "icao": "CRK",
+  "callsign": "BAUHINIA",
+  "country_id": "Hongkong",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Hong_Kong_Airlines"
+},
+{
+  "name": "Hunnu Air",
+  "iata": "MR",
+  "icao": "MML",
+  "callsign": "TRANSMONGOLIA",
+  "country_id": "Mongolei",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Hunnu_Air"
+},
+{
+  "name": "Hyperion Aviation",
+  "iata": "–",
+  "icao": "HYP",
+  "callsign": "HYPERION",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Hyperion_Aviation"
+},
+{
+  "name": "IAS Itzehoer Airservice",
+  "iata": "–",
+  "icao": "FNK",
+  "callsign": "FUNKY",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/IAS_Itzehoer_Airservice"
+},
+{
+  "name": "Iberia",
+  "iata": "IB",
+  "icao": "IBE",
+  "callsign": "IBERIA",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Iberia_Líneas_Aéreas_de_España"
+},
+{
+  "name": "Iberojet",
+  "iata": "E9",
+  "icao": "EVE",
+  "callsign": "EVELOP",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Iberojet"
+},
+{
+  "name": "Ibex Airlines",
+  "iata": "FW",
+  "icao": "IBX",
+  "callsign": "IBEX",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Ibex_Airlines"
+},
+{
+  "name": "Icarus Elicotteri",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Italien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Icarus_Elicotteri"
+},
+{
+  "name": "Icelandair",
+  "iata": "FI",
+  "icao": "ICE",
+  "callsign": "ICEAIR",
+  "country_id": "Island",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Icelandair"
+},
+{
+  "name": "IndiGo Airlines",
+  "iata": "6E",
+  "icao": "IGO",
+  "callsign": "IFLY",
+  "country_id": "Indien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/IndiGo_Airlines"
+},
+{
+  "name": "Indonesia AirAsia",
+  "iata": "QZ",
+  "icao": "AWQ",
+  "callsign": "WAGON AIR",
+  "country_id": "Indonesien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Indonesia_AirAsia"
+},
+{
+  "name": "InterCaribbean Airways",
+  "iata": "JY",
+  "icao": "TCI",
+  "callsign": "ISLANDWAYS",
+  "country_id": "Turks-_und_Caicosinseln",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/InterCaribbean_Airways"
+},
+{
+  "name": "Iran Air",
+  "iata": "IR",
+  "icao": "IRA",
+  "callsign": "IRAN AIR",
+  "country_id": "Iran",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Iran_Air"
+},
+{
+  "name": "Iran Airtour",
+  "iata": "B9",
+  "icao": "IRB",
+  "callsign": "AIRTOUR",
+  "country_id": "Iran",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Iran_Airtour"
+},
+{
+  "name": "Iran Aseman Airlines",
+  "iata": "EP",
+  "icao": "IRC",
+  "callsign": "ASEMAN",
+  "country_id": "Iran",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Iran_Aseman_Airlines"
+},
+{
+  "name": "Iraqi Airways",
+  "iata": "IA",
+  "icao": "IAW",
+  "callsign": "IRAQI",
+  "country_id": "Irak",
+  "remark": "P/R",
+  "link": "https://de.wikipedia.org/wiki/Iraqi_Airways"
+},
+{
+  "name": "ITA Airways",
+  "iata": "AZ",
+  "icao": "ITY",
+  "callsign": "ITARROW",
+  "country_id": "Italien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/ITA_Airways"
+},
+{
+  "name": "Israir",
+  "iata": "6H",
+  "icao": "ISR",
+  "callsign": "ISRAIR",
+  "country_id": "Israel",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Israir"
+},
+{
+  "name": "Jambojet",
+  "iata": "JM",
+  "icao": "JMA",
+  "callsign": "CHUI",
+  "country_id": "Kenia",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jambojet"
+},
+{
+  "name": "Janet",
+  "iata": "–",
+  "icao": "WWW",
+  "callsign": "JANET",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "Personentransport zur Nevada Test Site und Area 51",
+  "link": "https://de.wikipedia.org/wiki/Janet_(Fluggesellschaft)"
+},
+{
+  "name": "Japan Airlines",
+  "iata": "JL",
+  "icao": "JAL",
+  "callsign": "JAPANAIR",
+  "country_id": "Japan",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Japan_Airlines"
+},
+{
+  "name": "Japan Air Commuter",
+  "iata": "3X",
+  "icao": "JAC",
+  "callsign": "COMMUTER",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Japan_Air_Commuter"
+},
+{
+  "name": "Japan Transocean Air",
+  "iata": "NU",
+  "icao": "JTA",
+  "callsign": "JAI OCEAN",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Japan_Transocean_Air"
+},
+{
+  "name": "Jazeera Airways",
+  "iata": "J9",
+  "icao": "JZR",
+  "callsign": "JAZEERA",
+  "country_id": "Kuwait",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jazeera_Airways"
+},
+{
+  "name": "Jazz Aviation",
+  "iata": "QK",
+  "icao": "JZA",
+  "callsign": "JAZZ",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Jazz_Aviation"
+},
+{
+  "name": "J-Air",
+  "iata": "XM",
+  "icao": "JLJ",
+  "callsign": "J-AIR",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/J-Air"
+},
+{
+  "name": "Jeju Air",
+  "iata": "7C",
+  "icao": "JJA",
+  "callsign": "JEJU AIR",
+  "country_id": "Südkorea",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jeju_Air"
+},
+{
+  "name": "Jet2.com",
+  "iata": "LS",
+  "icao": "EXS",
+  "callsign": "CHANNEX",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jet2.com"
+},
+{
+  "name": "Jet Aviation",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Schweiz",
+  "remark": "Airtaxi",
+  "link": "https://de.wikipedia.org/wiki/Jet_Aviation"
+},
+{
+  "name": "JetConnect",
+  "iata": "QF",
+  "icao": "QNZ",
+  "callsign": "QANTAS JETCONNECT",
+  "country_id": "Neuseeland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/JetConnect"
+},
+{
+  "name": "Jetblue Airways",
+  "iata": "B6",
+  "icao": "JBU",
+  "callsign": "JETBLUE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jetblue_Airways"
+},
+{
+  "name": "Jetfly Aviation",
+  "iata": "–",
+  "icao": "JFA",
+  "callsign": "MOSQUITO",
+  "country_id": "Luxemburg",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Jetfly_Aviation"
+},
+{
+  "name": "JetSmart",
+  "iata": "JA",
+  "icao": "JAT",
+  "callsign": "ROCKSMART",
+  "country_id": "Chile",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/JetSmart"
+},
+{
+  "name": "JetSmart Argentina",
+  "iata": "WJ",
+  "icao": "JES",
+  "callsign": "SMARTBIRD",
+  "country_id": "Argentinien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/JetSmart_Argentina"
+},
+{
+  "name": "Jetstar Airways",
+  "iata": "JQ",
+  "icao": "JST",
+  "callsign": "JETSTAR",
+  "country_id": "Australien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jetstar_Airways"
+},
+{
+  "name": "Jetstar Pacific Airlines",
+  "iata": "BL",
+  "icao": "PIC",
+  "callsign": "PACIFIC EXPRESS",
+  "country_id": "Vietnam",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Jetstar_Pacific_Airlines"
+},
+{
+  "name": "Jhonlin Air Transport",
+  "iata": "–",
+  "icao": "JLB",
+  "callsign": "JHONLIN",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Jhonlin_Air_Transport"
+},
+{
+  "name": "Jin Air",
+  "iata": "LJ",
+  "icao": "JNA",
+  "callsign": "JIN AIR",
+  "country_id": "Südkorea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Jin_Air"
+},
+{
+  "name": "Jordan Aviation",
+  "iata": "R5",
+  "icao": "JAV",
+  "callsign": "JORDAN AVIATION",
+  "country_id": "Jordanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Jordan_Aviation"
+},
+{
+  "name": "Jubba Airways (Somalia)",
+  "iata": "6J",
+  "icao": "JUB",
+  "callsign": "JUBBA",
+  "country_id": "Somalia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Jubba_Airways_(Somalia)"
+},
+{
+  "name": "Jubba Airways (Kenia)",
+  "iata": "3J",
+  "icao": "JBW",
+  "callsign": "AIRJUB",
+  "country_id": "Kenia",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Jubba_Airways_(Kenia)"
+},
+{
+  "name": "Justice Prisoner and Alien Transportation System",
+  "iata": "–",
+  "icao": "DOJ",
+  "callsign": "JUSTICE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "Gefangenentransport",
+  "link": "https://de.wikipedia.org/wiki/Justice_Prisoner_and_Alien_Transportation_System"
+},
+{
+  "name": "Kalitta Charters",
+  "iata": "CB",
+  "icao": "KFS",
+  "callsign": "KALITTA",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Kalitta_Charters"
+},
+{
+  "name": "Kam Air",
+  "iata": "RQ",
+  "icao": "KMF",
+  "callsign": "KAMGAR",
+  "country_id": "Afghanistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Kam_Air"
+},
+{
+  "name": "Karinou Airlines",
+  "iata": "U5",
+  "icao": "KRN",
+  "callsign": "–",
+  "country_id": "Zentralafrikanische_Republik",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Karinou_Airlines"
+},
+{
+  "name": "Kaz Air Trans",
+  "iata": "–",
+  "icao": "KUY",
+  "callsign": "KAIGA",
+  "country_id": "Kasachstan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Kaz_Air_Trans"
+},
+{
+  "name": "Kazaviaspas",
+  "iata": "–",
+  "icao": "KZS",
+  "callsign": "SPAKAZ",
+  "country_id": "Kasachstan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Kazaviaspas"
+},
+{
+  "name": "Keewatin Air",
+  "iata": "FK",
+  "icao": "KEW",
+  "callsign": "BLIZZARD",
+  "country_id": "Kanada",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Keewatin_Air"
+},
+{
+  "name": "Kenmore Air",
+  "iata": "M5",
+  "icao": "KEN",
+  "callsign": "KENMORE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P, C",
+  "link": "https://de.wikipedia.org/wiki/Kenmore_Air"
+},
+{
+  "name": "Kenn Borek Air",
+  "iata": "4K",
+  "icao": "KBA",
+  "callsign": "BOREK AIR",
+  "country_id": "Kanada",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Kenn_Borek_Air"
+},
+{
+  "name": "Kenya Airways",
+  "iata": "KQ",
+  "icao": "KQA",
+  "callsign": "KENYA",
+  "country_id": "Kenia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Kenya_Airways"
+},
+{
+  "name": "Kish Air",
+  "iata": "Y9",
+  "icao": "IRK",
+  "callsign": "KISHAIR",
+  "country_id": "Iran",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Kish_Air"
+},
+{
+  "name": "KlasJet",
+  "iata": "–",
+  "icao": "KLJ",
+  "callsign": "CLASS LINE",
+  "country_id": "Litauen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/KlasJet"
+},
+{
+  "name": "KLM",
+  "iata": "KL",
+  "icao": "KLM",
+  "callsign": "KLM",
+  "country_id": "Niederlande",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/KLM_Royal_Dutch_Airlines"
+},
+{
+  "name": "KLM Cityhopper",
+  "iata": "WA",
+  "icao": "KLC",
+  "callsign": "CITY",
+  "country_id": "Niederlande",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/KLM_Cityhopper"
+},
+{
+  "name": "KM Malta Airlines",
+  "iata": "KM",
+  "icao": "KMM",
+  "callsign": "SKY KNIGHT",
+  "country_id": "Malta",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/KM_Malta_Airlines"
+},
+{
+  "name": "Korean Air",
+  "iata": "KE",
+  "icao": "KAL",
+  "callsign": "KOREANAIR",
+  "country_id": "Südkorea",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Korean_Air"
+},
+{
+  "name": "KrasAvia",
+  "iata": "KI",
+  "icao": "SSJ",
+  "callsign": "SIBERIAN SKY",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/KrasAvia"
+},
+{
+  "name": "Kuwait Airways",
+  "iata": "KU",
+  "icao": "KAC",
+  "callsign": "KUWAITI",
+  "country_id": "Kuwait",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Kuwait_Airways"
+},
+{
+  "name": "La Compagnie",
+  "iata": "B0",
+  "icao": "DJT",
+  "callsign": "DREAMJET",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/La_Compagnie"
+},
+{
+  "name": "LASER Airlines",
+  "iata": "QL",
+  "icao": "LER",
+  "callsign": "LASER",
+  "country_id": "Venezuela",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LASER_Airlines"
+},
+{
+  "name": "LAM Lineas Aereas de Mocambique",
+  "iata": "TM",
+  "icao": "LAM",
+  "callsign": "MOZAMBIQUE",
+  "country_id": "Mosambik",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Linhas_Aéreas_de_Moçambique"
+},
+{
+  "name": "Lanexang Airways International",
+  "iata": "5A",
+  "icao": "LXW",
+  "callsign": "LANEXANG",
+  "country_id": "Laos",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Lanexang_Airways_International"
+},
+{
+  "name": "Lao Airlines",
+  "iata": "QV",
+  "icao": "LAO",
+  "callsign": "LAO",
+  "country_id": "Laos",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Lao_Airlines"
+},
+{
+  "name": "LATAM Airlines",
+  "iata": "LA",
+  "icao": "LAN",
+  "callsign": "LAN",
+  "country_id": "Chile",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Airlines"
+},
+{
+  "name": "LATAM Airlines Brasil",
+  "iata": "JJ",
+  "icao": "TAM",
+  "callsign": "TAM",
+  "country_id": "Brasilien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Airlines_Brasil"
+},
+{
+  "name": "LATAM Airlines Colombia",
+  "iata": "4C",
+  "icao": "ARE",
+  "callsign": "AIRES",
+  "country_id": "Kolumbien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Airlines_Colombia"
+},
+{
+  "name": "LATAM Airlines Ecuador",
+  "iata": "XL",
+  "icao": "LNA",
+  "callsign": "LAN ECUADOR",
+  "country_id": "Ecuador",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Airlines_Ecuador"
+},
+{
+  "name": "LATAM Airlines Paraguay",
+  "iata": "PZ",
+  "icao": "LAP",
+  "callsign": "PARAGUAYA",
+  "country_id": "Paraguay",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Airlines_Paraguay"
+},
+{
+  "name": "LATAM Airlines Perú",
+  "iata": "LP",
+  "icao": "LPE",
+  "callsign": "LAN PERU",
+  "country_id": "Peru",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Airlines_Perú"
+},
+{
+  "name": "LATAM Express",
+  "iata": "LU",
+  "icao": "LXP",
+  "callsign": "LAN EX",
+  "country_id": "Chile",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/LATAM_Express"
+},
+{
+  "name": "Lauda Europe",
+  "iata": "LW",
+  "icao": "LDA",
+  "callsign": "BEAUFORT",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Lauda_Europe"
+},
+{
+  "name": "Level (Fluggesellschaft)",
+  "iata": "LL",
+  "icao": "LVL",
+  "callsign": "DALI",
+  "country_id": "Spanien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Level_(Fluggesellschaft)"
+},
+{
+  "name": "Libyan Airlines",
+  "iata": "LN",
+  "icao": "LAA",
+  "callsign": "LIBAIR",
+  "country_id": "Datei:Flag_of_Libya.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Libyan_Airlines"
+},
+{
+  "name": "Líneas Aéreas del Estado",
+  "iata": "LD",
+  "icao": "LDE",
+  "callsign": "LADE",
+  "country_id": "Argentinien",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Líneas_Aéreas_del_Estado"
+},
+{
+  "name": "Lion Air",
+  "iata": "JT",
+  "icao": "LNI",
+  "callsign": "LION INTER",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Lion_Air"
+},
+{
+  "name": "Loganair",
+  "iata": "LC",
+  "icao": "LOG",
+  "callsign": "LOGAN",
+  "country_id": "Schottland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Loganair"
+},
+{
+  "name": "LOT",
+  "iata": "LO",
+  "icao": "LOT",
+  "callsign": "POLLOT",
+  "country_id": "Polen",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Polskie_Linie_Lotnicze_LOT"
+},
+{
+  "name": "Lufthansa",
+  "iata": "LH",
+  "icao": "DLH",
+  "callsign": "LUFTHANSA",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Lufthansa"
+},
+{
+  "name": "Lufthansa City Airlines",
+  "iata": "VL",
+  "icao": "LXH",
+  "callsign": "CITYAIR",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Lufthansa_City_Airlines"
+},
+{
+  "name": "Lulutai Airlines",
+  "iata": "L8",
+  "icao": "TON",
+  "callsign": "TONGA",
+  "country_id": "Tonga",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Lulutai_Airlines"
+},
+{
+  "name": "Luxair",
+  "iata": "LG",
+  "icao": "LGL",
+  "callsign": "LUXAIR",
+  "country_id": "Luxemburg",
+  "remark": "P/R",
+  "link": "https://de.wikipedia.org/wiki/Luxair"
+},
+{
+  "name": "Luxaviation",
+  "iata": "–",
+  "icao": "LXA",
+  "callsign": "RED LION",
+  "country_id": "Luxemburg",
+  "remark": "C/R",
+  "link": "https://de.wikipedia.org/wiki/Luxaviation"
+},
+{
+  "name": "Luxaviation Germany",
+  "iata": "–",
+  "icao": "LXG",
+  "callsign": "LUX AVIATION",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Fairjets"
+},
+{
+  "name": "Luxwing",
+  "iata": "BN",
+  "icao": "LWG",
+  "callsign": "LUXWING",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Luxwing"
+},
+{
+  "name": "Mack Air",
+  "iata": "–",
+  "icao": "MKB",
+  "callsign": "Greentail",
+  "country_id": "Botswana",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Mack_Air"
+},
+{
+  "name": "Madagascar Airlines",
+  "iata": "MD",
+  "icao": "MDG",
+  "callsign": "MADAGASCAR",
+  "country_id": "Madagaskar",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Madagascar_Airlines"
+},
+{
+  "name": "Marabu",
+  "iata": "DI",
+  "icao": "MBU",
+  "callsign": "MARABU",
+  "country_id": "Estland",
+  "remark": null,
+  "link": "https://de.wikipedia.org/wiki/Marabu_Airlines"
+},
+{
+  "name": "Mahogany Air",
+  "iata": "KT",
+  "icao": "HOG",
+  "callsign": "HOGAN AIR",
+  "country_id": "Sambia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Mahogany_Air"
+},
+{
+  "name": "Mahan Air",
+  "iata": "W5",
+  "icao": "IRM",
+  "callsign": "MAHAN AIR",
+  "country_id": "Iran",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Mahan_Air"
+},
+{
+  "name": "Mahfooz Aviation",
+  "iata": "M2",
+  "icao": "MZS",
+  "callsign": "MAHFOOZ",
+  "country_id": "Gambia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Mahfooz_Aviation"
+},
+{
+  "name": "Malaysia Airlines",
+  "iata": "MH",
+  "icao": "MAS",
+  "callsign": "MALAYSIAN",
+  "country_id": "Malaysia",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Malaysia_Airlines"
+},
+{
+  "name": "Maldivian",
+  "iata": "Q2",
+  "icao": "DQA",
+  "callsign": "MALDIVIAN",
+  "country_id": "Malediven",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Maldivian"
+},
+{
+  "name": "Mandarin Airlines",
+  "iata": "AE",
+  "icao": "MDA",
+  "callsign": "MANDARIN",
+  "country_id": "Republik_China_(Taiwan)",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Mandarin_Airlines"
+},
+{
+  "name": "Mango",
+  "iata": "JE",
+  "icao": "MNO",
+  "callsign": "TULCA",
+  "country_id": "Südafrika",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Mango_(Fluggesellschaft)"
+},
+{
+  "name": "Mann Yadanarpon Airlines",
+  "iata": "7Y",
+  "icao": "MYP",
+  "callsign": "MANN ROYAL",
+  "country_id": "Myanmar",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Mann_Yadanarpon_Airlines"
+},
+{
+  "name": "MASwings",
+  "iata": "MH",
+  "icao": "MWG",
+  "callsign": "MASWINGS",
+  "country_id": "Malaysia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/MASwings"
+},
+{
+  "name": "Max Air",
+  "iata": "VM",
+  "icao": "NGL",
+  "callsign": "MAXAIR NIGERIA",
+  "country_id": "Nigeria",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Max_Air"
+},
+{
+  "name": "Maya Island Air",
+  "iata": "MY",
+  "icao": "MYD",
+  "callsign": "MYLAND",
+  "country_id": "Belize",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Maya_Island_Air"
+},
+{
+  "name": "Medavia",
+  "iata": "9H",
+  "icao": "MDM",
+  "callsign": "MEDAVIA",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Medavia"
+},
+{
+  "name": "Mesa Airlines",
+  "iata": "YV",
+  "icao": "ASH",
+  "callsign": "AIR SHUTTLE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Mesa_Airlines"
+},
+{
+  "name": "MHS Aviation",
+  "iata": "M2",
+  "icao": "MHV",
+  "callsign": "SNOWCAP",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/MHS_Aviation"
+},
+{
+  "name": "Mid Airlines",
+  "iata": "–",
+  "icao": "NYL",
+  "callsign": "NILE",
+  "country_id": "Sudan",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Mid_Airlines"
+},
+{
+  "name": "MIAT Mongolian Airlines",
+  "iata": "OM",
+  "icao": "MGL",
+  "callsign": "MONGOL AIR",
+  "country_id": "Mongolei",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/MIAT_Mongolian_Airlines"
+},
+{
+  "name": "MJET",
+  "iata": "–",
+  "icao": "MJF",
+  "callsign": "M EXPRESS",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/MJET"
+},
+{
+  "name": "Motor Sich Airlines",
+  "iata": "M9",
+  "icao": "MSI",
+  "callsign": "MOTOR SICH",
+  "country_id": "Ukraine",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Motor_Sich_Airlines"
+},
+{
+  "name": "Middle East Airlines",
+  "iata": "ME",
+  "icao": "MEA",
+  "callsign": "CEDAR JET",
+  "country_id": "Libanon",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Middle_East_Airlines"
+},
+{
+  "name": "Mustique Airways",
+  "iata": "–",
+  "icao": "MAW",
+  "callsign": "MUSTIQUE",
+  "country_id": "St._Vincent_und_die_Grenadinen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Mustique_Airways"
+},
+{
+  "name": "Myanmar National Airlines",
+  "iata": "UB",
+  "icao": "UBA",
+  "callsign": "UNIONAIR",
+  "country_id": "Myanmar",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Myanmar_National_Airlines"
+},
+{
+  "name": "Myanmar Airways International",
+  "iata": "8M",
+  "icao": "UBA",
+  "callsign": "UNIONAIR",
+  "country_id": "Myanmar",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Myanmar_Airways_International"
+},
+{
+  "name": "Mýflug",
+  "iata": null,
+  "icao": "MYA",
+  "callsign": "MYFLUG",
+  "country_id": "Island",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Mýflug"
+},
+{
+  "name": "MyWay Airlines",
+  "iata": "MJ",
+  "icao": "MYW",
+  "callsign": "MY SKY",
+  "country_id": "Georgien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/MyWay_Airlines"
+},
+{
+  "name": "National Air Services",
+  "iata": "XY",
+  "icao": "KNE",
+  "callsign": "NAS EXPRESS",
+  "country_id": "Saudi-Arabien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/National_Air_Services"
+},
+{
+  "name": "Nauru Airlines",
+  "iata": "ON",
+  "icao": "RON",
+  "callsign": "OUR AIRLINE",
+  "country_id": "Nauru",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Nauru_Airlines"
+},
+{
+  "name": "Nella Linhas Aéreas",
+  "iata": "–",
+  "icao": "NEL",
+  "callsign": "NELLA",
+  "country_id": "Brasilien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Nella_Linhas_Aéreas"
+},
+{
+  "name": "Nesma Airlines",
+  "iata": "NE",
+  "icao": "NMA",
+  "callsign": "NESMA",
+  "country_id": "Ägypten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Nesma_Airlines"
+},
+{
+  "name": "Neos",
+  "iata": "NO",
+  "icao": "NOS",
+  "callsign": "MOONFLOWER",
+  "country_id": "Italien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Neos_(Fluggesellschaft)"
+},
+{
+  "name": "Nepal Airlines",
+  "iata": "RA",
+  "icao": "RNA",
+  "callsign": "NEPAL",
+  "country_id": "Nepal",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Nepal_Airlines"
+},
+{
+  "name": "NetJets",
+  "iata": "1I",
+  "icao": "EJA",
+  "callsign": "EXECJET",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/NetJets"
+},
+{
+  "name": "NetJets",
+  "iata": "1I",
+  "icao": "NEJ",
+  "callsign": "NET BUSINESS",
+  "country_id": "Volksrepublik_China",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/NetJets"
+},
+{
+  "name": "NetJets",
+  "iata": "1I",
+  "icao": "NJE",
+  "callsign": "FRACTION",
+  "country_id": "Portugal",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/NetJets"
+},
+{
+  "name": "New Central Airservice",
+  "iata": "–",
+  "icao": "CUK",
+  "callsign": "CHUOH AIR",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/New_Central_Airservice"
+},
+{
+  "name": "New England Airlines",
+  "iata": "EJ",
+  "icao": "NEA",
+  "callsign": "NEW ENGLAND",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/New_England_Airlines"
+},
+{
+  "name": "Nile Air",
+  "iata": "NP",
+  "icao": "NIA",
+  "callsign": "NILE BIRD",
+  "country_id": "Ägypten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Nile_Air"
+},
+{
+  "name": "Nok Air",
+  "iata": "DD",
+  "icao": "NOK",
+  "callsign": "NOK AIR",
+  "country_id": "Thailand",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Nok_Air"
+},
+{
+  "name": "Nordic Regional Airlines",
+  "iata": "N7",
+  "icao": "FCM",
+  "callsign": "FINNCOMM",
+  "country_id": "Finnland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Nordic_Regional_Airlines"
+},
+{
+  "name": "Nordic Seaplanes",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Dänemark",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Nordic_Seaplanes"
+},
+{
+  "name": "Norlandair",
+  "iata": "–",
+  "icao": "FNA",
+  "callsign": "NORLAND",
+  "country_id": "Island",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Norlandair"
+},
+{
+  "name": "Northern Thunderbird Air",
+  "iata": "–",
+  "icao": "NTA",
+  "callsign": "THUNDERBIRD",
+  "country_id": "Kanada",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Northern_Thunderbird_Air"
+},
+{
+  "name": "North-Wright Airways",
+  "iata": "HW",
+  "icao": "NWL",
+  "callsign": "NORTHWRIGHT",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/North-Wright_Airways"
+},
+{
+  "name": "Norwegian Air Shuttle",
+  "iata": "DY",
+  "icao": "NAX",
+  "callsign": "NOR SHUTTLE",
+  "country_id": "Norwegen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Norwegian_Air_Shuttle"
+},
+{
+  "name": "Norwegian Air Sweden",
+  "iata": "D8",
+  "icao": "NSZ",
+  "callsign": "NORDIC",
+  "country_id": "Schweden",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Norwegian_Air_Sweden"
+},
+{
+  "name": "Nouvelair Tunisie",
+  "iata": "BJ",
+  "icao": "LBT",
+  "callsign": "NOUVELAIR",
+  "country_id": "Tunesien",
+  "remark": "B/C",
+  "link": "https://de.wikipedia.org/wiki/Nouvelair_Tunisie"
+},
+{
+  "name": "Nouvelle Air Affaires Gabon",
+  "iata": "–",
+  "icao": "NVS",
+  "callsign": "NOUVELLE AFFAIRES",
+  "country_id": "Gabun",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Nouvelle_Air_Affaires_Gabon"
+},
+{
+  "name": "Nyasa Express",
+  "iata": "7Q",
+  "icao": "NYS",
+  "callsign": "ULENDO",
+  "country_id": "Malawi",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Nyasa_Express"
+},
+{
+  "name": "Nyxair",
+  "iata": "–",
+  "icao": "NYX",
+  "callsign": "NYX AIR",
+  "country_id": "Estland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Nyxair"
+},
+{
+  "name": "OFD Ostfriesischer Flugdienst",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/OFD_Ostfriesischer_Flugdienst"
+},
+{
+  "name": "Olympic Air",
+  "iata": "OA",
+  "icao": "OAL",
+  "callsign": "OLYMPIC",
+  "country_id": "Griechenland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Olympic_Air"
+},
+{
+  "name": "Oman Air",
+  "iata": "WY",
+  "icao": "OMA",
+  "callsign": "OMAN AIR",
+  "country_id": "Oman",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Oman_Air"
+},
+{
+  "name": "Omni Aviation",
+  "iata": "OC",
+  "icao": "OAV",
+  "callsign": "–",
+  "country_id": "Portugal",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Omni_Aviation"
+},
+{
+  "name": "Omni Air International",
+  "iata": "OY",
+  "icao": "OAE",
+  "callsign": "OMNI-EXPRESS",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C/R",
+  "link": "https://de.wikipedia.org/wiki/Omni_Air_International"
+},
+{
+  "name": "Overland Airways",
+  "iata": "OJ",
+  "icao": "OLA",
+  "callsign": "OVERLAND",
+  "country_id": "Nigeria",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Overland_Airways"
+},
+{
+  "name": "Pacific Coastal Airlines",
+  "iata": "8P",
+  "icao": "PCO",
+  "callsign": "PASCO",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Pacific_Coastal_Airlines"
+},
+{
+  "name": "Pad Aviation",
+  "iata": "–",
+  "icao": "PVD",
+  "callsign": "PAD AVIATION",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Pad_Aviation"
+},
+{
+  "name": "Pakistan International Airlines",
+  "iata": "PK",
+  "icao": "PIA",
+  "callsign": "PAKISTAN",
+  "country_id": "Pakistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Pakistan_International_Airlines"
+},
+{
+  "name": "PAL Airlines",
+  "iata": "PB",
+  "icao": "PVL",
+  "callsign": "PROVINCIAL",
+  "country_id": "Kanada",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/PAL_Airlines"
+},
+{
+  "name": "Pegasus Airlines",
+  "iata": "PC",
+  "icao": "PGT",
+  "callsign": "SUNTURK",
+  "country_id": "Türkei",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Pegasus_Airlines"
+},
+{
+  "name": "Pel-Air",
+  "iata": "XM",
+  "icao": "QWA",
+  "callsign": "–",
+  "country_id": "Australien",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Pel-Air"
+},
+{
+  "name": "Pelita Air Service",
+  "iata": "6D",
+  "icao": "PAS",
+  "callsign": "PELITA",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Pelita_Air_Service"
+},
+{
+  "name": "Piedmont Airlines",
+  "iata": "EN",
+  "icao": "PDT",
+  "callsign": "PIEDMONT",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Piedmont_Airlines_(1993)"
+},
+{
+  "name": "Philippine Airlines",
+  "iata": "PR",
+  "icao": "PAL",
+  "callsign": "PHILIPPINE",
+  "country_id": "Philippinen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Philippine_Airlines"
+},
+{
+  "name": "PNG Air",
+  "iata": "CG",
+  "icao": "TOK",
+  "callsign": "BALUS",
+  "country_id": "Papua-Neuguinea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/PNG_Air"
+},
+{
+  "name": "Porter Airlines",
+  "iata": "PD",
+  "icao": "POE",
+  "callsign": "PORTER AIR",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Porter_Airlines"
+},
+{
+  "name": "Portugália Airlines",
+  "iata": "NI",
+  "icao": "PGA",
+  "callsign": "AIR PORTUGAL",
+  "country_id": "Portugal",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Portugália_Airlines"
+},
+{
+  "name": "Poste Air Cargo",
+  "iata": "7M",
+  "icao": "MSA",
+  "callsign": "MISTRAL",
+  "country_id": "Italien",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Poste_Air_Cargo"
+},
+{
+  "name": "Precision Air",
+  "iata": "PW",
+  "icao": "PRF",
+  "callsign": "PRECISION AIR",
+  "country_id": "Tansania",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Precision_Air"
+},
+{
+  "name": "PSA Airlines",
+  "iata": "JS",
+  "icao": "JIA",
+  "callsign": "BLUE STREAK",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/PSA_Airlines"
+},
+{
+  "name": "Qantas Airways",
+  "iata": "QF",
+  "icao": "QFA",
+  "callsign": "QANTAS",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Qantas_Airways"
+},
+{
+  "name": "QantasLink",
+  "iata": "QF",
+  "icao": "EAQ, SSQ, NJS, UTY",
+  "callsign": "EASTERN, SUNSTATE, NATIONAL JET, UNITY",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/QantasLink"
+},
+{
+  "name": "Qatar Airways",
+  "iata": "QR",
+  "icao": "QTR",
+  "callsign": "QATARI",
+  "country_id": "Katar",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Qatar_Airways"
+},
+{
+  "name": "Red Sea Airlines",
+  "iata": "4S",
+  "icao": "RSX",
+  "callsign": "RED SEA",
+  "country_id": "Ägypten",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Red_Sea_Airlines_(Ägypten)"
+},
+{
+  "name": "Red Wings Airlines",
+  "iata": "WZ",
+  "icao": "RWZ",
+  "callsign": "RED AIR",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Red_Wings_Airlines"
+},
+{
+  "name": "Regional Air Services",
+  "iata": "–",
+  "icao": "REG",
+  "callsign": "REGIONAL SERVICES",
+  "country_id": "Tansania",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Regional_Air_Services_(Tansania)"
+},
+{
+  "name": "Regional Express",
+  "iata": "ZL",
+  "icao": "RXA",
+  "callsign": "REX",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Regional_Express_(Fluggesellschaft)"
+},
+{
+  "name": "Republic Airline",
+  "iata": "RW",
+  "icao": "RPA",
+  "callsign": "BRICKYARD",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Republic_Airline"
+},
+{
+  "name": "Rossija",
+  "iata": "R4 & FV",
+  "icao": "SDM & PLK",
+  "callsign": "RUSSIA",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Rossija_(Fluggesellschaft)"
+},
+{
+  "name": "Royal Air Maroc",
+  "iata": "AT",
+  "icao": "RAM",
+  "callsign": "ROYAL AIR MAROC",
+  "country_id": "Marokko",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Royal_Air_Maroc"
+},
+{
+  "name": "Royal Air Maroc Express",
+  "iata": "FN",
+  "icao": "RXP",
+  "callsign": "EXPRESS MAROC",
+  "country_id": "Marokko",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Royal_Air_Maroc_Express"
+},
+{
+  "name": "Royal Brunei Airlines",
+  "iata": "BI",
+  "icao": "RBA",
+  "callsign": "BRUNEI",
+  "country_id": "Brunei",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Royal_Brunei_Airlines"
+},
+{
+  "name": "Royal Jordanian",
+  "iata": "RJ",
+  "icao": "RJA",
+  "callsign": "JORDANIAN",
+  "country_id": "Jordanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Royal_Jordanian"
+},
+{
+  "name": "RwandAir",
+  "iata": "WB",
+  "icao": "RWD",
+  "callsign": "RWANDAIR",
+  "country_id": "Ruanda",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/RwandAir"
+},
+{
+  "name": "RWL Luftfahrtgesellschaft",
+  "iata": "–",
+  "icao": "RWL",
+  "callsign": "RHEINTRAINER",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/RWL_Luftfahrtgesellschaft"
+},
+{
+  "name": "Ryanair",
+  "iata": "FR",
+  "icao": "RYR",
+  "callsign": "RYANAIR",
+  "country_id": "Irland",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Ryanair"
+},
+{
+  "name": "Ryanair Sun",
+  "iata": "RR",
+  "icao": "RYS",
+  "callsign": "MAGIC SUN",
+  "country_id": "Polen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Ryanair_Sun"
+},
+{
+  "name": "Ryūkyū Air Commuter",
+  "iata": "–",
+  "icao": "RAC",
+  "callsign": "RYUKYU",
+  "country_id": "Japan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Ryūkyū_Air_Commuter"
+},
+{
+  "name": "S7 Airlines",
+  "iata": "S7",
+  "icao": "SBI",
+  "callsign": "SIBERIAN AIRLINES",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/S7_Airlines"
+},
+{
+  "name": "Sabang Merauke Raya Air Charter",
+  "iata": "–",
+  "icao": "SMC",
+  "callsign": "SAMER",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sabang_Merauke_Raya_Air_Charter"
+},
+{
+  "name": "Safair",
+  "iata": "FA",
+  "icao": "SFR",
+  "callsign": "CARGO",
+  "country_id": "Südafrika",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Safair"
+},
+{
+  "name": "SalamAir",
+  "iata": "OV",
+  "icao": "OMS",
+  "callsign": "MAZOON",
+  "country_id": "Oman",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/SalamAir"
+},
+{
+  "name": "Samoa Airways",
+  "iata": "OL",
+  "icao": "PAO",
+  "callsign": "POLYNESIAN",
+  "country_id": "Samoa",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Samoa_Airways"
+},
+{
+  "name": "Sansa Regional Airline",
+  "iata": "RZ",
+  "icao": "LRS",
+  "callsign": "–",
+  "country_id": "Costa_Rica",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sansa_Regional_Airline"
+},
+{
+  "name": "SATA Air Açores",
+  "iata": "SP",
+  "icao": "SAT",
+  "callsign": "SATA",
+  "country_id": "Portugal",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/SATA_Air_Açores"
+},
+{
+  "name": "SATENA",
+  "iata": "9N",
+  "icao": "NSE",
+  "callsign": "SATENA",
+  "country_id": "Kolumbien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SATENA"
+},
+{
+  "name": "SAS Scandinavian Airlines",
+  "iata": "SK",
+  "icao": "SAS",
+  "callsign": "SCANDINAVIAN",
+  "country_id": "Schweden",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SAS_Scandinavian_Airlines"
+},
+{
+  "name": "Saudi Arabian Airlines",
+  "iata": "SV",
+  "icao": "SVA",
+  "callsign": "SAUDIA",
+  "country_id": "Saudi-Arabien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Saudi_Arabian_Airlines"
+},
+{
+  "name": "Sayat Air",
+  "iata": "–",
+  "icao": "SYM",
+  "callsign": "SAYAT AIR",
+  "country_id": "Kasachstan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sayat_Air"
+},
+{
+  "name": "Scandinavian Airlines Connect",
+  "iata": "SL",
+  "icao": "SZS",
+  "callsign": "SPINNAKER",
+  "country_id": "Irland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Scandinavian_Airlines_Connect"
+},
+{
+  "name": "SCAT Airlines",
+  "iata": "DV",
+  "icao": "VSV",
+  "callsign": "VLASTA",
+  "country_id": "Kasachstan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SCAT_Airlines"
+},
+{
+  "name": "Scoot",
+  "iata": "OQ",
+  "icao": "SCO",
+  "callsign": "SCOOTER",
+  "country_id": "Singapur",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Scoot"
+},
+{
+  "name": "Shandong Airlines",
+  "iata": "SC",
+  "icao": "CDG",
+  "callsign": "SHANDONG",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Shandong_Airlines"
+},
+{
+  "name": "Shanghai Airlines",
+  "iata": "FM",
+  "icao": "CSH",
+  "callsign": "SHANGHAI AIR",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Shanghai_Airlines"
+},
+{
+  "name": "Shenzhen Airlines",
+  "iata": "ZH",
+  "icao": "CSZ",
+  "callsign": "SHENZENAIR",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Shenzhen_Airlines"
+},
+{
+  "name": "Sichuan Airlines",
+  "iata": "3U",
+  "icao": "CSC",
+  "callsign": "CHUANHANG",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sichuan_Airlines"
+},
+{
+  "name": "Sierra Pacific Airlines",
+  "iata": "SI",
+  "icao": "SPA",
+  "callsign": "SIERRA PACIFIC",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Sierra_Pacific_Airlines"
+},
+{
+  "name": "Silver Airways",
+  "iata": "3M",
+  "icao": "SIL",
+  "callsign": "SILVER WINGS",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Silver_Airways"
+},
+{
+  "name": "Silver Cloud Air",
+  "iata": "–",
+  "icao": "SCR",
+  "callsign": "SILVER CLOUD",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Silver_Cloud_Air"
+},
+{
+  "name": "Singapore Airlines",
+  "iata": "SQ",
+  "icao": "SIA",
+  "callsign": "SINGAPORE",
+  "country_id": "Singapur",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Singapore_Airlines"
+},
+{
+  "name": "Sky Airline",
+  "iata": "H2",
+  "icao": "SKU",
+  "callsign": "AEROSKY",
+  "country_id": "Chile",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sky_Airline"
+},
+{
+  "name": "Sky Cana",
+  "iata": "RD",
+  "icao": "SNA",
+  "callsign": "CANA",
+  "country_id": "Dominikanische_Republik",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sky_Cana"
+},
+{
+  "name": "Sky Express SA",
+  "iata": "GQ",
+  "icao": "SEH",
+  "callsign": "AIR CRETE",
+  "country_id": "Griechenland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sky_Express_SA"
+},
+{
+  "name": "Sky Lease Cargo",
+  "iata": "WI",
+  "icao": "KYE",
+  "callsign": "SKY CUBE",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Sky_Lease_Cargo"
+},
+{
+  "name": "Skymark",
+  "iata": "BC",
+  "icao": "SKY",
+  "callsign": "SKYMARK",
+  "country_id": "Japan",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Skymark"
+},
+{
+  "name": "SkyTaxi",
+  "iata": "TE",
+  "icao": "IGA",
+  "callsign": "IGUANA",
+  "country_id": "Polen",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/SkyTaxi"
+},
+{
+  "name": "Skytraders",
+  "iata": "–",
+  "icao": "SND",
+  "callsign": "SNOWBIRD",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Skytraders"
+},
+{
+  "name": "Skytrans Airlines",
+  "iata": "Q6",
+  "icao": "SKP",
+  "callsign": "–",
+  "country_id": "Australien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Skytrans_Airlines"
+},
+{
+  "name": "SkyUp Airlines",
+  "iata": "PQ",
+  "icao": "SQP",
+  "callsign": "SKYUP",
+  "country_id": "Ukraine",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/SkyUp_Airlines"
+},
+{
+  "name": "SkyUp MT",
+  "iata": "U5",
+  "icao": "SEU",
+  "callsign": "SKY MALTA",
+  "country_id": "Malta",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/SkyUp_MT"
+},
+{
+  "name": "Sky Vision Airlines",
+  "iata": "SE",
+  "icao": "SVI",
+  "callsign": "–",
+  "country_id": "Ägypten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sky_Vision_Airlines"
+},
+{
+  "name": "SkyWest Airlines",
+  "iata": "OO",
+  "icao": "SKW",
+  "callsign": "SKYWEST",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SkyWest_Airlines"
+},
+{
+  "name": "SmartAvia",
+  "iata": "5N",
+  "icao": "AUL",
+  "callsign": "DVINA",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SmartAvia"
+},
+{
+  "name": "Smartwings",
+  "iata": "QS",
+  "icao": "TVS",
+  "callsign": "SKYTRAVEL",
+  "country_id": "Tschechien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Smartwings"
+},
+{
+  "name": "Smartwings Hungary",
+  "iata": "7O",
+  "icao": "TVL",
+  "callsign": "TRAVELLER",
+  "country_id": "Ungarn",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Smartwings_Hungary"
+},
+{
+  "name": "Smartwings Poland",
+  "iata": "3Z",
+  "icao": "TVP",
+  "callsign": "JET TRAVEL",
+  "country_id": "Polen",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Smartwings_Poland"
+},
+{
+  "name": "Solinair",
+  "iata": "–",
+  "icao": "SOP",
+  "callsign": "SOLINAIR",
+  "country_id": "Slowenien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Solinair"
+},
+{
+  "name": "Solomon Airlines",
+  "iata": "IE",
+  "icao": "SOL",
+  "callsign": "SOLOMON",
+  "country_id": "Salomonen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Solomon_Airlines"
+},
+{
+  "name": "South African Airways",
+  "iata": "SA",
+  "icao": "SAA",
+  "callsign": "SPRINGBOK",
+  "country_id": "Südafrika",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/South_African_Airways"
+},
+{
+  "name": "Southern Airways Express",
+  "iata": "9X",
+  "icao": "FDY",
+  "callsign": "FRIENDLY",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Southern_Airways_Express"
+},
+{
+  "name": "Southwest Airlines",
+  "iata": "WN",
+  "icao": "SWA",
+  "callsign": "SOUTHWEST",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Southwest_Airlines"
+},
+{
+  "name": "SpiceJet",
+  "iata": "SG",
+  "icao": "SEJ",
+  "callsign": "SPICEJET",
+  "country_id": "Indien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/SpiceJet"
+},
+{
+  "name": "Spring Airlines",
+  "iata": "9C",
+  "icao": "CQH",
+  "callsign": "AIR SPRING",
+  "country_id": "Volksrepublik_China",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Spring_Airlines"
+},
+{
+  "name": "Sprintair",
+  "iata": "P8",
+  "icao": "SRN",
+  "callsign": "SPRINTAIR",
+  "country_id": "Polen",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Sprintair"
+},
+{
+  "name": "SriLankan Airlines",
+  "iata": "UL",
+  "icao": "ALK",
+  "callsign": "SRILANKAN",
+  "country_id": "Sri_Lanka",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SriLankan_Airlines"
+},
+{
+  "name": "St Barth Commuter",
+  "iata": "PV",
+  "icao": "SBU",
+  "callsign": "BLACK FIN",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/St_Barth_Commuter"
+},
+{
+  "name": "StarFlyer",
+  "iata": "7G",
+  "icao": "SFJ",
+  "callsign": "STAR LINK",
+  "country_id": "Japan",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/StarFlyer"
+},
+{
+  "name": "Starling Air",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Dänemark",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Starling_Air"
+},
+{
+  "name": "Star Perú",
+  "iata": "2I",
+  "icao": "SRU",
+  "callsign": "STAR UP",
+  "country_id": "Peru",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Star_Perú"
+},
+{
+  "name": "Star Wings Dortmund",
+  "iata": "–",
+  "icao": "STQ",
+  "callsign": "STARTREK",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Star_Wings_Dortmund"
+},
+{
+  "name": "Sudan Airways",
+  "iata": "SD",
+  "icao": "SUD",
+  "callsign": "SUDANAIR",
+  "country_id": "Sudan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sudan_Airways"
+},
+{
+  "name": "SUM Air",
+  "iata": "–",
+  "icao": "XUM",
+  "callsign": null,
+  "country_id": "Südkorea",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SUM_Air"
+},
+{
+  "name": "Sun-Air of Scandinavia",
+  "iata": "EZ",
+  "icao": "SUS",
+  "callsign": "SUNSCAN",
+  "country_id": "Dänemark",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sun-Air_of_Scandinavia"
+},
+{
+  "name": "Sunclass Airlines",
+  "iata": "DK",
+  "icao": "VKG",
+  "callsign": "VIKING",
+  "country_id": "Dänemark",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Sunclass_Airlines"
+},
+{
+  "name": "Sun Country Airlines",
+  "iata": "SY",
+  "icao": "SCX",
+  "callsign": "SUN COUNTRY",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Sun_Country_Airlines"
+},
+{
+  "name": "Sundair",
+  "iata": "SR",
+  "icao": "SDR",
+  "callsign": "SUNDAIR",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Sundair"
+},
+{
+  "name": "Sun d’Or International Airlines",
+  "iata": "2U",
+  "icao": "ERO",
+  "callsign": "ECHO ROMEO",
+  "country_id": "Israel",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Sun_d’Or_International_Airlines"
+},
+{
+  "name": "Sunexpress",
+  "iata": "XQ",
+  "icao": "SXS",
+  "callsign": "SUNEXPRESS",
+  "country_id": "Türkei",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sunexpress"
+},
+{
+  "name": "Sunstate Airlines",
+  "iata": "QF",
+  "icao": "SSQ",
+  "callsign": "Q LINK",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sunstate_Airlines"
+},
+{
+  "name": "Surinam Airways",
+  "iata": "PY",
+  "icao": "SLM",
+  "callsign": "SURINAM",
+  "country_id": "Suriname",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Surinam_Airways"
+},
+{
+  "name": "Susi Air",
+  "iata": "SI",
+  "icao": "–",
+  "callsign": "SUSI AIR",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Susi_Air"
+},
+{
+  "name": "SVG Air",
+  "iata": "–",
+  "icao": "SVD",
+  "callsign": "GRENADINES",
+  "country_id": "St._Vincent_und_die_Grenadinen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/SVG_Air"
+},
+{
+  "name": "Swiss",
+  "iata": "LX",
+  "icao": "SWR",
+  "callsign": "SWISS",
+  "country_id": "Schweiz",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Swiss"
+},
+{
+  "name": "Sydney Seaplanes",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Australien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Sydney_Seaplanes"
+},
+{
+  "name": "Sylt Air",
+  "iata": "7E",
+  "icao": "AWU",
+  "callsign": "SYLT AIR",
+  "country_id": "Deutschland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Sylt_Air"
+},
+{
+  "name": "Syrian Arab Airlines",
+  "iata": "RB",
+  "icao": "SYR",
+  "callsign": "SYRIANAIR",
+  "country_id": "Syrien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Syrian_Arab_Airlines"
+},
+{
+  "name": "TAAG Angola Airlines",
+  "iata": "DT",
+  "icao": "DTA",
+  "callsign": "ANGOLA",
+  "country_id": "Angola",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/TAAG_Angola_Airlines"
+},
+{
+  "name": "Tailwind Airlines",
+  "iata": "TI",
+  "icao": "TWI",
+  "callsign": "TAILWIND",
+  "country_id": "Türkei",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Tailwind_Airlines"
+},
+{
+  "name": "Tajik Air",
+  "iata": "7J",
+  "icao": "TJK",
+  "callsign": "TAJIKISTAN",
+  "country_id": "Tadschikistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Tajik_Air"
+},
+{
+  "name": "TAP Air Portugal",
+  "iata": "TP",
+  "icao": "TAP",
+  "callsign": "AIR PORTUGAL",
+  "country_id": "Portugal",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/TAP_Air_Portugal"
+},
+{
+  "name": "Tara Air",
+  "iata": "TB",
+  "icao": "TRA",
+  "callsign": "TARA AIR",
+  "country_id": "Nepal",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Tara_Air"
+},
+{
+  "name": "TAROM",
+  "iata": "RO",
+  "icao": "ROT",
+  "callsign": "TAROM",
+  "country_id": "Rumänien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/TAROM"
+},
+{
+  "name": "Tassili Airlines",
+  "iata": "SF",
+  "icao": "DTH",
+  "callsign": "TASSILI",
+  "country_id": "Algerien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Tassili_Airlines"
+},
+{
+  "name": "Terra Avia",
+  "iata": "T8",
+  "icao": "TVR",
+  "callsign": "TERRAAVIA",
+  "country_id": "Republik_Moldau",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Terra_Avia"
+},
+{
+  "name": "Thai AirAsia",
+  "iata": "FD",
+  "icao": "AIQ",
+  "callsign": "THAI ASIA",
+  "country_id": "Thailand",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Thai_AirAsia"
+},
+{
+  "name": "Thai Airways International",
+  "iata": "TG",
+  "icao": "THA",
+  "callsign": "THAI",
+  "country_id": "Thailand",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Thai_Airways_International"
+},
+{
+  "name": "Thai Lion Air",
+  "iata": "SL",
+  "icao": "TLM",
+  "callsign": "MENTARI",
+  "country_id": "Thailand",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Thai_Lion_Air"
+},
+{
+  "name": "Thai Vietjet Air",
+  "iata": "VZ",
+  "icao": "TVJ",
+  "callsign": "THAIVIET JET",
+  "country_id": "Thailand",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Thai_Vietjet_Air"
+},
+{
+  "name": "Tianjin Airlines",
+  "iata": "GS",
+  "icao": "GCR",
+  "callsign": "CHINA DRAGON",
+  "country_id": "Volksrepublik_China",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Tianjin_Airlines"
+},
+{
+  "name": "Tibet Airlines",
+  "iata": "TV",
+  "icao": "TBA",
+  "callsign": "TIBET AIR",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Tibet_Airlines"
+},
+{
+  "name": "TJS Malta",
+  "iata": "–",
+  "icao": "TYJ",
+  "callsign": "TYROL MALTA",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/TJS_Malta"
+},
+{
+  "name": "Trade Air",
+  "iata": "C3",
+  "icao": "TDR",
+  "callsign": "TRADEAIR",
+  "country_id": "Kroatien",
+  "remark": "C,P",
+  "link": "https://de.wikipedia.org/wiki/Trade_Air"
+},
+{
+  "name": "TransNusa Air Services",
+  "iata": "8B",
+  "icao": "TNU",
+  "callsign": "TRANSNUSA",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/TransNusa_Air_Services"
+},
+{
+  "name": "Trans Maldivian Airways",
+  "iata": "M8",
+  "icao": "TMW",
+  "callsign": "TRANS MALDIVIAN",
+  "country_id": "Malediven",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Trans_Maldivian_Airways"
+},
+{
+  "name": "Transavia Airlines",
+  "iata": "HV",
+  "icao": "TRA",
+  "callsign": "TRANSAVIA",
+  "country_id": "Niederlande",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Transavia_Airlines"
+},
+{
+  "name": "Transavia France",
+  "iata": "TO",
+  "icao": "TVF",
+  "callsign": "FRANCE SOLEIL",
+  "country_id": "Frankreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Transavia_France"
+},
+{
+  "name": "Transaviabaltika",
+  "iata": "–",
+  "icao": "KTB",
+  "callsign": "TRANSBALTIKA",
+  "country_id": "Litauen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Transaviabaltika"
+},
+{
+  "name": "Trigana Air Service",
+  "iata": "IL",
+  "icao": "TGN",
+  "callsign": "TRIGANA",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Trigana_Air_Service"
+},
+{
+  "name": "Tropic Air",
+  "iata": "9N",
+  "icao": "TOS",
+  "callsign": "TROPISER",
+  "country_id": "Belize",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Tropic_Air"
+},
+{
+  "name": "TUIfly",
+  "iata": "X3",
+  "icao": "TUI",
+  "callsign": "TUI JET",
+  "country_id": "Deutschland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/TUIfly"
+},
+{
+  "name": "TUIfly Nordic",
+  "iata": "6B",
+  "icao": "BLX",
+  "callsign": "BLUESCAN",
+  "country_id": "Schweden",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/TUIfly_Nordic"
+},
+{
+  "name": "TUI Airlines Belgium",
+  "iata": "TB",
+  "icao": "JAF",
+  "callsign": "BEAUTY",
+  "country_id": "Belgien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/TUI_Airlines_Belgium"
+},
+{
+  "name": "TUI Airlines Nederland",
+  "iata": "OR",
+  "icao": "TFL",
+  "callsign": "ORANGE",
+  "country_id": "Niederlande",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/TUI_Airlines_Nederland"
+},
+{
+  "name": "TUI Airways",
+  "iata": "BY",
+  "icao": "TOM",
+  "callsign": "TOMJET",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/TUI_Airways"
+},
+{
+  "name": "Tunisair",
+  "iata": "TU",
+  "icao": "TAR",
+  "callsign": "TUNAIR",
+  "country_id": "Tunesien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Tunisair"
+},
+{
+  "name": "Tunisair Express",
+  "iata": "UG",
+  "icao": "TUX",
+  "callsign": "TUNEXPRESS",
+  "country_id": "Tunesien",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Tunisair_Express"
+},
+{
+  "name": "Turkish Airlines",
+  "iata": "TK",
+  "icao": "THY",
+  "callsign": "TURKISH",
+  "country_id": "Türkei",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Turkish_Airlines"
+},
+{
+  "name": "Turkmenistan Airlines",
+  "iata": "T5",
+  "icao": "TUA",
+  "callsign": "TURKMENISTAN",
+  "country_id": "Turkmenistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Turkmenistan_Airlines"
+},
+{
+  "name": "T’way Air",
+  "iata": "TW",
+  "icao": "TWB",
+  "callsign": "TEEWAY",
+  "country_id": "Südkorea",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/T’way_Air"
+},
+{
+  "name": "Twin Jet",
+  "iata": "T7",
+  "icao": "TJT",
+  "callsign": "TWINJET",
+  "country_id": "Frankreich",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Twin_Jet"
+},
+{
+  "name": "Tyrolean Jet Services",
+  "iata": "–",
+  "icao": "TJS",
+  "callsign": "TYROLJET",
+  "country_id": "Österreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Tyrolean_Jet_Services"
+},
+{
+  "name": "Ukraine Air Alliance",
+  "iata": "–",
+  "icao": "UKL",
+  "callsign": "UKRAINE ALLIANCE",
+  "country_id": "Ukraine",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/Ukraine_Air_Alliance"
+},
+{
+  "name": "Uni Air",
+  "iata": "B7",
+  "icao": "UIA",
+  "callsign": "GLORY",
+  "country_id": "Republik_China_(Taiwan)",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Uni_Air"
+},
+{
+  "name": "United Nations Humanitarian Air Service",
+  "iata": "–",
+  "icao": "–",
+  "callsign": "–",
+  "country_id": "Vereinte_Nationen",
+  "remark": "UNO-Einsätze",
+  "link": "https://de.wikipedia.org/wiki/Humanitärer_Flugdienst_der_Vereinten_Nationen"
+},
+{
+  "name": "United Airlines",
+  "iata": "UA",
+  "icao": "UAL",
+  "callsign": "UNITED",
+  "country_id": "Vereinigte_Staaten",
+  "remark": "U",
+  "link": "https://de.wikipedia.org/wiki/United_Airlines"
+},
+{
+  "name": "United Nigeria Airlines",
+  "iata": "U5",
+  "icao": "NUA",
+  "callsign": "UNITED NIGERIA",
+  "country_id": "Nigeria",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/United_Nigeria_Airlines"
+},
+{
+  "name": "UR Airlines",
+  "iata": "UD",
+  "icao": "UBD",
+  "callsign": "URAIR",
+  "country_id": "Irak",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/UR_Airlines"
+},
+{
+  "name": "Ural Airlines",
+  "iata": "U6",
+  "icao": "SVR",
+  "callsign": "SVERDLOVSK AIR",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Ural_Airlines"
+},
+{
+  "name": "USC",
+  "iata": "–",
+  "icao": "USY",
+  "callsign": "UNISKY",
+  "country_id": "Deutschland",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/USC_(Fluggesellschaft)"
+},
+{
+  "name": "UTair",
+  "iata": "UT",
+  "icao": "UTA",
+  "callsign": "UTAIR",
+  "country_id": "Russland",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/UTair"
+},
+{
+  "name": "Uzbekistan Airways",
+  "iata": "HY",
+  "icao": "UZB",
+  "callsign": "UZBEK",
+  "country_id": "Usbekistan",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Uzbekistan_Airways"
+},
+{
+  "name": "Valljet",
+  "iata": "–",
+  "icao": "VLJ",
+  "callsign": "–",
+  "country_id": "Frankreich",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Valljet"
+},
+{
+  "name": "Vieques Air Link",
+  "iata": "V4",
+  "icao": "VES",
+  "callsign": "VIEQUES",
+  "country_id": "Datei:Flag_of_Puerto_Rico.svg",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Vieques_Air_Link"
+},
+{
+  "name": "VietJet Air",
+  "iata": "VJ",
+  "icao": "VJC",
+  "callsign": "VIETJETAIR",
+  "country_id": "Vietnam",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/VietJet_Air"
+},
+{
+  "name": "Vietnam Airlines",
+  "iata": "VN",
+  "icao": "HVN",
+  "callsign": "VIET NAM AIRLINES",
+  "country_id": "Vietnam",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Vietnam_Airlines"
+},
+{
+  "name": "Vietnam Air Services Company",
+  "iata": "0V",
+  "icao": "VFC",
+  "callsign": "VASCO AIR",
+  "country_id": "Vietnam",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Vietnam_Air_Services_Company"
+},
+{
+  "name": "Virgin Atlantic Airways",
+  "iata": "VS",
+  "icao": "VIR",
+  "callsign": "VIRGIN",
+  "country_id": "Vereinigtes_Königreich",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Virgin_Atlantic_Airways"
+},
+{
+  "name": "Virgin Australia",
+  "iata": "VA",
+  "icao": "VOZ",
+  "callsign": "VELOCITY",
+  "country_id": "Australien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Virgin_Australia_Airlines"
+},
+{
+  "name": "Virgin Australia Regional Airlines",
+  "iata": "XR",
+  "icao": "OZW",
+  "callsign": "OZWEST",
+  "country_id": "Australien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Virgin_Australia_Regional_Airlines"
+},
+{
+  "name": "VistaJet",
+  "iata": "–",
+  "icao": "VJT",
+  "callsign": "VISTA JET",
+  "country_id": "Malta",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/VistaJet"
+},
+{
+  "name": "Viva Aerobus",
+  "iata": "VB",
+  "icao": "VIV",
+  "callsign": "VIVA",
+  "country_id": "Mexiko",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Viva_Aerobus"
+},
+{
+  "name": "Volaris",
+  "iata": "Y4",
+  "icao": "VOI",
+  "callsign": "VOLARIS",
+  "country_id": "Mexiko",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Volaris"
+},
+{
+  "name": "Volotea",
+  "iata": "V7",
+  "icao": "VOE",
+  "callsign": "VOLOTEA",
+  "country_id": "Spanien",
+  "remark": null,
+  "link": "https://de.wikipedia.org/wiki/Volotea"
+},
+{
+  "name": "Vueling",
+  "iata": "VY",
+  "icao": "VLG",
+  "callsign": "VUELING",
+  "country_id": "Spanien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Vueling_Airlines"
+},
+{
+  "name": "Wamos Air",
+  "iata": "EB",
+  "icao": "PLM",
+  "callsign": "PULLMAN",
+  "country_id": "Spanien",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Wamos_Air"
+},
+{
+  "name": "Wasaya Airways",
+  "iata": "WT",
+  "icao": "WSG",
+  "callsign": "WASAYA",
+  "country_id": "Kanada",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Wasaya_Airways"
+},
+{
+  "name": "West Atlantic Sweden",
+  "iata": "PT",
+  "icao": "SWN",
+  "callsign": "AIR SWEDEN",
+  "country_id": "Schweden",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/West_Atlantic_Sweden"
+},
+{
+  "name": "Westair Wings Charters",
+  "iata": "–",
+  "icao": "WAA",
+  "callsign": "WESTAIR WINGS",
+  "country_id": "Namibia",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Westair_Aviation"
+},
+{
+  "name": "Westjet Airlines",
+  "iata": "WS",
+  "icao": "WJA",
+  "callsign": "WESTJET",
+  "country_id": "Kanada",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Westjet_Airlines"
+},
+{
+  "name": "White Airways",
+  "iata": "WI",
+  "icao": "WHT",
+  "callsign": "YOUNG SKY",
+  "country_id": "Portugal",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/White_Airways"
+},
+{
+  "name": "Widerøe’s Flyveselskap",
+  "iata": "WF",
+  "icao": "WIF",
+  "callsign": "WIDEROE",
+  "country_id": "Norwegen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Widerøe’s_Flyveselskap"
+},
+{
+  "name": "Winair",
+  "iata": "WM",
+  "icao": "WIA",
+  "callsign": "WINWARD",
+  "country_id": "Sint_Maarten",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Winair"
+},
+{
+  "name": "Windrose Air",
+  "iata": "–",
+  "icao": "QGA",
+  "callsign": "QUADRIGA",
+  "country_id": "Deutschland",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Windrose_Air"
+},
+{
+  "name": "Windward Express Airways",
+  "iata": "–",
+  "icao": "WEA",
+  "callsign": null,
+  "country_id": "Sint_Maarten",
+  "remark": "C",
+  "link": "https://de.wikipedia.org/wiki/Windward_Express_Airways"
+},
+{
+  "name": "Wings Abadi Airlines",
+  "iata": "IW",
+  "icao": "WON",
+  "callsign": "WINGS ABADI",
+  "country_id": "Indonesien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Wings_Abadi_Airlines"
+},
+{
+  "name": "Wizz Air",
+  "iata": "W6",
+  "icao": "WZZ",
+  "callsign": "WIZZAIR",
+  "country_id": "Bulgarien",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Wizz_Air"
+},
+{
+  "name": "Wizz Air Malta",
+  "iata": "W4",
+  "icao": "WMT",
+  "callsign": "WIZZ MALTA",
+  "country_id": "Malta",
+  "remark": "B",
+  "link": "https://de.wikipedia.org/wiki/Wizz_Air_Malta"
+},
+{
+  "name": "World2Fly",
+  "iata": "2W",
+  "icao": "WFL",
+  "callsign": "BLUE WORLD",
+  "country_id": "Spanien",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/World2Fly"
+},
+{
+  "name": "Xiamen Airlines",
+  "iata": "MF",
+  "icao": "CXA",
+  "callsign": "XIAMEN AIR",
+  "country_id": "Volksrepublik_China",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Xiamen_Air"
+},
+{
+  "name": "Yakutia Airlines",
+  "iata": "R3",
+  "icao": "SYL",
+  "callsign": "AIR YAKUTIA",
+  "country_id": "Russland",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Yakutia_Airlines"
+},
+{
+  "name": "Yamal Airlines",
+  "iata": "YC",
+  "icao": "LLM",
+  "callsign": "YAMAL",
+  "country_id": "Russland",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Yamal_Airlines"
+},
+{
+  "name": "Yanair",
+  "iata": "YE",
+  "icao": "ANR",
+  "callsign": "YANAIR",
+  "country_id": "Ukraine",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Yanair"
+},
+{
+  "name": "Yemenia",
+  "iata": "IY",
+  "icao": "IYE",
+  "callsign": "YEMENI",
+  "country_id": "Jemen",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Yemenia"
+},
+{
+  "name": "Yeti Airlines",
+  "iata": "YT",
+  "icao": "NYT",
+  "callsign": "YETI AIRLINES",
+  "country_id": "Nepal",
+  "remark": "U+",
+  "link": "https://de.wikipedia.org/wiki/Yeti_Airlines"
+},
+{
+  "name": "Z Air",
+  "iata": "7Z",
+  "icao": "EZR",
+  "callsign": "EASYWAY",
+  "country_id": "Bonaire",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/Z_Air"
+},
+{
+  "name": "Zagros Airlines",
+  "iata": "ZO",
+  "icao": "IZG",
+  "callsign": "ZAGROS",
+  "country_id": "Iran",
+  "remark": "P",
+  "link": "https://de.wikipedia.org/wiki/Zagros_Airlines"
+},
+{
+  "name": "ZanAir",
+  "iata": "B4",
+  "icao": "TAN",
+  "callsign": "ZANAIR",
+  "country_id": "Tansania",
+  "remark": "P+",
+  "link": "https://de.wikipedia.org/wiki/ZanAir"
+}
+]
