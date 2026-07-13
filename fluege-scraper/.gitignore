@@ -1,0 +1,24 @@
+# Dependencies and local environments
+node_modules/
+.venv/
+venv/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Build and tool output
+.dist/
+dist/
+coverage/
+.angular/cache/
+
+# Local configuration and operating-system files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
