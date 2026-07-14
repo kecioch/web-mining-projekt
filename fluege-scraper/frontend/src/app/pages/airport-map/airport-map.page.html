@@ -1,0 +1,119 @@
+<section class="dashboard" [class.dashboard--dark]="mapTheme() === 'dark'">
+    <header class="map-toolbar">
+        <h1>
+            Verkehrsflughäfen <span>{{ airportCount() }}</span>
+        </h1>
+
+        <button
+            class="theme-toggle"
+            type="button"
+            [attr.aria-pressed]="mapTheme() === 'dark'"
+            [attr.aria-label]="
+                mapTheme() === 'light' ? 'Dunkle Karte aktivieren' : 'Helle Karte aktivieren'
+            "
+            [attr.title]="mapTheme() === 'light' ? 'Dunkle Karte' : 'Helle Karte'"
+            (click)="toggleMapTheme()"
+        >
+            <i
+                class="pi"
+                [class.pi-moon]="mapTheme() === 'light'"
+                [class.pi-sun]="mapTheme() === 'dark'"
+                aria-hidden="true"
+            ></i>
+        </button>
+    </header>
+
+    <main class="map-area">
+        @if (loadingAirports()) {
+            <p class="map-message">Flughafendaten werden geladen...</p>
+        }
+        @if (loadError(); as error) {
+            <p class="map-message map-message--error">{{ error }}</p>
+        }
+
+        <div
+            class="map-container"
+            leaflet
+            [leafletOptions]="mapOptions"
+            (leafletMapReady)="onMapReady($event)"
+        ></div>
+    </main>
+
+    <p-drawer
+        [visible]="drawerVisible()"
+        (visibleChange)="setDrawerVisibility($event)"
+        position="right"
+        styleClass="airport-drawer"
+    >
+        @if (selectedAirport(); as airport) {
+            <div class="airport-heading">
+                <span class="airport-code">{{ airport.iata_code ?? '-' }}</span>
+                <div>
+                    <h2>{{ airport.detail_airport_name ?? airport.airport_name }}</h2>
+                    <p>{{ airport.location ?? 'Keine Ortsangabe vorhanden' }}</p>
+                </div>
+            </div>
+
+            <div class="airport-details">
+                <div>
+                    <span>ICAO-Code</span><strong>{{ airport.icao_code ?? '-' }}</strong>
+                </div>
+                <div>
+                    <span>Betreiber</span><strong>{{ airport.operator ?? '-' }}</strong>
+                </div>
+                <div>
+                    <span>Passagiere</span
+                    ><strong>{{
+                        airport.passengers === null ? '-' : (airport.passengers | number: '1.0-0')
+                    }}</strong>
+                </div>
+                <div>
+                    <span>Flugbewegungen</span
+                    ><strong>{{
+                        airport.aircraft_movements === null
+                            ? '-'
+                            : (airport.aircraft_movements | number: '1.0-0')
+                    }}</strong>
+                </div>
+                <div>
+                    <span>Fracht</span
+                    ><strong>{{
+                        airport.freight_tons === null
+                            ? '-'
+                            : (airport.freight_tons | number: '1.0-0') + ' t'
+                    }}</strong>
+                </div>
+                <div>
+                    <span>Start-/Landebahnen</span><strong>{{ airport.runways ?? '-' }}</strong>
+                </div>
+                <div>
+                    <span>Höhe</span
+                    ><strong>{{ airport.detail_elevation ?? airport.elevation ?? '-' }}</strong>
+                </div>
+                <div>
+                    <span>Eröffnung</span
+                    ><strong>{{ airport.detail_opened ?? airport.opened ?? '-' }}</strong>
+                </div>
+                <div>
+                    <span>Fläche</span
+                    ><strong>{{
+                        airport.detail_area ??
+                            (airport.area_ha === null ? '-' : airport.area_ha + ' ha')
+                    }}</strong>
+                </div>
+                <div>
+                    <span>Terminals</span><strong>{{ airport.terminals ?? '-' }}</strong>
+                </div>
+            </div>
+
+            <a
+                class="wikipedia-link"
+                [href]="airport.airport_url"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Wikipedia-Artikel öffnen
+            </a>
+        }
+    </p-drawer>
+</section>
