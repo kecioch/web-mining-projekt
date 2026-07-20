@@ -2,5 +2,38 @@ scrapy crawl airports_wikipedia -O data/output/airports_wikipedia_details.jsonl
 
 scrapy crawl airlines_wikipedia -O data/output/airlines_wikipedia_details.jsonl
 
-
 scrapy crawl airports_wikipedia -O frontend/public/data/airports.json
+
+.\.venv\Scripts\python.exe -m scrapy crawl flightera_flights -a airport_icao=EDDF -a airport_slug=Frankfurt -a movement_type=departure -O data/output/flightera_frankfurt_departures.jsonl
+
+
+# Aktuell Abflüge Frankfurt
+.\.venv\Scripts\python.exe -m scrapy crawl flightera_flights `
+  -a airport_icao=EDDF `
+  -a airport_slug=Frankfurt `
+  -a movement_type=departure `
+  -O data/output/flights.jsonl
+  
+# Historische Abflüge Frankfurt bis zum Zielzeitpunkt verfolgen
+.\.venv\Scripts\python.exe -m scrapy crawl flightera_flights `
+  -a airport_icao=EDDF `
+  -a airport_slug=Frankfurt `
+  -a movement_type=departure `
+  -a start_date=2026-07-01 `
+  -a start_time=00:00 `
+  -a end_date=2026-07-01 `
+  -a end_time=23:59 `
+  -O data/output/flights-2026-07-01.json
+
+
+.\.venv\Scripts\python.exe -m scrapy crawl flightera_flights `
+  -a airport_icao=EDDF `
+  -a airport_slug=Frankfurt `
+  -a movement_type=departure `
+  -a start_date=2026-07-01 `
+  -a start_time=00:00 `
+  -a end_date=2026-07-10 `
+  -a end_time=23:59 `
+  -s DOWNLOAD_DELAY=5 `
+  -s RANDOMIZE_DOWNLOAD_DELAY=True `
+  -O data/output/EDDF_2026-07.json

@@ -1,0 +1,16 @@
+.vscode
+.zed
+.idea
+.DS_Store
+
+__pycache__
+.mypy_cache
+.pytest_cache
+.ruff_cache
+
+.venv
+venv
+
+storage
+
+.git

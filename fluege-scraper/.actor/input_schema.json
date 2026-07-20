@@ -1,0 +1,83 @@
+{
+    "$schema": "https://apify.com/schemas/v1/input.ide.json",
+    "title": "Flightera-Flüge",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "airportIcao": {
+            "title": "ICAO-Code",
+            "type": "string",
+            "description": "Vierstelliger ICAO-Code des Flughafens.",
+            "editor": "textfield",
+            "default": "EDDF"
+        },
+        "airportSlug": {
+            "title": "Flughafenname in der URL",
+            "type": "string",
+            "description": "Flightera-Bezeichnung des Flughafens.",
+            "editor": "textfield",
+            "default": "Frankfurt"
+        },
+        "movementType": {
+            "title": "Flugbewegung",
+            "type": "string",
+            "description": "Aktuell ist der Zeitraum-Modus nur für Abflüge vorgesehen.",
+            "editor": "select",
+            "enum": ["departure", "arrival", "all"],
+            "enumTitles": ["Abflüge", "Ankünfte", "Alle"],
+            "default": "departure"
+        },
+        "startDate": {
+            "title": "Startdatum",
+            "type": "string",
+            "description": "Optional im Format YYYY-MM-DD.",
+            "editor": "textfield"
+        },
+        "startTime": {
+            "title": "Startzeit",
+            "type": "string",
+            "description": "Lokale Flughafenzeit im Format HH:MM.",
+            "editor": "textfield",
+            "default": "00:00"
+        },
+        "endDate": {
+            "title": "Enddatum",
+            "type": "string",
+            "description": "Optional im Format YYYY-MM-DD.",
+            "editor": "textfield"
+        },
+        "endTime": {
+            "title": "Endzeit",
+            "type": "string",
+            "description": "Lokale Flughafenzeit im Format HH:MM.",
+            "editor": "textfield",
+            "default": "23:59"
+        },
+        "maxPages": {
+            "title": "Maximale Seitenzahl",
+            "type": "integer",
+            "description": "Optionales Limit für Testläufe.",
+            "editor": "number",
+            "minimum": 1
+        },
+        "waitSeconds": {
+            "title": "Wartezeit",
+            "type": "integer",
+            "description": "Wartezeit für die gerenderte Flugtabelle.",
+            "editor": "number",
+            "default": 10,
+            "minimum": 0
+        },
+        "proxyConfiguration": {
+            "sectionCaption": "Netzwerk",
+            "title": "Proxy-Konfiguration",
+            "type": "object",
+            "description": "Für den ersten Test deaktiviert lassen.",
+            "editor": "proxy",
+            "default": {
+                "useApifyProxy": false
+            }
+        }
+    },
+    "required": ["airportIcao", "airportSlug", "movementType"]
+}

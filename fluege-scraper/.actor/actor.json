@@ -1,0 +1,13 @@
+{
+    "$schema": "https://apify.com/schemas/v1/actor.ide.json",
+    "actorSpecification": 1,
+    "name": "web-mining-scraper",
+    "title": "Getting started with Python and Scrapy",
+    "description": "Python Scrapy project wrapped using the Apify CLI.",
+    "version": "0.0",
+    "meta": {
+        "templateId": "python-scrapy"
+    },
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile"
+}

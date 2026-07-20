@@ -1,0 +1,2 @@
+[scrapy]
+settings = web_mining_scraper.settings
