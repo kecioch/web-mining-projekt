@@ -1,17 +1,18 @@
-import { DecimalPipe } from '@angular/common';
 import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import { Map } from 'leaflet';
+import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
 import { take } from 'rxjs';
 
+import { AirportDetailsComponent } from '../../components/airport-details/airport-details.component';
 import { Airport } from '../../models/airport';
 import { AirportMapService, AirportMapTheme } from '../../services/airport-map.service';
 import { AirportService } from '../../services/airport.service';
 
 @Component({
     selector: 'app-airport-map-page',
-    imports: [DecimalPipe, DrawerModule, LeafletModule],
+    imports: [AirportDetailsComponent, ButtonModule, DrawerModule, LeafletModule],
     providers: [AirportMapService],
     templateUrl: './airport-map.page.html',
     styleUrl: './airport-map.page.scss',

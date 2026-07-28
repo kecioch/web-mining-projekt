@@ -1,0 +1,44 @@
+:host {
+    display: block;
+}
+
+.airport-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    h2,
+    p {
+        margin: 0;
+    }
+
+    p {
+        margin-top: 0.35rem;
+        color: var(--p-text-muted-color);
+    }
+}
+
+.airport-code {
+    display: inline-grid;
+    min-width: 4rem;
+    min-height: 4rem;
+    place-items: center;
+    color: var(--p-orange-950);
+    background: var(--p-orange-300);
+    border-radius: var(--p-border-radius-md);
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.wikipedia-link {
+    margin-top: 1.25rem;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited {
+        text-decoration: none;
+    }
+}

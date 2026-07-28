@@ -8,7 +8,7 @@ import { Airport } from '../models/airport';
 export class AirportService {
     private readonly http = inject(HttpClient);
 
-    getAirports(): Observable<Airport[]> {
-        return this.http.get<Airport[]>('/data/airports.json');
+    public getAirports(): Observable<Airport[]> {
+        return this.http.get<Airport[]>('/api/airports');
     }
 }

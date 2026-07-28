@@ -8,12 +8,30 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 
 # Build and tool output
 .dist/
 dist/
+build/
+tmp/
+out-tsc/
+bazel-out/
 coverage/
-.angular/cache/
+.angular/
+.playwright/
+*.log
+.sass-cache/
+connect.lock
+libpeerconnection.log
+testem.log
+typings/
+__screenshots__/
+
+# Package-manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Local configuration and operating-system files
 .env
@@ -22,17 +40,19 @@ coverage/
 .DS_Store
 Thumbs.db
 
-.vscode
+# IDEs and editors
+.vscode/
 .zed
-.idea
-.DS_Store
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.history/
 
-__pycache__
-.mypy_cache
-.pytest_cache
-.ruff_cache
-
-.venv
-venv
-
+# Local runtime data
 storage
+data/output/*-TEST*.json
+data/output/flightera_hourly/

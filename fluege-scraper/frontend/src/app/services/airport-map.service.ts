@@ -1,18 +1,28 @@
-import { Injectable } from '@angular/core';
-import { divIcon, featureGroup, latLng, Map, marker, TileLayer, tileLayer } from 'leaflet';
+import {
+    ApplicationRef,
+    ComponentRef,
+    createComponent,
+    EnvironmentInjector,
+    inject,
+    Injectable,
+} from '@angular/core';
+import { divIcon, DivIcon, featureGroup, latLng, Map, marker, TileLayer, tileLayer } from 'leaflet';
 
+import { AirportMarkerComponent } from '../components/airport-marker/airport-marker.component';
 import { Airport } from '../models/airport';
 
 export type AirportMapTheme = 'light' | 'dark';
 
 @Injectable()
 export class AirportMapService {
+    private readonly applicationRef = inject(ApplicationRef);
+    private readonly environmentInjector = inject(EnvironmentInjector);
     private baseLayer = this.createBaseLayer('light');
 
     readonly options = {
         layers: [this.baseLayer],
         zoom: 5,
-        center: latLng([51.3755, 7.7028]),
+        center: latLng([51.3755, 7.7028]), // Zentrum von Deutschland
     };
 
     private readonly airportLayer = featureGroup();
@@ -42,11 +52,14 @@ export class AirportMapService {
                 continue;
             }
 
+            const { componentRef, icon } = this.createAirportIcon(airport);
             const airportMarker = marker([airport.latitude, airport.longitude], {
-                icon: this.createAirportIcon(airport),
+                icon,
                 keyboard: true,
                 title: `${airport.airport_name} (${airport.iata_code ?? '-'})`,
             }).addTo(this.airportLayer);
+
+            airportMarker.once('remove', () => this.destroyMarkerComponent(componentRef));
 
             const tooltip = document.createElement('span');
             tooltip.textContent = `${airport.airport_name} (${airport.iata_code ?? '-'})`;
@@ -64,23 +77,34 @@ export class AirportMapService {
         this.map = null;
     }
 
-    private createAirportIcon(airport: Airport) {
-        const airportCode = (airport.iata_code ?? 'AIR').replace(/[^A-Z0-9]/g, '');
-
-        return divIcon({
-            className: 'airport-plane-marker',
-            html: `
-                <span class="airport-plane-marker__content" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" focusable="false">
-                        <path d="M10.18 9 2 3.5V2l10 3 10-3v1.5L13.82 9 22 14.5V16l-10-3-10 3v-1.5L10.18 9z"></path>
-                    </svg>
-                    <span class="airport-plane-marker__code">${airportCode}</span>
-                </span>
-            `,
-            iconSize: [58, 30],
-            iconAnchor: [29, 15],
-            tooltipAnchor: [0, -18],
+    private createAirportIcon(airport: Airport): {
+        componentRef: ComponentRef<AirportMarkerComponent>;
+        icon: DivIcon;
+    } {
+        const hostElement = document.createElement('app-airport-marker');
+        const componentRef = createComponent(AirportMarkerComponent, {
+            environmentInjector: this.environmentInjector,
+            hostElement,
         });
+        componentRef.setInput('code', airport.iata_code);
+        this.applicationRef.attachView(componentRef.hostView);
+        componentRef.changeDetectorRef.detectChanges();
+
+        return {
+            componentRef,
+            icon: divIcon({
+                className: 'airport-plane-marker',
+                html: hostElement,
+                iconSize: [58, 30],
+                iconAnchor: [29, 15],
+                tooltipAnchor: [0, -18],
+            }),
+        };
+    }
+
+    private destroyMarkerComponent(componentRef: ComponentRef<AirportMarkerComponent>): void {
+        this.applicationRef.detachView(componentRef.hostView);
+        componentRef.destroy();
     }
 
     private createBaseLayer(theme: AirportMapTheme): TileLayer {

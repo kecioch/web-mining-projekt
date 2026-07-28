@@ -1,0 +1,34 @@
+:host {
+    display: inline-flex;
+    height: 28px;
+    align-items: center;
+    gap: 3px;
+    padding: 0 6px 0 4px;
+    box-sizing: border-box;
+    color: #431407;
+    background: #fb923c;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 45%);
+    transition:
+        transform 120ms ease,
+        background-color 120ms ease;
+}
+
+:host-context(.airport-plane-marker:hover),
+:host-context(.airport-plane-marker:focus) {
+    background: #fbbf24;
+    transform: scale(1.12);
+}
+
+.airport-icon {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+    transform: rotate(-18deg);
+}
+
+.airport-code {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+}

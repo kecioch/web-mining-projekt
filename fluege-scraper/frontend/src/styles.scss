@@ -2,52 +2,24 @@
 
 html,
 body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 .airport-plane-marker {
-  background: transparent;
-  border: 0;
-}
-
-.airport-plane-marker__content {
-  display: inline-flex;
-  height: 28px;
-  align-items: center;
-  gap: 3px;
-  padding: 0 6px 0 4px;
-  box-sizing: border-box;
-  color: #431407;
-  background: #fb923c;
-  border-radius: 5px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 45%);
-  transition: transform 120ms ease, background-color 120ms ease;
-
-  svg {
-    width: 19px;
-    height: 19px;
-    flex: 0 0 auto;
-    fill: currentColor;
-    transform: rotate(-18deg);
-  }
-}
-
-.airport-plane-marker__code {
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-
-.airport-plane-marker:hover .airport-plane-marker__content,
-.airport-plane-marker:focus .airport-plane-marker__content {
-  background: #fbbf24;
-  transform: scale(1.12);
+    background: transparent;
+    border: 0;
 }
 
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #121212;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        sans-serif;
+    background: #121212;
 }
