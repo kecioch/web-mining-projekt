@@ -1,0 +1,22 @@
+{
+    "name": "fluege-backend",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "tsx watch src/server.ts",
+        "build": "tsc",
+        "prestart": "npm run build",
+        "start": "node dist/server.js",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "express": "^5.1.0"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.3",
+        "@types/node": "^24.1.0",
+        "tsx": "^4.20.3",
+        "typescript": "^5.9.2"
+    }
+}

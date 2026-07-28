@@ -1,6 +1,0 @@
-scrapy crawl airports_wikipedia -O data/output/airports_wikipedia_details.jsonl
-
-scrapy crawl airlines_wikipedia -O data/output/airlines_wikipedia_details.jsonl
-
-
-scrapy crawl airports_wikipedia -O frontend/public/data/airports.json

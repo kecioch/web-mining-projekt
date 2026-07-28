@@ -1,0 +1,17 @@
+{
+    "name": "fluege-scraper-project",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "format": "prettier --write .prettierrc \"package*.json\" frontend backend",
+        "format:check": "prettier --check .prettierrc \"package*.json\" frontend backend",
+        "build": "npm run build:backend && npm run build:frontend",
+        "build:backend": "npm --prefix backend run build",
+        "build:frontend": "npm --prefix frontend run build",
+        "start:backend": "npm --prefix backend run start",
+        "start:frontend": "npm --prefix frontend run start"
+    },
+    "devDependencies": {
+        "prettier": "^3.8.1"
+    }
+}

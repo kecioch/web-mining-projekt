@@ -50,32 +50,6 @@
     }
 }
 
-.theme-toggle {
-    display: inline-grid;
-    width: 40px;
-    height: 40px;
-    flex: 0 0 40px;
-    place-items: center;
-    padding: 0;
-    color: #172033;
-    background: #fff;
-    border: 1px solid #cbd5e1;
-    border-radius: 0.55rem;
-    font: inherit;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-
-    &:hover {
-        background: #f1f5f9;
-    }
-
-    &:focus-visible {
-        outline: 3px solid rgb(249 115 22 / 35%);
-        outline-offset: 2px;
-    }
-}
-
 .map-area {
     position: relative;
     min-width: 0;
@@ -112,92 +86,11 @@
         background: rgb(17 24 39 / 94%);
         border-color: #334155;
     }
-
-    .theme-toggle {
-        color: #f8fafc;
-        background: #1e293b;
-        border-color: #475569;
-
-        &:hover {
-            background: #334155;
-        }
-    }
-}
-
-.airport-heading {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-
-    h2,
-    p {
-        margin: 0;
-    }
-
-    p {
-        margin-top: 0.35rem;
-        color: #64748b;
-    }
-}
-
-.airport-code {
-    display: inline-grid;
-    min-width: 4rem;
-    min-height: 4rem;
-    place-items: center;
-    color: #431407;
-    background: #fdba74;
-    border-radius: 0.6rem;
-    font-size: 1.15rem;
-    font-weight: 800;
-}
-
-.airport-details {
-    display: grid;
-    gap: 0;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.75rem;
-
-    div {
-        display: grid;
-        grid-template-columns: minmax(8rem, 42%) 1fr;
-        gap: 1rem;
-        padding: 0.75rem;
-        border-bottom: 1px solid #e2e8f0;
-    }
-
-    div:last-child {
-        border-bottom: 0;
-    }
-
-    span {
-        color: #64748b;
-    }
-}
-
-.wikipedia-link {
-    display: inline-block;
-    margin-top: 1.25rem;
-    color: #c2410c;
-    font-weight: 700;
-    text-decoration: none;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 @media (max-width: 600px) {
     .map-toolbar {
         min-height: 58px;
         padding-inline: 0.75rem;
-    }
-
-    .theme-toggle {
-        width: 38px;
-        height: 38px;
-        flex-basis: 38px;
     }
 }

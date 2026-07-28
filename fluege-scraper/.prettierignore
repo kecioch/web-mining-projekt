@@ -1,0 +1,10 @@
+**/node_modules/
+**/dist/
+**/build/
+**/.angular/
+**/.venv/
+**/.playwright/
+**/coverage/
+**/*.jsonl
+data/
+project.egg-info/

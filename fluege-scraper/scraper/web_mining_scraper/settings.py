@@ -1,3 +1,5 @@
+import os
+
 # Scrapy settings for web_mining_scraper project
 #
 # For simplicity, this file contains only settings considered important or
@@ -12,7 +14,18 @@ BOT_NAME = "web_mining_scraper"
 SPIDER_MODULES = ["web_mining_scraper.spiders"]
 NEWSPIDER_MODULE = "web_mining_scraper.spiders"
 
-ADDONS = {}
+# Scrapy Cloud stellt SHUB_JOBKEY und den Zyte-API-Key bereit. Lokal bleibt
+# das Add-on deaktiviert, damit der Flightera-Spider Playwright direkt nutzt.
+ADDONS = (
+    {"scrapy_zyte_api.Addon": 500}
+    if os.environ.get("SHUB_JOBKEY")
+    else {}
+)
+
+# Nur Requests, die dies explizit in ihren Metadaten anfordern, laufen über
+# Zyte API. Dadurch bleiben die Wikipedia-Spider unverändert und Flightera
+# kann das von Zyte verwaltete Browser-Rendering verwenden.
+ZYTE_API_TRANSPARENT_MODE = False
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
