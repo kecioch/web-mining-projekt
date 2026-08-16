@@ -10,7 +10,6 @@ __pycache__/
 
 # Env / secrets
 .env
-.env.*
 *.local
 
 # Build output
