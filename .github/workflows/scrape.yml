@@ -1,4 +1,4 @@
-name: Scrape flights
+name: Scrape flight-data
 
 on:
   schedule:
@@ -17,7 +17,7 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - run: pip install -r requirements.txt
+      - run: pip install -r crawler/Soup/requirements.txt
 
       - run: playwright install --with-deps chromium
 
@@ -25,4 +25,4 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-        run: python scripts/soup_flightdata_arr_dep.py
+        run: python crawler/Soup/scripts/soup_flightdata_arr_dep.py
