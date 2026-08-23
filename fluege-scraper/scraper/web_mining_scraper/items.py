@@ -83,6 +83,7 @@ class FlightMovementItem(scrapy.Item):
     actual_departure_local = scrapy.Field()
     departure_delay_minutes = scrapy.Field()
     departure_delay_text = scrapy.Field()
+    scheduled_arrival_local = scrapy.Field()
     actual_arrival_local = scrapy.Field()
     arrival_delay_minutes = scrapy.Field()
     arrival_delay_text = scrapy.Field()

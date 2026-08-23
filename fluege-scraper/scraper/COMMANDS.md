@@ -57,3 +57,39 @@ Die Befehle werden aus dem Verzeichnis `scraper/` ausgeführt:
 ```powershell
 ..\.venv\Scripts\python.exe delegate_flightera.py --max-airports 5
 ```
+
+## Frankfurt Airport (JSON)
+
+```powershell
+..\.venv\Scripts\python.exe -m scrapy crawl frankfurt_airport_flights `
+  -a movement_type=both `
+  -a service_date=2026-08-20 `
+  -a start_time=00:00 `
+  -a end_time=23:59 `
+  -a max_pages=50 `
+  -a per_page=50 `
+  -O ..\data\output\EDDF_2026-08-20_TEST123.json
+```
+
+## Munich Airport (HTML)
+
+```powershell
+..\.venv\Scripts\python.exe -m scrapy crawl munich_airport_flights `
+  -a movement_type=both `
+  -a service_date=2026-08-20 `
+  -a max_pages=50 `
+  -a per_page=50 `
+  -O ..\data\output\EDDM_2026-08-20_TEST.json
+```
+
+## Berlin Brandenburg Airport (JSON)
+
+```powershell
+..\.venv\Scripts\python.exe -m scrapy crawl berlin_airport_flights `
+  -a movement_type=both `
+  -a service_date=2026-08-20 `
+  -a start_time=00:00 `
+  -a end_time=23:59 `
+  -a max_pages=50 `
+  -a per_page=50 `
+  -O ..\data\output\EDDB_2026-08-20_TEST.json
