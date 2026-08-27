@@ -1,5 +1,5 @@
 import re
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from urllib.parse import urlencode
 from zoneinfo import ZoneInfo
 
@@ -234,7 +234,14 @@ class MunichAirportFlightsSpider(scrapy.Spider):
 
     @staticmethod
     def parse_date(value):
-        return date.fromisoformat(str(value)).isoformat() if value not in (None, "") else None
+        if value in (None, ""):
+            return None
+        if str(value).strip().lower() == "yesterday":
+            return (
+                datetime.now(ZoneInfo("Europe/Berlin")).date()
+                - timedelta(days=1)
+            ).isoformat()
+        return date.fromisoformat(str(value)).isoformat()
 
     @staticmethod
     def positive_int(value, name):

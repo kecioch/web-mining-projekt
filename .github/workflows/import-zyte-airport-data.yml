@@ -1,0 +1,47 @@
+name: Import Zyte airport data
+
+on:
+  schedule:
+    # Zyte startet die Airport-Spider täglich um 10:00 UTC.
+    # Zwei Stunden Puffer lassen den drei Jobs Zeit zum Abschluss.
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Nur fertige Zyte-Jobs und Item-Anzahlen anzeigen"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: import-zyte-airport-data
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install importer dependency
+        run: python -m pip install requests
+
+      - name: Import completed Scrapy Cloud jobs into Supabase
+        env:
+          SCRAPY_CLOUD_API_KEY: ${{ secrets.SCRAPY_CLOUD_API_KEY }}
+          SCRAPY_CLOUD_PROJECT_ID: "870726"
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          # Ohne diese explizite Repository-Freigabe bleibt auch der Zeitplan
+          # sicher im Nur-Lesen-Modus.
+          DRY_RUN: ${{ vars.ZYTE_DB_IMPORT_ENABLED != 'true' || inputs.dry_run }}
+        run: python fluege-scraper/scripts/import_zyte_to_supabase.py

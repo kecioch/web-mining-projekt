@@ -257,6 +257,11 @@ class BerlinAirportFlightsSpider(scrapy.Spider):
     def parse_date(value):
         if value in (None, ""):
             return None
+        if str(value).strip().lower() == "yesterday":
+            return (
+                datetime.now(ZoneInfo("Europe/Berlin")).date()
+                - timedelta(days=1)
+            ).isoformat()
         return date.fromisoformat(str(value)).isoformat()
 
     @staticmethod
