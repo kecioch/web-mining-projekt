@@ -30,7 +30,7 @@ HEADLESS = True
 WAIT_UNTIL = "domcontentloaded"
 
 DELAY_SECONDS = 1
-DETAIL_LIMIT = None     
+DETAIL_LIMIT = None
 
 TABLE_SELECTOR = "table.airportBoard"
 DETAIL_SELECTOR = "h3.flightPageDataTableHeading, .flightPageSummaryTimes"
@@ -64,7 +64,7 @@ def save_supabase(icao, rows, fields, table, scraped_at, within_minutes=60, batc
 
     inserts, updated = [], 0
     for r in rows:
-        record = {k: (r.get(k) or None) for k in fields}
+        record = {k: _nz(r.get(k)) for k in fields}
         record["scraped_at"] = scraped_at
 
         existing_id = recent.get(r["flight_no"])
@@ -81,10 +81,95 @@ def save_supabase(icao, rows, fields, table, scraped_at, within_minutes=60, batc
     print(f"DB {icao} '{table}': {updated} updated, {len(inserts)} inserted")
 
 
+def save_lookups(results):
+    """Populate the lookup tables (airports, airlines, aircraft) from the
+    full names captured while parsing so the fact tables can reference them
+    by ICAO / code only."""
+    airlines: dict[str, str] = {}   # icao -> name
+    aircraft: dict[str, str] = {}   # code -> type
+    airports: dict[str, str] = {}   # icao -> name
+
+    airline_keys: set[str] = set()
+    aircraft_keys: set[str] = set()
+    airport_keys: set[str] = set()
+
+    for icao, data in results.items():
+        airport_keys.add(icao)  # the crawled airport itself
+        for r in data["departures"] + data["arrivals"]:
+            if r.get("airline_icao"):
+                airline_keys.add(r["airline_icao"])
+                if r.get("airline"):
+                    airlines[r["airline_icao"]] = r["airline"]
+
+            if r.get("aircraft_code"):
+                aircraft_keys.add(r["aircraft_code"])
+                if r.get("aircraft_type"):
+                    aircraft[r["aircraft_code"]] = r["aircraft_type"]
+
+            # destination (departures) or origin (arrivals)
+            other_icao = r.get("destination_icao") or r.get("origin_icao")
+            other_name = r.get("destination") or r.get("origin")
+            if other_icao:
+                airport_keys.add(other_icao)
+                if other_name:
+                    airports[other_icao] = other_name
+
+    # upsert everything we have a name for (overwrites/refreshes the name)
+    if airlines:
+        supabase.table("airlines").upsert(
+            [{"icao": k, "name": v} for k, v in airlines.items()],
+            on_conflict="icao").execute()
+    if aircraft:
+        supabase.table("aircraft").upsert(
+            [{"code": k, "type": v} for k, v in aircraft.items()],
+            on_conflict="code").execute()
+    if airports:
+        supabase.table("airports").upsert(
+            [{"icao": k, "name": v} for k, v in airports.items()],
+            on_conflict="icao").execute()
+
+    # make sure every referenced key exists
+    miss_airlines = [{"icao": k} for k in airline_keys if k not in airlines]
+    miss_aircraft = [{"code": k} for k in aircraft_keys if k not in aircraft]
+    miss_airports = [{"icao": k} for k in airport_keys if k not in airports]
+    if miss_airlines:
+        supabase.table("airlines").upsert(
+            miss_airlines, on_conflict="icao", ignore_duplicates=True).execute()
+    if miss_aircraft:
+        supabase.table("aircraft").upsert(
+            miss_aircraft, on_conflict="code", ignore_duplicates=True).execute()
+    if miss_airports:
+        supabase.table("airports").upsert(
+            miss_airports, on_conflict="icao", ignore_duplicates=True).execute()
+
+    print(f"Lookups: {len(airlines)} airlines, {len(aircraft)} aircraft, "
+          f"{len(airports)} airports (named)")
+
+
 #### Helper ################################################################
 
 def _clean(txt: str) -> str:
     return txt.replace("\xa0", " ").replace("\n", " ").strip() if txt else ""
+
+
+def _nz(v):
+    """Normalize empty strings to None, but keep 0 / negative numbers intact.
+    An on-time flight with delay_minutes == 0 is stored, not dropped)."""
+    return None if v is None or v == "" else v
+
+
+def _to_time(s) -> str | None:
+    """'19:44 CEST' or '17:14' -> 'HH:MM' (Postgres casts it to `time`), else None."""
+    m = re.search(r"(\d{1,2}):(\d{2})", s or "")
+    return f"{int(m.group(1)):02d}:{m.group(2)}" if m else None
+
+
+def _to_minutes(s) -> int | None:
+    """'4 Minuten' / '-7' -> integer minutes, else None."""
+    if s is None:
+        return None
+    m = re.search(r"-?\d+", str(s))
+    return int(m.group()) if m else None
 
 
 def _delay_minutes(actual: str, scheduled: str) -> str:
@@ -143,11 +228,10 @@ def parse_departures(html: str) -> list[dict]:
         ac_full = type_span.get("title", "").strip() if type_span else ""
         ac_code = _clean(tds[1].get_text())
 
-        # 3. Destination: Name + IATA + ICAO
+        # 3. Destination: Name + ICAO (IATA only used to find the ICAO link)
         name_span = tds[2].find("span", itemprop="name")
         dest_name = _clean(name_span.get_text()) if name_span else ""
         iata_link = tds[2].find("a", itemprop="url")
-        dest_iata = _clean(iata_link.get_text()) if iata_link else ""
         dest_icao = ""
         if iata_link and iata_link.get("href"):
             mm = re.search(r"/airport/([A-Z0-9]+)", iata_link["href"])
@@ -160,26 +244,24 @@ def parse_departures(html: str) -> list[dict]:
 
         rows.append({
             "flight_no": flight_no,
-            "airline": airline,
+            "airline": airline,          # -> airlines lookup table
             "airline_icao": airline_icao,
             "aircraft_code": ac_code,
-            "aircraft_type": ac_full,
-            "destination": dest_name,
-            "destination_iata": dest_iata,
+            "aircraft_type": ac_full,    # -> aircraft lookup table
+            "destination": dest_name,    # -> airports lookup table
             "destination_icao": dest_icao,
-            "departure_time": dep_time,
+            "departure_time": _to_time(dep_time),
             "departure_time_tz": dep_tz,
-            "arrival_time": arr_time,
+            "arrival_time": _to_time(arr_time),
             "arrival_time_tz": arr_tz,
             "detail_url": detail_url,
-            # Details properties will be failed later
+            # Details properties will be filled later
             "departure_status": "",
             "gate_from_is": "",
             "gate_from_plan": "",
             "start_is": "",
             "start_plan": "",
             "rolltime": "",
-            "delay_avg": "",
             "delay_minutes": "",
         })
     return rows
@@ -188,7 +270,7 @@ def parse_departures(html: str) -> list[dict]:
 #### Arrival ################################################################
 
 def parse_arrivals(html: str) -> list[dict]:
-    """Extract all departures from HTML"""
+    """Extract all arrivals from HTML"""
     soup = BeautifulSoup(html, "html.parser")
     table = soup.find("table", {"data-type": "arrivals"})
     if table is None:
@@ -215,11 +297,10 @@ def parse_arrivals(html: str) -> list[dict]:
         ac_full = type_span.get("title", "").strip() if type_span else ""
         ac_code = _clean(tds[1].get_text())
 
-        # 3. Origin: Name + IATA + ICAO
+        # 3. Origin: Name + ICAO (IATA only used to find the ICAO link)
         name_span = tds[2].find("span", itemprop="name")
         orig_name = _clean(name_span.get_text()) if name_span else ""
         iata_link = tds[2].find("a", itemprop="url")
-        orig_iata = _clean(iata_link.get_text()) if iata_link else ""
         orig_icao = ""
         if iata_link and iata_link.get("href"):
             mm = re.search(r"/airport/([A-Z0-9]+)", iata_link["href"])
@@ -232,26 +313,24 @@ def parse_arrivals(html: str) -> list[dict]:
 
         rows.append({
             "flight_no": flight_no,
-            "airline": airline,
+            "airline": airline,          # -> airlines lookup table
             "airline_icao": airline_icao,
             "aircraft_code": ac_code,
-            "aircraft_type": ac_full,
-            "origin": orig_name,
-            "origin_iata": orig_iata,
+            "aircraft_type": ac_full,    # -> aircraft lookup table
+            "origin": orig_name,         # -> airports lookup table
             "origin_icao": orig_icao,
-            "departure_time": dep_time,
+            "departure_time": _to_time(dep_time),
             "departure_time_tz": dep_tz,
-            "arrival_time": arr_time,
+            "arrival_time": _to_time(arr_time),
             "arrival_time_tz": arr_tz,
             "detail_url": detail_url,
-            # Details properties will be failed later
+            # Details properties will be filled later
             "arrival_status": "",
             "landing_is": "",
             "landing_plan": "",
             "gate_to_is": "",
             "gate_to_plan": "",
             "rolltime": "",
-            "delay_avg": "",
             "delay_minutes": "",
         })
     return rows
@@ -283,18 +362,18 @@ def parse_detail_departure(html: str) -> dict:
             break
 
     if dep_table:
-        out["gate_from_is"], out["gate_from_plan"] = _time_child(dep_table, "Verlassen des Gates")
-        out["start_is"], out["start_plan"] = _time_child(dep_table, "Start")
+        gate_is, gate_plan = _time_child(dep_table, "Verlassen des Gates")
+        start_is, start_plan = _time_child(dep_table, "Start")
+        out["gate_from_is"], out["gate_from_plan"] = _to_time(gate_is), _to_time(gate_plan)
+        out["start_is"], out["start_plan"] = _to_time(start_is), _to_time(start_plan)
 
         for anc in dep_table.select(".flightPageDataAncillaryTextContainer .flightPageDataAncillaryText"):
             t = _clean(anc.get_text())
             if t.startswith("Rollzeit"):
-                out["rolltime"] = t.split(":", 1)[1].strip()
-            elif "Durchschnittliche Verspätung" in t:
-                out["delay_avg"] = t.split(":", 1)[1].strip()
+                out["rolltime"] = _to_minutes(t.split(":", 1)[1])
 
-        out["delay_minutes"] = _delay_minutes(
-            out.get("gate_from_is", ""), out.get("gate_from_plan", ""))
+        # delay is computed from the raw 'HH:MM (+n)' strings, then stored as int
+        out["delay_minutes"] = _to_minutes(_delay_minutes(gate_is, gate_plan))
 
     return out
 
@@ -323,19 +402,19 @@ def parse_detail_arrival(html: str) -> dict:
             break
 
     if arr_table:
-        out["landing_is"], out["landing_plan"] = _time_child(arr_table, "Landung")
-        out["gate_to_is"], out["gate_to_plan"] = _time_child(arr_table, "Ankunft am Gate")
+        landing_is, landing_plan = _time_child(arr_table, "Landung")
+        gate_is, gate_plan = _time_child(arr_table, "Ankunft am Gate")
+        out["landing_is"], out["landing_plan"] = _to_time(landing_is), _to_time(landing_plan)
+        out["gate_to_is"], out["gate_to_plan"] = _to_time(gate_is), _to_time(gate_plan)
 
         for anc in arr_table.select(
                 ".flightPageDataAncillaryTextContainer .flightPageDataAncillaryText"):
             t = _clean(anc.get_text())
             if t.startswith("Rollzeit"):
-                out["rolltime"] = t.split(":", 1)[1].strip()
-            elif "Durchschnittliche Verspätung" in t:
-                out["delay_avg"] = t.split(":", 1)[1].strip()
+                out["rolltime"] = _to_minutes(t.split(":", 1)[1])
 
-        out["delay_minutes"] = _delay_minutes(
-            out.get("gate_to_is", ""), out.get("gate_to_plan", ""))
+        # delay is computed from the raw 'HH:MM (+n)' strings, then stored as int
+        out["delay_minutes"] = _to_minutes(_delay_minutes(gate_is, gate_plan))
 
     return out
 
@@ -382,8 +461,7 @@ def _enrich_details(page, base: str, rows: list[dict], detail_parser) -> None:
         try:
             detail_html = _load(page, detail_url, DETAIL_SELECTOR)
             row.update(detail_parser(detail_html))
-            print(f"    AVG Delay: {row.get('delay_avg', '') or '?'}  "
-                  f"calculated: {row.get('delay_minutes', '') or '?'} Min.")
+            print(f"    calculated delay: {row.get('delay_minutes', '') or '?'} Min.")
         except Exception as exc:
             print(f"    ! Error: {exc}")
 
@@ -445,19 +523,17 @@ def crawl_all(icaos: list[str]) -> dict:
 #### Save ################################################################
 
 FIELDS_DEP = [
-    "airport_icao","flight_no", "airline", "airline_icao", "aircraft_code", "aircraft_type",
-    "destination", "destination_iata", "destination_icao",
+    "airport_icao", "flight_no", "airline_icao", "aircraft_code", "destination_icao",
     "departure_time", "departure_time_tz", "arrival_time", "arrival_time_tz",
     "departure_status", "gate_from_is", "gate_from_plan", "start_is", "start_plan",
-    "rolltime", "delay_avg", "delay_minutes",
+    "rolltime", "delay_minutes",
 ]
 
 FIELDS_ARR = [
-    "airport_icao","flight_no", "airline", "airline_icao", "aircraft_code", "aircraft_type",
-    "origin", "origin_iata", "origin_icao",
+    "airport_icao", "flight_no", "airline_icao", "aircraft_code","origin_icao",
     "departure_time", "departure_time_tz", "arrival_time", "arrival_time_tz",
     "arrival_status", "landing_is", "landing_plan", "gate_to_is", "gate_to_plan",
-    "rolltime", "delay_avg", "delay_minutes",
+    "rolltime", "delay_minutes",
 ]
 
 
@@ -480,6 +556,9 @@ def main(icaos: list[str]) -> None:
     results = crawl_all(icaos)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     scraped_at = datetime.now(timezone.utc).isoformat()
+
+    # lookup tables first, so the foreign keys in departures/arrivals resolve
+    save_lookups(results)
 
     for icao, data in results.items():
         if data["departures"]:
