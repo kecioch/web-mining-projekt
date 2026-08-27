@@ -38,7 +38,7 @@ jobs:
       - name: Import completed Scrapy Cloud jobs into Supabase
         env:
           SCRAPY_CLOUD_API_KEY: ${{ secrets.SCRAPY_CLOUD_API_KEY }}
-          SCRAPY_CLOUD_PROJECT_ID: "870726"
+          SCRAPY_CLOUD_PROJECT_ID: "870950"
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           # Ohne diese explizite Repository-Freigabe bleibt auch der Zeitplan
