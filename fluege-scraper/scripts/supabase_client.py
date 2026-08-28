@@ -175,6 +175,16 @@ class SupabaseClient:
                 f"({response.status_code}): {response.text[:2000]}"
             ) from exc
 
+    def call_rpc(self, function_name: str, parameters: dict):
+        """Ruft eine freigegebene Postgres-Funktion über die Supabase-API auf."""
+        response = requests.post(
+            f"{self.base_url}/rpc/{function_name}",
+            headers=self.headers,
+            json=parameters,
+            timeout=120,
+        )
+        return self._json(response)
+
     def _write_batches(
         self,
         method: str,
