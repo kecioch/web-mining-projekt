@@ -7,11 +7,12 @@ import os
 
 import requests
 
+from supabase_client import SupabaseClient
+
 
 OURAIRPORTS_CSV_URL = (
     "https://davidmegginson.github.io/ourairports-data/airports.csv"
 )
-PAGE_SIZE = 1000
 ENRICHMENT_FIELDS = ("iata", "latitude", "longitude", "website_url")
 
 
@@ -26,42 +27,8 @@ def is_true(value: str | None) -> bool:
     return str(value).strip().lower() in {"1", "true", "yes", "on"}
 
 
-def supabase_url() -> str:
-    return f"{required_env('SUPABASE_URL').rstrip('/')}/rest/v1/airports"
-
-
-def supabase_headers(**extra: str) -> dict[str, str]:
-    key = required_env("SUPABASE_SERVICE_KEY")
-    return {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-        **extra,
-    }
-
-
 def is_empty(value) -> bool:
     return value is None or (isinstance(value, str) and not value.strip())
-
-
-def load_airports() -> list[dict]:
-    """Lädt die gesamte Tabelle seitenweise trotz Supabase-Zeilenlimit."""
-    airports: list[dict] = []
-    start = 0
-
-    while True:
-        response = requests.get(
-            supabase_url(),
-            params={"select": "icao,iata,latitude,longitude,website_url", "order": "icao"},
-            headers=supabase_headers(Range=f"{start}-{start + PAGE_SIZE - 1}"),
-            timeout=30,
-        )
-        response.raise_for_status()
-        page = response.json()
-        airports.extend(page)
-        if len(page) < PAGE_SIZE:
-            return airports
-        start += PAGE_SIZE
 
 
 def parse_float(value: str | None) -> float | None:
@@ -72,6 +39,7 @@ def parse_float(value: str | None) -> float | None:
 
 
 def load_ourairports(wanted_icaos: set[str]) -> dict[str, dict]:
+    """Lädt die OurAirports-CSV einmal und behält nur gesuchte ICAO-Codes."""
     response = requests.get(OURAIRPORTS_CSV_URL, timeout=90)
     response.raise_for_status()
     response.encoding = "utf-8"
@@ -106,20 +74,15 @@ def missing_values(airport: dict, source: dict) -> dict:
     }
 
 
-def update_airport(icao: str, values: dict) -> None:
-    response = requests.patch(
-        supabase_url(),
-        params={"icao": f"eq.{icao}"},
-        headers=supabase_headers(Prefer="return=minimal"),
-        json=values,
-        timeout=30,
-    )
-    response.raise_for_status()
-
-
 def main() -> None:
+    """Ergänzt ausschließlich fehlende Werte bereits vorhandener Flughäfen."""
     dry_run = is_true(os.environ.get("DRY_RUN", "true"))
-    airports = load_airports()
+    database = SupabaseClient(
+        required_env("SUPABASE_URL"), required_env("SUPABASE_SERVICE_KEY")
+    )
+    airports = database.fetch_all(
+        "airports", "icao,iata,latitude,longitude,website_url", order="icao"
+    )
     incomplete = [
         airport
         for airport in airports
@@ -150,7 +113,7 @@ def main() -> None:
 
         print(f"{icao}: ergänze {', '.join(values)}")
         if not dry_run:
-            update_airport(icao, values)
+            database.patch_equal("airports", "icao", icao, values)
         updated += 1
 
     mode = "TESTLAUF - keine DB-Änderung" if dry_run else "DB aktualisiert"

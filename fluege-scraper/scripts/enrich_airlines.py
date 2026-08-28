@@ -10,10 +10,11 @@ from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 
+from supabase_client import SupabaseClient
+
 
 IATA_BASE_URL = "https://www.iata.org"
 IATA_LIST_URL = f"{IATA_BASE_URL}/en/about/members/airline-list/"
-PAGE_SIZE = 1000
 REQUEST_DELAY_SECONDS = 0.25
 ENRICHMENT_FIELDS = ("iata", "legal_name", "country", "website_url")
 USER_AGENT = (
@@ -38,21 +39,8 @@ def is_empty(value) -> bool:
     return value is None or (isinstance(value, str) and not value.strip())
 
 
-def supabase_url() -> str:
-    return f"{required_env('SUPABASE_URL').rstrip('/')}/rest/v1/airlines"
-
-
-def supabase_headers(**extra: str) -> dict[str, str]:
-    key = required_env("SUPABASE_SERVICE_KEY")
-    return {
-        "apikey": key,
-        "Authorization": f"Bearer {key}",
-        "Content-Type": "application/json",
-        **extra,
-    }
-
-
 def create_iata_session() -> requests.Session:
+    """Erstellt eine wiederverwendbare Sitzung mit browserähnlichen HTTP-Headern."""
     session = requests.Session()
     session.headers.update(
         {
@@ -71,29 +59,6 @@ def get_html(session: requests.Session, url: str, params: dict | None = None) ->
     return response.text
 
 
-def load_airlines() -> list[dict]:
-    """Lädt die gesamte Tabelle seitenweise trotz Supabase-Zeilenlimit."""
-    airlines: list[dict] = []
-    start = 0
-
-    while True:
-        response = requests.get(
-            supabase_url(),
-            params={
-                "select": "icao,name,iata,legal_name,country,website_url",
-                "order": "icao",
-            },
-            headers=supabase_headers(Range=f"{start}-{start + PAGE_SIZE - 1}"),
-            timeout=30,
-        )
-        response.raise_for_status()
-        page = response.json()
-        airlines.extend(page)
-        if len(page) < PAGE_SIZE:
-            return airlines
-        start += PAGE_SIZE
-
-
 def find_airline_table(soup: BeautifulSoup):
     for table in soup.select("table.datatable"):
         headings = [cell.get_text(" ", strip=True) for cell in table.select("thead td")]
@@ -103,6 +68,7 @@ def find_airline_table(soup: BeautifulSoup):
 
 
 def parse_list_page(html: str, wanted_icaos: set[str]) -> dict[str, dict]:
+    """Extrahiert passende IATA-, ICAO- und Länderwerte aus einer Listenseite."""
     soup = BeautifulSoup(html, "html.parser")
     table = find_airline_table(soup)
     if table is None:
@@ -136,6 +102,7 @@ def page_count(html: str) -> int:
 def load_iata_members(
     session: requests.Session, wanted_icaos: set[str]
 ) -> dict[str, dict]:
+    """Durchläuft alle Mitgliederseiten und sammelt nur vorhandene DB-Airlines."""
     first_html = get_html(session, IATA_LIST_URL)
     matches = parse_list_page(first_html, wanted_icaos)
 
@@ -146,6 +113,7 @@ def load_iata_members(
 
 
 def parse_detail_page(html: str) -> dict:
+    """Liest offiziellen Firmennamen und Webseite einer Airline-Detailseite."""
     soup = BeautifulSoup(html, "html.parser")
     values: dict[str, str] = {}
     for row in soup.select("table.datatable tbody tr"):
@@ -176,20 +144,17 @@ def missing_values(airline: dict, source: dict) -> dict:
     }
 
 
-def update_airline(icao: str, values: dict) -> None:
-    response = requests.patch(
-        supabase_url(),
-        params={"icao": f"eq.{icao}"},
-        headers=supabase_headers(Prefer="return=minimal"),
-        json=values,
-        timeout=30,
-    )
-    response.raise_for_status()
-
-
 def main() -> None:
+    """Ergänzt ausschließlich fehlende Werte bereits vorhandener Airlines."""
     dry_run = is_true(os.environ.get("DRY_RUN", "true"))
-    airlines = load_airlines()
+    database = SupabaseClient(
+        required_env("SUPABASE_URL"), required_env("SUPABASE_SERVICE_KEY")
+    )
+    airlines = database.fetch_all(
+        "airlines",
+        "icao,name,iata,legal_name,country,website_url",
+        order="icao",
+    )
     incomplete = [
         airline
         for airline in airlines
@@ -229,9 +194,9 @@ def main() -> None:
             unchanged += 1
             continue
 
-        print(f"{icao}: ergaenze {', '.join(values)}")
+        print(f"{icao}: ergänze {', '.join(values)}")
         if not dry_run:
-            update_airline(icao, values)
+            database.patch_equal("airlines", "icao", icao, values)
         updated += 1
 
     mode = "TESTLAUF - keine DB-Änderung" if dry_run else "DB aktualisiert"
