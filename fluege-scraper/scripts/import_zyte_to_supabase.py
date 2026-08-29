@@ -9,6 +9,15 @@ from supabase_client import SupabaseClient, natural_key
 from zyte_client import ZyteClient
 
 
+JOB_SEPARATOR = "=" * 72
+RESULT_SEPARATOR = "#" * 72
+SPIDER_NAMES = {
+    "berlin_airport_flights": "Berlin",
+    "frankfurt_airport_flights": "Frankfurt",
+    "munich_airport_flights": "München",
+}
+
+
 def required_env(name: str) -> str:
     value = os.environ.get(name, "").strip()
     if not value:
@@ -20,13 +29,101 @@ def is_true(value: str | None) -> bool:
     return str(value).strip().lower() in {"1", "true", "yes", "on"}
 
 
+def preview(values: set[str], limit: int = 10) -> str:
+    ordered = sorted(values)
+    visible = ", ".join(ordered[:limit])
+    remaining = len(ordered) - limit
+    return f"{visible} … (+{remaining} weitere)" if remaining > 0 else visible
+
+
+def print_job_header(job: dict, position: int, total: int, dry_run: bool) -> None:
+    """Kennzeichnet vor der Verarbeitung eindeutig den folgenden Jobblock."""
+    spider = job.get("spider", "unbekannter Spider")
+    airport = SPIDER_NAMES.get(spider, spider)
+    mode = "DRY RUN – keine Datenbankänderungen" if dry_run else "ECHTER IMPORT"
+    print(f"\n{JOB_SEPARATOR}")
+    print(f"JOB {position}/{total} | {airport} | {job.get('id', 'unbekannte ID')}")
+    print(f"Modus: {mode}")
+    print(JOB_SEPARATOR, flush=True)
+
+
+def print_job_report(
+    stats: dict,
+    missing: dict[str, list[dict]],
+    unmatched: dict[str, set[str]],
+    new_examples: list[tuple[str, dict]],
+    dry_run: bool,
+) -> None:
+    """Gibt Mengen, Stammdatenlücken und Beispiele eines Jobs gebündelt aus."""
+    new_label = "Würden neu gespeichert" if dry_run else "Neu gespeichert"
+    lookup_label = "Würden angelegt" if dry_run else "Neu angelegt"
+    print("Flugdaten:")
+    print(f"  Items gelesen:          {stats['items']}")
+    print(f"  {new_label + ':':<24}{stats['new']}")
+    print(f"  Bereits vorhanden:      {stats['existing']}")
+    print(f"  Unvollständig:          {stats['incomplete']}")
+
+    if new_examples:
+        print("  Beispiele für neue Datensätze:")
+        for table, row in new_examples:
+            direction = "Ankunft" if table == "arrivals" else "Abflug"
+            timestamp_field = (
+                "scheduled_arrival_at"
+                if table == "arrivals"
+                else "scheduled_departure_at"
+            )
+            print(
+                f"    - {direction} | {row['airport_icao']} | "
+                f"{row['flight_no']} | {row[timestamp_field]}"
+            )
+
+    print("Stammdaten:")
+    print(
+        f"  {lookup_label}: "
+        + " | ".join(f"{table}={len(rows)}" for table, rows in missing.items())
+    )
+    populated = [(label, values) for label, values in unmatched.items() if values]
+    if not populated:
+        print("  Nicht zugeordnet: keine")
+        return
+    print("  Nicht zugeordnet; entsprechender Fremdschlüssel bleibt NULL:")
+    for label, values in populated:
+        print(f"    - {label}: {len(values)} ({preview(values)})")
+
+
+def print_summary(
+    totals: dict[str, int], job_count: int, failure_count: int, dry_run: bool
+) -> None:
+    """Trennt das Gesamtergebnis sichtbar von allen Flughafenblöcken."""
+    mode = (
+        "DRY RUN – ES WURDE NICHTS GESPEICHERT"
+        if dry_run
+        else "IMPORT ABGESCHLOSSEN"
+    )
+    new_label = "Würden neu gespeichert" if dry_run else "Neu gespeichert"
+    print(f"\n{RESULT_SEPARATOR}")
+    print(f"GESAMTERGEBNIS | {mode}")
+    print(RESULT_SEPARATOR)
+    print(f"Jobs erfolgreich:         {job_count - failure_count}/{job_count}")
+    print(f"Items gelesen:            {totals['items']}")
+    print(f"{new_label + ':':<27}{totals['new']}")
+    print(f"Bereits vorhanden:        {totals['existing']}")
+    print(f"Unvollständig:            {totals['incomplete']}")
+    print(
+        '\n„Neu“ bedeutet: Der Schlüssel aus Flughafen, Flugnummer und geplanter '
+        "Hauptzeit wurde nicht in Supabase gefunden. Beispiele stehen im Jobblock."
+    )
+
+
+
+
 def import_job(
     job: dict,
     dry_run: bool,
     zyte: ZyteClient,
     database: SupabaseClient,
     mapper: FlightMappingService,
-) -> int:
+) -> dict[str, int]:
     """Verarbeitet einen Zyte-Job vollständig und markiert ihn erst nach Erfolg."""
     job_id = job.get("id")
     if not job_id:
@@ -66,20 +163,13 @@ def import_job(
         raise RuntimeError(f"Job {job_id} enthält keine Items und bleibt db-pending")
 
     missing = mapper.missing_lookups(collected)
-    print("Neue Lookups: " + ", ".join(f"{k}={len(v)}" for k, v in missing.items()))
     if not dry_run:
         database.upsert_lookups(missing)
     mapper.register_lookups(missing)
 
-    for label, values in unmatched.items():
-        if values:
-            print(
-                f"Nicht gemappte {label}: {len(values)} "
-                f"({', '.join(sorted(values)[:10])})"
-            )
-
     inserted = 0
     duplicates = 0
+    new_examples = []
     for table, rows in mapped.items():
         known_keys = database.existing_keys(table, rows)
         new_rows = []
@@ -90,17 +180,22 @@ def import_job(
             else:
                 known_keys.add(key)
                 new_rows.append(row)
+                if len(new_examples) < 5:
+                    new_examples.append((table, row))
         if not dry_run:
             database.insert_rows(table, new_rows)
         inserted += len(new_rows)
 
-    print(
-        f"{job_id} ({job['spider']}): {item_count} Items, "
-        f"{inserted} neu, {duplicates} vorhanden, {skipped} unvollständig"
-    )
+    stats = {
+        "items": item_count,
+        "new": inserted,
+        "existing": duplicates,
+        "incomplete": skipped,
+    }
+    print_job_report(stats, missing, unmatched, new_examples, dry_run)
     if not dry_run:
         zyte.mark_imported(job_id)
-    return inserted
+    return stats
 
 
 def main() -> int:
@@ -120,19 +215,20 @@ def main() -> int:
 
     mapper = FlightMappingService(database.load_reference_rows())
     failures = []
-    total_inserted = 0
-    for job in reversed(jobs):
+    totals = {"items": 0, "new": 0, "existing": 0, "incomplete": 0}
+    ordered_jobs = list(reversed(jobs))
+    for position, job in enumerate(ordered_jobs, start=1):
+        print_job_header(job, position, len(ordered_jobs), dry_run)
         try:
-            total_inserted += import_job(job, dry_run, zyte, database, mapper)
+            stats = import_job(job, dry_run, zyte, database, mapper)
+            for key in totals:
+                totals[key] += stats[key]
         except Exception as exc:  # Jobs unabhängig weiterverarbeiten
             job_id = job.get("id", "unbekannt")
             failures.append((job_id, str(exc)))
             print(f"FEHLER bei {job_id}: {exc}", file=sys.stderr)
 
-    print(
-        f"Ergebnis: {len(jobs) - len(failures)}/{len(jobs)} Jobs, "
-        f"{total_inserted} neue Datensätze."
-    )
+    print_summary(totals, len(jobs), len(failures), dry_run)
     if failures:
         print("Fehlgeschlagene Jobs bleiben db-pending.", file=sys.stderr)
         return 1
