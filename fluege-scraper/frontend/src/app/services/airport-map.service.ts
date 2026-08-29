@@ -56,13 +56,13 @@ export class AirportMapService {
             const airportMarker = marker([airport.latitude, airport.longitude], {
                 icon,
                 keyboard: true,
-                title: `${airport.airport_name} (${airport.iata_code ?? '-'})`,
+                title: `${airport.name} (${airport.icao ?? '-'})`,
             }).addTo(this.airportLayer);
 
             airportMarker.once('remove', () => this.destroyMarkerComponent(componentRef));
 
             const tooltip = document.createElement('span');
-            tooltip.textContent = `${airport.airport_name} (${airport.iata_code ?? '-'})`;
+            tooltip.textContent = `${airport.name} (${airport.icao ?? '-'})`;
             airportMarker.bindTooltip(tooltip);
             airportMarker.on('click', () => onSelect(airport));
             renderedMarkers += 1;
@@ -86,7 +86,7 @@ export class AirportMapService {
             environmentInjector: this.environmentInjector,
             hostElement,
         });
-        componentRef.setInput('code', airport.iata_code);
+        componentRef.setInput('code', airport.icao);
         this.applicationRef.attachView(componentRef.hostView);
         componentRef.changeDetectorRef.detectChanges();
 

@@ -9,6 +9,6 @@ export class AirportService {
     private readonly http = inject(HttpClient);
 
     public getAirports(): Observable<Airport[]> {
-        return this.http.get<Airport[]>('/api/airports');
+        return this.http.get<Airport[]>('/api/airports/tracked');
     }
 }

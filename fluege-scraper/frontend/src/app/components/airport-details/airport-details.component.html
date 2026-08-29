@@ -1,8 +1,8 @@
 <header class="airport-heading">
-    <span class="airport-code">{{ airport().iata_code ?? '-' }}</span>
+    <span class="airport-code">{{ airport().icao ?? '-' }}</span>
     <div>
-        <h2>{{ airport().detail_airport_name ?? airport().airport_name }}</h2>
-        <p>{{ airport().location ?? 'Keine Ortsangabe vorhanden' }}</p>
+        <h2>{{ airport().name }}</h2>
+        <p>{{ 'Keine Ortsangabe vorhanden' }}</p>
     </div>
 </header>
 
@@ -24,10 +24,10 @@
 <a
     pButton
     class="wikipedia-link"
-    [href]="airport().airport_url"
+    [href]="airport().website_url"
     target="_blank"
     rel="noopener noreferrer"
 >
-    <span pButtonLabel>Wikipedia-Artikel öffnen</span>
+    <span pButtonLabel>Webseite öffnen</span>
     <i class="pi pi-external-link" aria-hidden="true"></i>
 </a>

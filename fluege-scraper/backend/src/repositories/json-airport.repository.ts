@@ -13,6 +13,10 @@ export class JsonAirportRepository implements AirportRepository {
                 '../../../data/output/airports_wikipedia_details.json',
             ),
     ) {}
+    
+    findTracked(): Promise<AirportSourceRecord[]> {
+        throw new Error('Method not implemented.');
+    }
 
     public async findAll(): Promise<AirportSourceRecord[]> {
         const content = await readFile(this.filePath, 'utf8');

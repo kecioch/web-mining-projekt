@@ -7,3 +7,4 @@ const airportController = new AirportController();
 export const airportRouter = Router();
 
 airportRouter.get('/', airportController.getAll.bind(airportController));
+airportRouter.get('/tracked', airportController.getTracked.bind(airportController));

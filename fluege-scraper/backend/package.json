@@ -4,13 +4,14 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "tsx watch src/server.ts",
+        "dev": "tsx watch --env-file-if-exists=.env src/server.ts",
         "build": "tsc",
         "prestart": "npm run build",
-        "start": "node dist/server.js",
+        "start": "node --env-file-if-exists=.env dist/server.js",
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
+        "@supabase/supabase-js": "^2.112.4",
         "express": "^5.1.0"
     },
     "devDependencies": {

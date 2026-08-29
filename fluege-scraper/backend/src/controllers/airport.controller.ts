@@ -13,4 +13,17 @@ export class AirportController {
             next(error);
         }
     }
+
+    public async getTracked(
+        _request: Request,
+        response: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const airports = await this.airportService.getTracked();
+            response.status(200).json(airports);
+        } catch (error) {
+            next(error);
+        }
+    }
 }
