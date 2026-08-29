@@ -17,6 +17,8 @@ load_dotenv(find_dotenv())
 
 #### Config ################################################################
 
+SCRAPED_BY = "SOUP_FLIGHTDATA_ARR_DEP_SCRIPT"
+
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -35,7 +37,11 @@ DETAIL_LIMIT = None
 TABLE_SELECTOR = "table.airportBoard"
 DETAIL_SELECTOR = "h3.flightPageDataTableHeading, .flightPageSummaryTimes"
 
-AIRPORTS = ["EDLW","EDDL","EDDK"] # ICAO codes
+AIRPORTS = [
+    a.strip().upper()
+    for a in os.environ.get("SOUP_FLIGHTDATA_AIRPORTS").split(",")
+    if a.strip()
+]
 AIRPORT_URL = "https://de.flightaware.com/live/airport/{icao}"
 
 #### DB ####################################################################
@@ -180,22 +186,44 @@ def _split_time_tz(td) -> tuple[str, str]:
 # DST abbreviations already encode the offset (CEST=+2, CET=+1), so fixed
 # values are correct for the abbreviation as given.
 TZ_ABBR = {
-    "UTC": 0, 
-    "GMT": 0, 
-    "Z": 0,
-    "WET": 0,   
-    "WEST": 60,
-    "CET": 60,  
-    "CEST": 120,
-    "EET": 120, 
-    "EEST": 180,
+    "UTC": 0, "GMT": 0, "Z": 0,
+ 
+    # Europe / Atlantic
+    "WET": 0,   "WEST": 60,
+    "CET": 60,  "CEST": 120,
+    "EET": 120, "EEST": 180,
     "MSK": 180,
     "BST": 60,        # British Summer Time
     "IST": 60,        # Irish Standard Time
     "IDT": 180,       # Israel Daylight Time
     "TRT": 180,       # Turkey
     "AZOT": -60, "AZOST": 0,   # Azores
+ 
+    # North America (standard / daylight)
+    "EST": -300, "EDT": -240,
+    "CST": -360, "CDT": -300,
+                                
+    "MST": -420, "MDT": -360,
+    "PST": -480, "PDT": -420,
+    "AKST": -540, "AKDT": -480,
+    "HST": -600,
+    "AST": -240, "ADT": -180,   
+    "NST": -210, "NDT": -150,   # Newfoundland
+ 
+    # Middle East / Asia
     "GST": 240,       # Gulf
+    "PKT": 300,       # Pakistan
+    "ICT": 420,       # Indochina
+    "SGT": 480,       # Singapore
+    "HKT": 480,       # Hong Kong
+    "JST": 540,       # Japan
+    "KST": 540,       # Korea
+ 
+    # Africa
+    "WAT": 60,        # West Africa
+    "CAT": 120,       # Central Africa
+    "SAST": 120,      # South Africa Standard
+    "EAT": 180,       # East Africa
 }
 
 _UNKNOWN_TZ: set[str] = set()
@@ -567,8 +595,10 @@ def crawl_all(icaos: list[str]) -> dict:
                     data = crawl_airport(page, base, url)
                     for r in data["departures"]:
                         r["airport_icao"] = icao
+                        r["scraped_by"] = SCRAPED_BY
                     for r in data["arrivals"]:
                         r["airport_icao"] = icao
+                        r["scraped_by"] = SCRAPED_BY
                     results[icao] = data
                 except Exception as exc:
                     print(f"! {icao} failed: {exc}")
@@ -586,6 +616,7 @@ FIELDS_DEP = [
     "departure_status", "rolltime", "delay_minutes",
     "scheduled_departure_at", "reported_departure_at",
     "scheduled_arrival_at", "reported_arrival_at",
+    "scraped_by"
 ]
 
 FIELDS_ARR = [
@@ -593,6 +624,7 @@ FIELDS_ARR = [
     "arrival_status", "rolltime", "delay_minutes",
     "scheduled_departure_at", "reported_departure_at",
     "scheduled_arrival_at", "reported_arrival_at",
+    "scraped_by"
 ]
 
 

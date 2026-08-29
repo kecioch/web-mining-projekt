@@ -2,13 +2,13 @@ name: Scrape flight-data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # every 30 min, at :00 and :30 UTC
+    - cron: "0,30 * * * *"   # every 30 min, at :00 and :30 UTC
   workflow_dispatch:         # adds a "Run workflow" button for manual runs
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -23,6 +23,7 @@ jobs:
 
       - name: Run scraper
         env:
+          AIRPORTS: ${{ vars.AIRPORTS }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: python crawler/Soup/scripts/soup_flightdata_arr_dep.py
