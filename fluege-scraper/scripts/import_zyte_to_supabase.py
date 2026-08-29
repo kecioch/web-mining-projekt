@@ -29,18 +29,15 @@ def is_true(value: str | None) -> bool:
     return str(value).strip().lower() in {"1", "true", "yes", "on"}
 
 
-def preview(values: set[str], limit: int = 10) -> str:
-    ordered = sorted(values)
-    visible = ", ".join(ordered[:limit])
-    remaining = len(ordered) - limit
-    return f"{visible} … (+{remaining} weitere)" if remaining > 0 else visible
+def preview(values: set[str]) -> str:
+    return ", ".join(sorted(values))
 
 
 def print_job_header(job: dict, position: int, total: int, dry_run: bool) -> None:
     """Kennzeichnet vor der Verarbeitung eindeutig den folgenden Jobblock."""
     spider = job.get("spider", "unbekannter Spider")
     airport = SPIDER_NAMES.get(spider, spider)
-    mode = "DRY RUN – keine Datenbankänderungen" if dry_run else "ECHTER IMPORT"
+    mode = "DRY RUN" if dry_run else "ECHTER IMPORT"
     print(f"\n{JOB_SEPARATOR}")
     print(f"JOB {position}/{total} | {airport} | {job.get('id', 'unbekannte ID')}")
     print(f"Modus: {mode}")
@@ -95,11 +92,7 @@ def print_summary(
     totals: dict[str, int], job_count: int, failure_count: int, dry_run: bool
 ) -> None:
     """Trennt das Gesamtergebnis sichtbar von allen Flughafenblöcken."""
-    mode = (
-        "DRY RUN – ES WURDE NICHTS GESPEICHERT"
-        if dry_run
-        else "IMPORT ABGESCHLOSSEN"
-    )
+    mode = "DRY RUN" if dry_run else "IMPORT ABGESCHLOSSEN"
     new_label = "Würden neu gespeichert" if dry_run else "Neu gespeichert"
     print(f"\n{RESULT_SEPARATOR}")
     print(f"GESAMTERGEBNIS | {mode}")
@@ -109,10 +102,6 @@ def print_summary(
     print(f"{new_label + ':':<27}{totals['new']}")
     print(f"Bereits vorhanden:        {totals['existing']}")
     print(f"Unvollständig:            {totals['incomplete']}")
-    print(
-        '\n„Neu“ bedeutet: Der Schlüssel aus Flughafen, Flugnummer und geplanter '
-        "Hauptzeit wurde nicht in Supabase gefunden. Beispiele stehen im Jobblock."
-    )
 
 
 
