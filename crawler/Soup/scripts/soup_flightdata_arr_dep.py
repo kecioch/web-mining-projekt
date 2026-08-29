@@ -35,7 +35,7 @@ DETAIL_LIMIT = None
 TABLE_SELECTOR = "table.airportBoard"
 DETAIL_SELECTOR = "h3.flightPageDataTableHeading, .flightPageSummaryTimes"
 
-AIRPORTS = ["EDDF","EDDL","EDDK"] # ICAO codes
+AIRPORTS = ["EDLW","EDDL","EDDK"] # ICAO codes
 AIRPORT_URL = "https://de.flightaware.com/live/airport/{icao}"
 
 #### DB ####################################################################
