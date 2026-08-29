@@ -158,12 +158,6 @@ def _nz(v):
     return None if v is None or v == "" else v
 
 
-def _to_time(s) -> str | None:
-    """'19:44 CEST' or '17:14' -> 'HH:MM' (Postgres casts it to `time`), else None."""
-    m = re.search(r"(\d{1,2}):(\d{2})", s or "")
-    return f"{int(m.group(1)):02d}:{m.group(2)}" if m else None
-
-
 def _to_minutes(s) -> int | None:
     """'4 Minuten' / '-7' -> integer minutes, else None."""
     if s is None:
@@ -172,36 +166,156 @@ def _to_minutes(s) -> int | None:
     return int(m.group()) if m else None
 
 
-def _delay_minutes(actual: str, scheduled: str) -> str:
-    """Calculate delays in minutes from two 'HH:MM'-Strings"""
-    def to_min(s):
-        m = re.search(r"(\d{1,2}):(\d{2})", s or "")
-        return int(m.group(1)) * 60 + int(m.group(2)) if m else None
-    a, s = to_min(actual), to_min(scheduled)
-    if a is None or s is None:
-        return ""
-    diff = a - s
-    # day changes
-    p_a = re.search(r"\(\+(\d)\)", actual or "")
-    p_s = re.search(r"\(\+(\d)\)", scheduled or "")
-    diff += (int(p_a.group(1)) if p_a else 0) * 1440
-    diff -= (int(p_s.group(1)) if p_s else 0) * 1440
-    if diff < -720 and not p_a and not p_s:   # catch day changes without (+1)
-        diff += 1440
-    return str(diff)
-
-
 def _split_time_tz(td) -> tuple[str, str]:
+    """Board cell -> (time_text, tz). Only the tz is used downstream (fallback)."""
     tz_span = td.find("span", class_="tz")
     tz = _clean(tz_span.get_text()) if tz_span else ""
     time_txt = _clean(td.get_text()).replace(tz, "").strip()
     return time_txt, tz
 
 
+#### timezone handling ################################################################
+
+# Abbreviation -> UTC offset in MINUTES.
+# DST abbreviations already encode the offset (CEST=+2, CET=+1), so fixed
+# values are correct for the abbreviation as given.
+TZ_ABBR = {
+    "UTC": 0, 
+    "GMT": 0, 
+    "Z": 0,
+    "WET": 0,   
+    "WEST": 60,
+    "CET": 60,  
+    "CEST": 120,
+    "EET": 120, 
+    "EEST": 180,
+    "MSK": 180,
+    "BST": 60,        # British Summer Time
+    "IST": 60,        # Irish Standard Time
+    "IDT": 180,       # Israel Daylight Time
+    "TRT": 180,       # Turkey
+    "AZOT": -60, "AZOST": 0,   # Azores
+    "GST": 240,       # Gulf
+}
+
+_UNKNOWN_TZ: set[str] = set()
+
+
+def _tz_offset_minutes(tz: str | None) -> int | None:
+    """CEST / EEST / IDT / '+03' / 'UTC+05:30' / '-0430' -> offset in minutes, else None."""
+    if not tz:
+        return None
+    s = tz.strip().upper()
+
+    # numeric offset: +03, -05, +0530, +05:30, UTC+3, GMT+2 ...
+    if s[0] in "+-" or s.startswith("UTC") or s.startswith("GMT"):
+        m = re.search(r"([+-])(\d{1,2})(?::?(\d{2}))?$", s)
+        if m:
+            sign = 1 if m.group(1) == "+" else -1
+            return sign * (int(m.group(2)) * 60 + int(m.group(3) or 0))
+
+    if s in TZ_ABBR:
+        return TZ_ABBR[s]
+
+    if s not in _UNKNOWN_TZ:
+        _UNKNOWN_TZ.add(s)
+        print(f"  ! unknown timezone '{tz}' -> timestamp left NULL (extend TZ_ABBR)")
+    return None
+
+
+def _time_and_tz(raw: str | None) -> tuple[str | None, str | None]:
+    """'13:09 CEST' -> ('13:09', 'CEST'); '17:14' -> ('17:14', None).
+    Day markers like '(+1)' are stripped before the tz token is read."""
+    if not raw:
+        return None, None
+    s = raw.replace("\xa0", " ")
+    s = re.sub(r"\(.*?\)", " ", s)          # drop '(+1)' etc so it isn't read as an offset
+    m = re.search(r"(\d{1,2}):(\d{2})", s)
+    if not m:
+        return None, None
+    hhmm = f"{int(m.group(1)):02d}:{m.group(2)}"
+    zm = re.search(r"[A-Za-z]{2,5}|[+-]\d{1,2}:?\d{0,2}", s[m.end():])
+    tz = zm.group(0).strip() if zm else None
+    return hhmm, tz
+
+
+def _combine_utc(hhmm: str | None, tz: str | None, ref_utc: datetime) -> datetime | None:
+    """'HH:MM' + zone -> UTC datetime. Date inferred as the day (yesterday/today/
+    tomorrow) whose result is closest to the scrape time. Fine for a live board."""
+    if not hhmm or not tz:
+        return None
+    m = re.search(r"(\d{1,2}):(\d{2})", hhmm)
+    if not m:
+        return None
+    off = _tz_offset_minutes(tz)
+    if off is None:
+        return None
+
+    tzinfo = timezone(timedelta(minutes=off))
+    ref_local = ref_utc.astimezone(tzinfo)
+    base = ref_local.replace(hour=int(m.group(1)), minute=int(m.group(2)),
+                             second=0, microsecond=0)
+    best = min((base + timedelta(days=d) for d in (-1, 0, 1)),
+               key=lambda dt: abs(dt - ref_local))
+    return best.astimezone(timezone.utc)
+
+
+def _combine_from_raw(raw: str | None, tz_fallback: str | None,
+                      ref_utc: datetime) -> datetime | None:
+    """Combine a detail time string using its own inline tz, board tz as fallback."""
+    hhmm, tz = _time_and_tz(raw)
+    if not hhmm:
+        return None
+    return _combine_utc(hhmm, tz or tz_fallback, ref_utc)
+
+
+def _fmt_ts(dt: datetime | None) -> str | None:
+    """UTC datetime -> '2026-08-29 11:09:00+00' (Postgres timestamptz)."""
+    return dt.strftime("%Y-%m-%d %H:%M:%S+00") if dt else None
+
+
+def _delay_from(actual: datetime | None, planned: datetime | None) -> int | None:
+    """Minutes between two timestamps (positive = actual later than planned)."""
+    if actual is None or planned is None:
+        return None
+    diff = round((actual - planned).total_seconds() / 60)
+    if diff > 720:          # day-inference artifact
+        diff -= 1440
+    elif diff < -720:
+        diff += 1440
+    return diff
+
+
+def add_event_timestamps(row: dict, kind: str, ref_utc: datetime) -> None:
+    """Build the 4 timestamptz fields + delay_minutes for one row.
+
+    Mapping (identical for departures and arrivals):
+        scheduled_departure_at = Start  Planmäßig      (planned takeoff, at origin)
+        reported_departure_at  = Start  actual         (actual takeoff, at origin)
+        scheduled_arrival_at   = Gate-in Planmäßig     (planned gate-in, at destination)
+        reported_arrival_at    = Gate-in actual        (actual gate-in, at destination)
+        delay_minutes          = reported_arrival - scheduled_arrival
+    """
+    start_tz = row.get("departure_time_tz")   # takeoff is at the origin
+    gate_tz  = row.get("arrival_time_tz")     # gate-in is at the destination
+
+    dep_actual  = _combine_from_raw(row.get("start_is"),      start_tz, ref_utc)  # actual takeoff
+    dep_planned = _combine_from_raw(row.get("start_plan"),    start_tz, ref_utc)  # planned takeoff
+    arr_actual  = _combine_from_raw(row.get("gate_arr_is"),   gate_tz,  ref_utc)  # actual gate-in
+    arr_planned = _combine_from_raw(row.get("gate_arr_plan"), gate_tz,  ref_utc)  # planned gate-in
+
+    row["scheduled_departure_at"] = _fmt_ts(dep_planned)   # planned takeoff
+    row["reported_departure_at"]  = _fmt_ts(dep_actual)    # actual takeoff
+    row["scheduled_arrival_at"]   = _fmt_ts(arr_planned)   # planned gate-in
+    row["reported_arrival_at"]    = _fmt_ts(arr_actual)    # actual gate-in
+    row["delay_minutes"]          = _delay_from(arr_actual, arr_planned)
+    row["rolltime"]               = row.get("rolltime_out") if kind == "dep" else row.get("rolltime_in")
+
+
 #### Departure ################################################################
 
 def parse_departures(html: str) -> list[dict]:
-    """Extract all departures from HTML"""
+    """Extract all departures from the airport board."""
     soup = BeautifulSoup(html, "html.parser")
     table = soup.find("table", {"data-type": "departures"})
     if table is None:
@@ -228,7 +342,7 @@ def parse_departures(html: str) -> list[dict]:
         ac_full = type_span.get("title", "").strip() if type_span else ""
         ac_code = _clean(tds[1].get_text())
 
-        # 3. Destination: Name + ICAO (IATA only used to find the ICAO link)
+        # 3. Destination: Name + ICAO
         name_span = tds[2].find("span", itemprop="name")
         dest_name = _clean(name_span.get_text()) if name_span else ""
         iata_link = tds[2].find("a", itemprop="url")
@@ -238,9 +352,9 @@ def parse_departures(html: str) -> list[dict]:
             if mm:
                 dest_icao = mm.group(1)
 
-        # 4. Times
-        dep_time, dep_tz = _split_time_tz(tds[3])
-        arr_time, arr_tz = _split_time_tz(tds[5])
+        # 4. Timezones only (used as fallback for the detail times)
+        _, dep_tz = _split_time_tz(tds[3])
+        _, arr_tz = _split_time_tz(tds[5])
 
         rows.append({
             "flight_no": flight_no,
@@ -250,19 +364,9 @@ def parse_departures(html: str) -> list[dict]:
             "aircraft_type": ac_full,    # -> aircraft lookup table
             "destination": dest_name,    # -> airports lookup table
             "destination_icao": dest_icao,
-            "departure_time": _to_time(dep_time),
-            "departure_time_tz": dep_tz,
-            "arrival_time": _to_time(arr_time),
-            "arrival_time_tz": arr_tz,
+            "departure_time_tz": dep_tz, # origin tz (fallback for Start)
+            "arrival_time_tz": arr_tz,   # destination tz (fallback for gate-in)
             "detail_url": detail_url,
-            # Details properties will be filled later
-            "departure_status": "",
-            "gate_from_is": "",
-            "gate_from_plan": "",
-            "start_is": "",
-            "start_plan": "",
-            "rolltime": "",
-            "delay_minutes": "",
         })
     return rows
 
@@ -270,7 +374,7 @@ def parse_departures(html: str) -> list[dict]:
 #### Arrival ################################################################
 
 def parse_arrivals(html: str) -> list[dict]:
-    """Extract all arrivals from HTML"""
+    """Extract all arrivals from the airport board."""
     soup = BeautifulSoup(html, "html.parser")
     table = soup.find("table", {"data-type": "arrivals"})
     if table is None:
@@ -297,7 +401,7 @@ def parse_arrivals(html: str) -> list[dict]:
         ac_full = type_span.get("title", "").strip() if type_span else ""
         ac_code = _clean(tds[1].get_text())
 
-        # 3. Origin: Name + ICAO (IATA only used to find the ICAO link)
+        # 3. Origin: Name + ICAO
         name_span = tds[2].find("span", itemprop="name")
         orig_name = _clean(name_span.get_text()) if name_span else ""
         iata_link = tds[2].find("a", itemprop="url")
@@ -307,9 +411,9 @@ def parse_arrivals(html: str) -> list[dict]:
             if mm:
                 orig_icao = mm.group(1)
 
-        # Times
-        dep_time, dep_tz = _split_time_tz(tds[3])
-        arr_time, arr_tz = _split_time_tz(tds[5])
+        # Timezones only (used as fallback for the detail times)
+        _, dep_tz = _split_time_tz(tds[3])
+        _, arr_tz = _split_time_tz(tds[5])
 
         rows.append({
             "flight_no": flight_no,
@@ -319,119 +423,77 @@ def parse_arrivals(html: str) -> list[dict]:
             "aircraft_type": ac_full,    # -> aircraft lookup table
             "origin": orig_name,         # -> airports lookup table
             "origin_icao": orig_icao,
-            "departure_time": _to_time(dep_time),
-            "departure_time_tz": dep_tz,
-            "arrival_time": _to_time(arr_time),
-            "arrival_time_tz": arr_tz,
+            "departure_time_tz": dep_tz, # origin tz (fallback for Start)
+            "arrival_time_tz": arr_tz,   # destination tz (fallback for gate-in)
             "detail_url": detail_url,
-            # Details properties will be filled later
-            "arrival_status": "",
-            "landing_is": "",
-            "landing_plan": "",
-            "gate_to_is": "",
-            "gate_to_plan": "",
-            "rolltime": "",
-            "delay_minutes": "",
         })
     return rows
 
 
 #### Detailspage ################################################################
 
-def parse_detail_departure(html: str) -> dict:
-    soup = BeautifulSoup(html, "html.parser")
-    out: dict = {}
-
-    # Airline-ICAO from fleet link
-    fleet = soup.find("a", href=re.compile(r"/live/fleet/"))
-    if fleet:
-        mm = re.search(r"/live/fleet/([A-Z0-9]+)", fleet["href"])
-        if mm:
-            out["airline_icao"] = mm.group(1)
-
-    # Departure Status
-    status = soup.select_one(".flightPageDepartureDelayStatus")
-    if status:
-        out["departure_status"] = _clean(status.get_text()).strip("()")
-
-    # Departure Times
-    dep_table = None
-    for h3 in soup.select("h3.flightPageDataTableHeading"):
-        if "Abflugzeiten" in _clean(h3.get_text()):
-            dep_table = h3.find_next_sibling("div", class_="flightPageDataTable")
-            break
-
-    if dep_table:
-        gate_is, gate_plan = _time_child(dep_table, "Verlassen des Gates")
-        start_is, start_plan = _time_child(dep_table, "Start")
-        out["gate_from_is"], out["gate_from_plan"] = _to_time(gate_is), _to_time(gate_plan)
-        out["start_is"], out["start_plan"] = _to_time(start_is), _to_time(start_plan)
-
-        for anc in dep_table.select(".flightPageDataAncillaryTextContainer .flightPageDataAncillaryText"):
-            t = _clean(anc.get_text())
-            if t.startswith("Rollzeit"):
-                out["rolltime"] = _to_minutes(t.split(":", 1)[1])
-
-        # delay is computed from the raw 'HH:MM (+n)' strings, then stored as int
-        out["delay_minutes"] = _to_minutes(_delay_minutes(gate_is, gate_plan))
-
-    return out
-
-
-def parse_detail_arrival(html: str) -> dict:
-    soup = BeautifulSoup(html, "html.parser")
-    out: dict = {}
-
-    # Airline-ICAO from fleet link
-    fleet = soup.find("a", href=re.compile(r"/live/fleet/"))
-    if fleet:
-        mm = re.search(r"/live/fleet/([A-Z0-9]+)", fleet["href"])
-        if mm:
-            out["airline_icao"] = mm.group(1)
-
-    # Arrival Status
-    status = soup.select_one(".flightPageArrivalDelayStatus")
-    if status:
-        out["arrival_status"] = _clean(status.get_text()).strip("()")
-
-    # Arrival Times
-    arr_table = None
-    for h3 in soup.select("h3.flightPageDataTableHeading"):
-        if "Ankunftszeiten" in _clean(h3.get_text()):
-            arr_table = h3.find_next_sibling("div", class_="flightPageDataTable")
-            break
-
-    if arr_table:
-        landing_is, landing_plan = _time_child(arr_table, "Landung")
-        gate_is, gate_plan = _time_child(arr_table, "Ankunft am Gate")
-        out["landing_is"], out["landing_plan"] = _to_time(landing_is), _to_time(landing_plan)
-        out["gate_to_is"], out["gate_to_plan"] = _to_time(gate_is), _to_time(gate_plan)
-
-        for anc in arr_table.select(
-                ".flightPageDataAncillaryTextContainer .flightPageDataAncillaryText"):
-            t = _clean(anc.get_text())
-            if t.startswith("Rollzeit"):
-                out["rolltime"] = _to_minutes(t.split(":", 1)[1])
-
-        # delay is computed from the raw 'HH:MM (+n)' strings, then stored as int
-        out["delay_minutes"] = _to_minutes(_delay_minutes(gate_is, gate_plan))
-
-    return out
-
-
-def _time_child(table, heading_text: str) -> tuple[str, str]:
-    """Reads 'is' and 'plan' times from a time block"""
-    for child in table.select(".flightPageDataTimesChild"):
+def _detail_time(soup, heading_text: str) -> tuple[str | None, str | None]:
+    """Find the times-child whose heading contains `heading_text` and return
+    (actual_raw, planned_raw), both including the tz suffix. Searches the whole
+    page, so it works for the two-table and the single 'Flugzeiten' layout."""
+    for child in soup.select(".flightPageDataTimesChild"):
         head = child.select_one(".flightPageDataActualTimeHeading")
-        if head and heading_text.lower() in _clean(head.get_text()).lower():
-            actual = child.select_one(".flightPageDataActualTimeText")
-            ancil = child.select_one(".flightPageDataAncillaryText")
-            actual_txt = _clean(actual.get_text()) if actual else ""
-            sched_txt = ""
-            if ancil:
-                sched_txt = _clean(ancil.get_text()).replace("Planmäßig", "").strip()
-            return actual_txt, sched_txt
-    return "", ""
+        if not head or heading_text.lower() not in _clean(head.get_text()).lower():
+            continue
+        actual = child.select_one(".flightPageDataActualTimeText")
+        ancil = child.select_one(".flightPageDataAncillaryText")
+        actual_txt = _clean(actual.get_text()) if actual else ""
+        sched_txt = ""
+        if ancil:
+            sched_txt = _clean(ancil.get_text()).replace("Planmäßig", "").strip()
+        return (actual_txt or None), (sched_txt or None)
+    return None, None
+
+
+def parse_detail(html: str) -> dict:
+    """Shared detail parser for both departures and arrivals. Reads the takeoff
+    ('Start') and gate-in ('Ankunft am Gate', fallback 'Landung') blocks."""
+    soup = BeautifulSoup(html, "html.parser")
+    out: dict = {}
+
+    # Airline-ICAO from fleet link (more reliable than the board prefix)
+    fleet = soup.find("a", href=re.compile(r"/live/fleet/"))
+    if fleet:
+        mm = re.search(r"/live/fleet/([A-Z0-9]+)", fleet["href"])
+        if mm:
+            out["airline_icao"] = mm.group(1)
+
+    # Statuses (each row keeps only the one its FIELDS list references)
+    dstat = soup.select_one(".flightPageDepartureDelayStatus")
+    if dstat:
+        out["departure_status"] = _clean(dstat.get_text()).strip("()")
+    astat = soup.select_one(".flightPageArrivalDelayStatus")
+    if astat:
+        out["arrival_status"] = _clean(astat.get_text()).strip("()")
+
+    # Takeoff: present in both layouts. Fall back to gate-out if ever absent.
+    start_is, start_plan = _detail_time(soup, "Start")
+    if start_is is None and start_plan is None:
+        start_is, start_plan = _detail_time(soup, "Verlassen des Gates")
+    out["start_is"], out["start_plan"] = start_is, start_plan
+
+    # Gate-in: two-table layout has 'Ankunft am Gate'; single 'Flugzeiten'
+    # layout only has 'Landung', so fall back to it.
+    gate_is, gate_plan = _detail_time(soup, "Ankunft am Gate")
+    if gate_is is None and gate_plan is None:
+        gate_is, gate_plan = _detail_time(soup, "Landung")
+    out["gate_arr_is"], out["gate_arr_plan"] = gate_is, gate_plan
+
+    # Rolltime: first 'Rollzeit' = taxi-out (departure), second = taxi-in (arrival)
+    rolls = []
+    for anc in soup.select(".flightPageDataAncillaryTextContainer .flightPageDataAncillaryText"):
+        t = _clean(anc.get_text())
+        if t.startswith("Rollzeit"):
+            rolls.append(_to_minutes(t.split(":", 1)[1] if ":" in t else t))
+    out["rolltime_out"] = rolls[0] if len(rolls) >= 1 else None
+    out["rolltime_in"]  = rolls[1] if len(rolls) >= 2 else None
+
+    return out
 
 
 #### Load page (one browser for session) ################################################################
@@ -445,13 +507,11 @@ def _load(page, url: str, wait_selector: str) -> str:
             return page.content()
         except PWTimeout:
             last_error = f"Timeout (Attempt {attempt}/{MAX_RETRIES})"
-            # if attempt < MAX_RETRIES:
-            #     time.sleep(1 * attempt)
     raise RuntimeError(last_error or "Loading failed")
 
 
-def _enrich_details(page, base: str, rows: list[dict], detail_parser) -> None:
-    """Crawls details page for each data entry from main page (for delay information)"""
+def _enrich_details(page, base: str, rows: list[dict]) -> None:
+    """Crawl the detail page for each row (start / gate-in times)."""
     targets = rows if DETAIL_LIMIT is None else rows[:DETAIL_LIMIT]
     for i, row in enumerate(targets):
         if not row["detail_url"]:
@@ -460,8 +520,8 @@ def _enrich_details(page, base: str, rows: list[dict], detail_parser) -> None:
         print(f"[{i + 1}/{len(targets)}] Detail: {row['flight_no']}")
         try:
             detail_html = _load(page, detail_url, DETAIL_SELECTOR)
-            row.update(detail_parser(detail_html))
-            print(f"    calculated delay: {row.get('delay_minutes', '') or '?'} Min.")
+            row.update(parse_detail(detail_html))
+            print(f"    start {row.get('start_is') or '?'} / gate {row.get('gate_arr_is') or '?'}")
         except Exception as exc:
             print(f"    ! Error: {exc}")
 
@@ -479,9 +539,9 @@ def crawl_airport(page, base: str, url: str) -> dict:
     print(f"Departures: {len(departures)} | Arrivals: {len(arrivals)}\n")
 
     print("--- Departure: Details ---")
-    _enrich_details(page, base, departures, parse_detail_departure)
+    _enrich_details(page, base, departures)
     print("\n--- Arrival: Details ---")
-    _enrich_details(page, base, arrivals, parse_detail_arrival)
+    _enrich_details(page, base, arrivals)
 
     return {"departures": departures, "arrivals": arrivals}
 
@@ -505,7 +565,6 @@ def crawl_all(icaos: list[str]) -> dict:
                 print(f"\n========== {icao} ==========")
                 try:
                     data = crawl_airport(page, base, url)
-                    # tag every row with the airport it came from
                     for r in data["departures"]:
                         r["airport_icao"] = icao
                     for r in data["arrivals"]:
@@ -524,16 +583,16 @@ def crawl_all(icaos: list[str]) -> dict:
 
 FIELDS_DEP = [
     "airport_icao", "flight_no", "airline_icao", "aircraft_code", "destination_icao",
-    "departure_time", "departure_time_tz", "arrival_time", "arrival_time_tz",
-    "departure_status", "gate_from_is", "gate_from_plan", "start_is", "start_plan",
-    "rolltime", "delay_minutes",
+    "departure_status", "rolltime", "delay_minutes",
+    "scheduled_departure_at", "reported_departure_at",
+    "scheduled_arrival_at", "reported_arrival_at",
 ]
 
 FIELDS_ARR = [
-    "airport_icao", "flight_no", "airline_icao", "aircraft_code","origin_icao",
-    "departure_time", "departure_time_tz", "arrival_time", "arrival_time_tz",
-    "arrival_status", "landing_is", "landing_plan", "gate_to_is", "gate_to_plan",
-    "rolltime", "delay_minutes",
+    "airport_icao", "flight_no", "airline_icao", "aircraft_code", "origin_icao",
+    "arrival_status", "rolltime", "delay_minutes",
+    "scheduled_departure_at", "reported_departure_at",
+    "scheduled_arrival_at", "reported_arrival_at",
 ]
 
 
@@ -554,10 +613,18 @@ def save_json(rows, path):
 
 def main(icaos: list[str]) -> None:
     results = crawl_all(icaos)
+    scraped_dt = datetime.now(timezone.utc)          # reference for date inference
+    scraped_at = scraped_dt.isoformat()
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    scraped_at = datetime.now(timezone.utc).isoformat()
 
-    # lookup tables first, so the foreign keys in departures/arrivals resolve
+    # derive the 4 timestamptz fields + delay before saving
+    for icao, data in results.items():
+        for r in data["departures"]:
+            add_event_timestamps(r, "dep", scraped_dt)
+        for r in data["arrivals"]:
+            add_event_timestamps(r, "arr", scraped_dt)
+
+    # lookup tables first, so the foreign keys resolve
     save_lookups(results)
 
     for icao, data in results.items():
