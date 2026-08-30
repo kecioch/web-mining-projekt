@@ -585,6 +585,10 @@ def crawl_all(icaos: list[str]) -> dict:
         )
         page = context.new_page()
         page.set_default_timeout(NAV_TIMEOUT_MS)
+        time = datetime.now()
+
+        print(f"\n========== CRAWLER ACTION ==========")
+        print(f"Time: {time}")
 
         try:
             for icao in icaos:
