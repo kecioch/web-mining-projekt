@@ -31,3 +31,96 @@
     <span pButtonLabel>Webseite öffnen</span>
     <i class="pi pi-external-link" aria-hidden="true"></i>
 </a>
+
+<section class="connections">
+    <div class="connections__range">
+        <span class="connections__range-label">Zeitraum</span>
+        <p-selectButton
+            [options]="rangeOptions"
+            optionLabel="label"
+            optionValue="value"
+            [allowEmpty]="false"
+            [ngModel]="range()"
+            (onChange)="onRangeChange($event.value)"
+            size="small"
+        />
+    </div>
+
+    @if (loadingConnections()) {
+        <p class="connections__message">Verbindungen werden geladen...</p>
+    } @else if (connectionsError(); as error) {
+        <p class="connections__message connections__message--error">{{ error }}</p>
+    } @else {
+        <!-- Departures -->
+        <div class="connections__group">
+            <h3>
+                <i class="pi pi-arrow-up-right" aria-hidden="true"></i>
+                Abflüge <span class="connections__count">{{ departures().length }}</span>
+            </h3>
+
+            @if (departures().length === 0) {
+                <p class="connections__message">Keine Abflüge im Zeitraum.</p>
+            } @else {
+                <div class="bars" aria-label="Top 3 Ziele">
+                    @for (item of departuresTop3(); track item.connection.icao) {
+                        <div class="bars__row">
+                            <span class="bars__label">{{ connectionLabel(item.connection) }}</span>
+                            <span class="bars__track">
+                                <span
+                                    class="bars__fill bars__fill--departure"
+                                    [style.width.%]="barPercent(item.count, departuresTop3())"
+                                ></span>
+                            </span>
+                            <span class="bars__value">{{ item.count }}</span>
+                        </div>
+                    }
+                </div>
+
+                <ul class="connections__list">
+                    @for (item of departures(); track item.connection.icao) {
+                        <li>
+                            <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
+                            <span class="connections__badge">{{ item.count }}</span>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <!-- Arrivals -->
+        <div class="connections__group">
+            <h3>
+                <i class="pi pi-arrow-down-left" aria-hidden="true"></i>
+                Ankünfte <span class="connections__count">{{ arrivals().length }}</span>
+            </h3>
+
+            @if (arrivals().length === 0) {
+                <p class="connections__message">Keine Ankünfte im Zeitraum.</p>
+            } @else {
+                <div class="bars" aria-label="Top 3 Herkünfte">
+                    @for (item of arrivalsTop3(); track item.connection.icao) {
+                        <div class="bars__row">
+                            <span class="bars__label">{{ connectionLabel(item.connection) }}</span>
+                            <span class="bars__track">
+                                <span
+                                    class="bars__fill bars__fill--arrival"
+                                    [style.width.%]="barPercent(item.count, arrivalsTop3())"
+                                ></span>
+                            </span>
+                            <span class="bars__value">{{ item.count }}</span>
+                        </div>
+                    }
+                </div>
+
+                <ul class="connections__list">
+                    @for (item of arrivals(); track item.connection.icao) {
+                        <li>
+                            <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
+                            <span class="connections__badge">{{ item.count }}</span>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    }
+</section>

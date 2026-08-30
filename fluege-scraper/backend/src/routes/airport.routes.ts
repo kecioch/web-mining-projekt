@@ -8,3 +8,4 @@ export const airportRouter = Router();
 
 airportRouter.get('/', airportController.getAll.bind(airportController));
 airportRouter.get('/tracked', airportController.getTracked.bind(airportController));
+airportRouter.get('/:icao/connections', airportController.getConnections.bind(airportController));

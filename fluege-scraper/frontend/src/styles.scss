@@ -13,6 +13,16 @@ body {
     border: 0;
 }
 
+// No Browser-Focusborder (SVG-Bounding-Box) for clicking on a connection line
+.connection-line {
+    outline: none;
+
+    &:focus,
+    &:focus-visible {
+        outline: none;
+    }
+}
+
 body {
     font-family:
         Inter,

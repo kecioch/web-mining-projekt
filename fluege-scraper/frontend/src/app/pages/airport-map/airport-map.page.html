@@ -35,11 +35,20 @@
     <p-drawer
         [visible]="drawerVisible()"
         (visibleChange)="setDrawerVisibility($event)"
+        [modal]="false"
+        [dismissible]="false"
         position="right"
         styleClass="airport-drawer"
     >
         @if (selectedAirport(); as airport) {
-            <app-airport-details [airport]="airport" />
+            <app-airport-details
+                [airport]="airport"
+                [connections]="connections()"
+                [loadingConnections]="loadingConnections()"
+                [connectionsError]="connectionsError()"
+                [range]="range()"
+                (rangeChange)="onRangeChange($event)"
+            />
         }
     </p-drawer>
 </section>

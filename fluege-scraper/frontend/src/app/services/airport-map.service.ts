@@ -6,12 +6,40 @@ import {
     inject,
     Injectable,
 } from '@angular/core';
-import { divIcon, DivIcon, featureGroup, latLng, Map, marker, TileLayer, tileLayer } from 'leaflet';
+import {
+    circleMarker,
+    CircleMarker,
+    divIcon,
+    DivIcon,
+    featureGroup,
+    latLng,
+    latLngBounds,
+    Map as LeafletMap,
+    marker,
+    Polyline,
+    polyline,
+    TileLayer,
+    tileLayer,
+} from 'leaflet';
 
 import { AirportMarkerComponent } from '../components/airport-marker/airport-marker.component';
 import { Airport } from '../models/airport';
+import { AirportConnections, ConnectionCount } from '../models/connection';
+
+const DEPARTURE_COLOR = '#f97316';
+const ARRIVAL_COLOR = '#3b82f6';
+const BIDIRECTIONAL_COLOR = '#8b5cf6';
+const FOCUS_ZOOM = 6;
+const INITIAL_CENTER: [number, number] = [51.3755, 7.7028]; // Zentrum von Deutschland
+const INITIAL_ZOOM = 5;
 
 export type AirportMapTheme = 'light' | 'dark';
+
+interface MergedConnection {
+    connection: Airport;
+    departureCount: number;
+    arrivalCount: number;
+}
 
 @Injectable()
 export class AirportMapService {
@@ -21,16 +49,30 @@ export class AirportMapService {
 
     readonly options = {
         layers: [this.baseLayer],
-        zoom: 5,
-        center: latLng([51.3755, 7.7028]), // Zentrum von Deutschland
+        zoom: INITIAL_ZOOM,
+        zoomSnap: 0.25,
+        center: latLng(INITIAL_CENTER),
     };
 
     private readonly airportLayer = featureGroup();
-    private map: Map | null = null;
+    private readonly connectionLayer = featureGroup();
+    private readonly hoverLayer = featureGroup();
+    private map: LeafletMap | null = null;
 
-    connect(map: Map): void {
+    private airports: Airport[] = [];
+    private onSelect: (airport: Airport) => void = () => {};
+    private backgroundClickHandler: () => void = () => {};
+
+    connect(map: LeafletMap): void {
         this.map = map;
+        this.connectionLayer.addTo(map);
+        this.hoverLayer.addTo(map);
         this.airportLayer.addTo(map);
+        map.on('click', () => this.backgroundClickHandler());
+    }
+
+    setBackgroundClickHandler(handler: () => void): void {
+        this.backgroundClickHandler = handler;
     }
 
     setTheme(theme: AirportMapTheme): void {
@@ -44,6 +86,127 @@ export class AirportMapService {
     }
 
     renderAirports(airports: Airport[], onSelect: (airport: Airport) => void): number {
+        this.airports = airports;
+        this.onSelect = onSelect;
+        return this.renderAirportMarkers(airports);
+    }
+
+    focusAirport(airport: Airport): void {
+        this.renderAirportMarkers([airport]);
+
+        if (this.map && this.hasValidCoordinates(airport)) {
+            this.centerInVisibleArea([airport.latitude, airport.longitude], FOCUS_ZOOM);
+        }
+    }
+
+    resetAirports(): void {
+        this.renderAirportMarkers(this.airports);
+
+        this.map?.setView(INITIAL_CENTER, INITIAL_ZOOM, { animate: true });
+    }
+
+    renderConnections(origin: Airport, connections: AirportConnections): number {
+        this.connectionLayer.clearLayers();
+        this.hoverLayer.clearLayers();
+
+        if (!this.hasValidCoordinates(origin)) {
+            return 0;
+        }
+
+        const originLatLng: [number, number] = [origin.latitude, origin.longitude];
+        const endpoints: [number, number][] = [];
+
+        for (const merged of this.mergeConnections(connections)) {
+            const connection = merged.connection;
+            if (!this.hasValidCoordinates(connection)) {
+                continue;
+            }
+
+            const color = this.lineColor(merged);
+            const connectionLatLng: [number, number] = [connection.latitude, connection.longitude];
+
+            const line = polyline([originLatLng, connectionLatLng], {
+                className: 'connection-line',
+                color,
+                weight: 2,
+                opacity: 0.7,
+                bubblingMouseEvents: false,
+            }).addTo(this.connectionLayer);
+
+            line.bindTooltip(this.tooltipHtml(merged), { sticky: true });
+
+            const connectionDot = circleMarker(connectionLatLng, {
+                radius: 6,
+                color,
+                weight: 2,
+                fillColor: color,
+                fillOpacity: 0.9,
+                interactive: false,
+            });
+
+            line.on('mouseover', () => this.highlightLine(line, connectionDot));
+            line.on('mouseout', () => this.resetLine(line, connectionDot, color));
+
+            endpoints.push(connectionLatLng);
+        }
+
+        this.fitToConnections(originLatLng, endpoints);
+
+        return endpoints.length;
+    }
+
+    private fitToConnections(originLatLng: [number, number], endpoints: [number, number][]): void {
+        if (!this.map) {
+            return;
+        }
+
+        if (endpoints.length === 0) {
+            this.centerInVisibleArea(originLatLng, FOCUS_ZOOM);
+            return;
+        }
+
+        const rightPadding = this.getDrawerWidth();
+        const bounds = latLngBounds([originLatLng, ...endpoints]);
+
+        this.map.fitBounds(bounds, {
+            paddingTopLeft: [30, 30],
+            paddingBottomRight: [rightPadding + 30, 30],
+            animate: true,
+        });
+    }
+
+    private centerInVisibleArea(target: [number, number], zoom: number): void {
+        if (!this.map) {
+            return;
+        }
+
+        this.map.setView(target, zoom, { animate: false });
+        this.map.panBy([this.getDrawerWidth() / 2, 0], { animate: false });
+    }
+
+    private getDrawerWidth(): number {
+        const drawer =
+            document.querySelector<HTMLElement>('.airport-drawer') ??
+            document.querySelector<HTMLElement>('.p-drawer');
+        return drawer?.offsetWidth ?? 0;
+    }
+
+    clearConnections(): void {
+        this.connectionLayer.clearLayers();
+        this.hoverLayer.clearLayers();
+    }
+
+    disconnect(): void {
+        this.airportLayer.clearLayers();
+        this.airportLayer.remove();
+        this.connectionLayer.clearLayers();
+        this.connectionLayer.remove();
+        this.hoverLayer.clearLayers();
+        this.hoverLayer.remove();
+        this.map = null;
+    }
+
+    private renderAirportMarkers(airports: Airport[]): number {
         this.airportLayer.clearLayers();
         let renderedMarkers = 0;
 
@@ -63,18 +226,76 @@ export class AirportMapService {
 
             const tooltip = document.createElement('span');
             tooltip.textContent = `${airport.name} (${airport.icao ?? '-'})`;
-            airportMarker.bindTooltip(tooltip);
-            airportMarker.on('click', () => onSelect(airport));
+            airportMarker.bindTooltip(tooltip, { direction: 'center' });
+            airportMarker.on('click', () => this.onSelect(airport));
             renderedMarkers += 1;
         }
 
         return renderedMarkers;
     }
 
-    disconnect(): void {
-        this.airportLayer.clearLayers();
-        this.airportLayer.remove();
-        this.map = null;
+    private mergeConnections(connections: AirportConnections): MergedConnection[] {
+        const byIcao = new Map<string, MergedConnection>();
+
+        const add = (item: ConnectionCount, direction: 'departure' | 'arrival'): void => {
+            const existing = byIcao.get(item.connection.icao);
+            if (existing) {
+                if (direction === 'departure') {
+                    existing.departureCount += item.count;
+                } else {
+                    existing.arrivalCount += item.count;
+                }
+                return;
+            }
+
+            byIcao.set(item.connection.icao, {
+                connection: item.connection,
+                departureCount: direction === 'departure' ? item.count : 0,
+                arrivalCount: direction === 'arrival' ? item.count : 0,
+            });
+        };
+
+        for (const departure of connections.departures) {
+            add(departure, 'departure');
+        }
+        for (const arrival of connections.arrivals) {
+            add(arrival, 'arrival');
+        }
+
+        return [...byIcao.values()];
+    }
+
+    private lineColor(merged: MergedConnection): string {
+        if (merged.departureCount > 0 && merged.arrivalCount > 0) {
+            return BIDIRECTIONAL_COLOR;
+        }
+        return merged.departureCount > 0 ? DEPARTURE_COLOR : ARRIVAL_COLOR;
+    }
+
+    private tooltipHtml(merged: MergedConnection): string {
+        const connection = merged.connection;
+        const code = connection.iata ?? connection.icao;
+        const title = connection.name ? `${connection.name} (${code})` : code;
+
+        const lines: string[] = [];
+        if (merged.departureCount > 0) {
+            lines.push(`&#8592; ${merged.departureCount} Abflüge`);
+        }
+        if (merged.arrivalCount > 0) {
+            lines.push(`&#8594; ${merged.arrivalCount} Ankünfte`);
+        }
+
+        return `<strong>${title}</strong><br>${lines.join('<br>')}`;
+    }
+
+    private highlightLine(line: Polyline, connectionDot: CircleMarker): void {
+        line.setStyle({ weight: 5, opacity: 1 });
+        connectionDot.addTo(this.hoverLayer);
+    }
+
+    private resetLine(line: Polyline, connectionDot: CircleMarker, color: string): void {
+        line.setStyle({ weight: 2, opacity: 0.7, color });
+        this.hoverLayer.removeLayer(connectionDot);
     }
 
     private createAirportIcon(airport: Airport): {
@@ -97,7 +318,7 @@ export class AirportMapService {
                 html: hostElement,
                 iconSize: [58, 30],
                 iconAnchor: [29, 15],
-                tooltipAnchor: [0, -18],
+                tooltipAnchor: [0, 0],
             }),
         };
     }
