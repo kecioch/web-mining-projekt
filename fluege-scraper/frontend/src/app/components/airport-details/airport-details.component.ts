@@ -35,7 +35,7 @@ export class AirportDetailsComponent {
         { label: '24 h', value: '24h' },
         { label: '7 Tage', value: '7d' },
         { label: '30 Tage', value: '30d' },
-        { label: 'Alle', value: 'all' },
+        { label: 'Gesamt', value: 'all' },
     ];
 
     protected readonly detailRows = computed<AirportDetailRow[]>(() => {

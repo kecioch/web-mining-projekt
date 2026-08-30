@@ -32,6 +32,8 @@ const BIDIRECTIONAL_COLOR = '#8b5cf6';
 const FOCUS_ZOOM = 6;
 const INITIAL_CENTER: [number, number] = [51.3755, 7.7028]; // Zentrum von Deutschland
 const INITIAL_ZOOM = 5;
+const DOT_RADIUS = 3;
+const DOT_RADIUS_HOVER = 6;
 
 export type AirportMapTheme = 'light' | 'dark';
 
@@ -39,6 +41,13 @@ interface MergedConnection {
     connection: Airport;
     departureCount: number;
     arrivalCount: number;
+}
+
+interface RenderedConnection {
+    line: Polyline;
+    dot: CircleMarker;
+    color: string;
+    resetTimer: ReturnType<typeof setTimeout> | null;
 }
 
 @Injectable()
@@ -51,24 +60,30 @@ export class AirportMapService {
         layers: [this.baseLayer],
         zoom: INITIAL_ZOOM,
         zoomSnap: 0.25,
+        minZoom: 3,
+        maxBounds: latLngBounds([-85, -180], [85, 300]),
+        maxBoundsViscosity: 1,
+        worldCopyJump: false,
         center: latLng(INITIAL_CENTER),
     };
 
     private readonly airportLayer = featureGroup();
     private readonly connectionLayer = featureGroup();
-    private readonly hoverLayer = featureGroup();
     private map: LeafletMap | null = null;
 
     private airports: Airport[] = [];
     private onSelect: (airport: Airport) => void = () => {};
     private backgroundClickHandler: () => void = () => {};
+    private activeHover: RenderedConnection | null = null;
+    private renderedLines: RenderedConnection[] = [];
 
     connect(map: LeafletMap): void {
         this.map = map;
         this.connectionLayer.addTo(map);
-        this.hoverLayer.addTo(map);
         this.airportLayer.addTo(map);
         map.on('click', () => this.backgroundClickHandler());
+        map.on('movestart', () => this.clearActiveHover());
+        map.on('moveend', () => this.resetAllConnections());
     }
 
     setBackgroundClickHandler(handler: () => void): void {
@@ -106,8 +121,9 @@ export class AirportMapService {
     }
 
     renderConnections(origin: Airport, connections: AirportConnections): number {
+        this.activeHover = null;
+        this.renderedLines = [];
         this.connectionLayer.clearLayers();
-        this.hoverLayer.clearLayers();
 
         if (!this.hasValidCoordinates(origin)) {
             return 0;
@@ -136,17 +152,23 @@ export class AirportMapService {
             line.bindTooltip(this.tooltipHtml(merged), { sticky: true });
 
             const connectionDot = circleMarker(connectionLatLng, {
-                radius: 6,
+                radius: DOT_RADIUS,
                 color,
                 weight: 2,
                 fillColor: color,
                 fillOpacity: 0.9,
-                interactive: false,
-            });
+                bubblingMouseEvents: false,
+            }).addTo(this.connectionLayer);
 
-            line.on('mouseover', () => this.highlightLine(line, connectionDot));
-            line.on('mouseout', () => this.resetLine(line, connectionDot, color));
+            const entry: RenderedConnection = { line, dot: connectionDot, color, resetTimer: null };
 
+            line.on('mouseover', () => this.enterConnection(entry));
+            line.on('mouseout', () => this.leaveConnection(entry));
+            connectionDot.on('mouseover', () => this.enterConnection(entry));
+            connectionDot.on('mouseout', () => this.leaveConnection(entry));
+            line.on('tooltipopen', () => this.closeOtherTooltips(line));
+
+            this.renderedLines.push(entry);
             endpoints.push(connectionLatLng);
         }
 
@@ -192,8 +214,9 @@ export class AirportMapService {
     }
 
     clearConnections(): void {
+        this.activeHover = null;
+        this.renderedLines = [];
         this.connectionLayer.clearLayers();
-        this.hoverLayer.clearLayers();
     }
 
     disconnect(): void {
@@ -201,8 +224,6 @@ export class AirportMapService {
         this.airportLayer.remove();
         this.connectionLayer.clearLayers();
         this.connectionLayer.remove();
-        this.hoverLayer.clearLayers();
-        this.hoverLayer.remove();
         this.map = null;
     }
 
@@ -288,14 +309,73 @@ export class AirportMapService {
         return `<strong>${title}</strong><br>${lines.join('<br>')}`;
     }
 
-    private highlightLine(line: Polyline, connectionDot: CircleMarker): void {
-        line.setStyle({ weight: 5, opacity: 1 });
-        connectionDot.addTo(this.hoverLayer);
+    private enterConnection(entry: RenderedConnection): void {
+        if (entry.resetTimer) {
+            clearTimeout(entry.resetTimer);
+            entry.resetTimer = null;
+        }
+
+        if (this.activeHover && this.activeHover.line !== entry.line) {
+            this.clearActiveHover();
+        }
+
+        entry.line.setStyle({ weight: 5, opacity: 1 });
+        entry.dot.setRadius(DOT_RADIUS_HOVER);
+        entry.dot.bringToFront();
+        entry.line.openTooltip(entry.dot.getLatLng());
+        this.activeHover = entry;
     }
 
-    private resetLine(line: Polyline, connectionDot: CircleMarker, color: string): void {
-        line.setStyle({ weight: 2, opacity: 0.7, color });
-        this.hoverLayer.removeLayer(connectionDot);
+    private leaveConnection(entry: RenderedConnection): void {
+        if (entry.resetTimer) {
+            clearTimeout(entry.resetTimer);
+        }
+        entry.resetTimer = setTimeout(() => {
+            entry.resetTimer = null;
+            this.resetConnection(entry);
+        }, 0);
+    }
+
+    private resetConnection(entry: RenderedConnection): void {
+        entry.line.closeTooltip();
+        entry.line.setStyle({ weight: 2, opacity: 0.7, color: entry.color });
+        entry.dot.setRadius(DOT_RADIUS);
+
+        if (this.activeHover?.line === entry.line) {
+            this.activeHover = null;
+        }
+    }
+
+    private clearActiveHover(): void {
+        if (this.activeHover) {
+            this.resetConnection(this.activeHover);
+        }
+    }
+
+    private closeOtherTooltips(current: Polyline): void {
+        for (const entry of this.renderedLines) {
+            if (entry.line === current) {
+                continue;
+            }
+            this.resetEntry(entry);
+        }
+    }
+
+    private resetAllConnections(): void {
+        this.activeHover = null;
+        for (const entry of this.renderedLines) {
+            this.resetEntry(entry);
+        }
+    }
+
+    private resetEntry(entry: RenderedConnection): void {
+        if (entry.resetTimer) {
+            clearTimeout(entry.resetTimer);
+            entry.resetTimer = null;
+        }
+        entry.line.closeTooltip();
+        entry.line.setStyle({ weight: 2, opacity: 0.7, color: entry.color });
+        entry.dot.setRadius(DOT_RADIUS);
     }
 
     private createAirportIcon(airport: Airport): {
@@ -333,6 +413,9 @@ export class AirportMapService {
 
         return tileLayer(`https://{s}.basemaps.cartocdn.com/${style}/{z}/{x}/{y}{r}.png`, {
             maxZoom: 19,
+            minZoom: 3,
+            noWrap: true,
+            bounds: latLngBounds([-85, -180], [85, 180]),
             attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         });

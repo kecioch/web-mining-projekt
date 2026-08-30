@@ -2,11 +2,22 @@
     display: block;
 }
 
+:host ::ng-deep .airport-drawer .p-drawer-content {
+    padding: 1.25rem;
+    overflow-x: hidden;
+}
+
 .airport-heading {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin: -1.25rem 0 1.5rem;
+    padding-top: 1.25rem;
+    padding-bottom: 0.85rem;
+    background: var(--p-drawer-background, var(--p-content-background, #ffffff));
 
     h2,
     p {
@@ -137,7 +148,7 @@
 
     &__row {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 6rem auto;
+        grid-template-columns: minmax(0, 1fr) 6rem 2.5rem;
         align-items: center;
         gap: 0.6rem;
     }
@@ -172,6 +183,7 @@
     }
 
     &__value {
+        text-align: right;
         font-weight: 700;
         font-variant-numeric: tabular-nums;
     }
