@@ -6,6 +6,7 @@ import { DrawerModule } from 'primeng/drawer';
 import { take } from 'rxjs';
 
 import { AirportDetailsComponent } from '../../components/airport-details/airport-details.component';
+import { AirportAircraft } from '../../models/aircraft';
 import { AirportAirlines } from '../../models/airline';
 import { Airport } from '../../models/airport';
 import { AirportConnections, ConnectionRange } from '../../models/connection';
@@ -32,6 +33,9 @@ export class AirportMapPage implements OnDestroy {
     protected readonly airlines = signal<AirportAirlines | null>(null);
     protected readonly loadingAirlines = signal(false);
     protected readonly airlinesError = signal<string | null>(null);
+    protected readonly aircraft = signal<AirportAircraft | null>(null);
+    protected readonly loadingAircraft = signal(false);
+    protected readonly aircraftError = signal<string | null>(null);
     protected readonly range = signal<ConnectionRange>('7d');
     protected readonly airportCount = signal(0);
     protected readonly loadingAirports = signal(true);
@@ -65,6 +69,7 @@ export class AirportMapPage implements OnDestroy {
         if (airport) {
             this.loadConnections(airport);
             this.loadAirlines(airport);
+            this.loadAircraft(airport);
         }
     }
 
@@ -82,6 +87,8 @@ export class AirportMapPage implements OnDestroy {
         this.connectionsError.set(null);
         this.airlines.set(null);
         this.airlinesError.set(null);
+        this.aircraft.set(null);
+        this.aircraftError.set(null);
         this.airportMapService.clearConnections();
         this.airportMapService.resetAirports();
     }
@@ -115,6 +122,7 @@ export class AirportMapPage implements OnDestroy {
         this.airportMapService.focusAirport(airport);
         this.loadConnections(airport);
         this.loadAirlines(airport);
+        this.loadAircraft(airport);
     }
 
     private loadConnections(airport: Airport): void {
@@ -171,6 +179,34 @@ export class AirportMapPage implements OnDestroy {
                 error: () => {
                     this.loadingAirlines.set(false);
                     this.airlinesError.set('Die Airlines konnten nicht geladen werden.');
+                },
+            });
+    }
+
+    private loadAircraft(airport: Airport): void {
+        this.aircraft.set(null);
+        this.aircraftError.set(null);
+
+        if (!airport.icao) {
+            return;
+        }
+
+        this.loadingAircraft.set(true);
+
+        this.airportService
+            .getAircraft(airport.icao, this.range())
+            .pipe(take(1))
+            .subscribe({
+                next: (aircraft) => {
+                    if (this.selectedAirport()?.icao !== airport.icao) {
+                        return;
+                    }
+                    this.aircraft.set(aircraft);
+                    this.loadingAircraft.set(false);
+                },
+                error: () => {
+                    this.loadingAircraft.set(false);
+                    this.aircraftError.set('Die Flugzeugtypen konnten nicht geladen werden.');
                 },
             });
     }

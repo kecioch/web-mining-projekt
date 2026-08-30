@@ -125,7 +125,7 @@
         <div class="connections__group">
             <h3>
                 <i class="pi pi-arrow-up-right" aria-hidden="true"></i>
-                Abflüge <span class="connections__count">{{ departures().length }}</span>
+                Abflüge <span class="connections__count">{{ departures().length }} Flugziele</span>
             </h3>
 
             @if (departures().length === 0) {
@@ -179,7 +179,7 @@
         <div class="connections__group">
             <h3>
                 <i class="pi pi-arrow-down-left" aria-hidden="true"></i>
-                Ankünfte <span class="connections__count">{{ arrivals().length }}</span>
+                Ankünfte <span class="connections__count">{{ arrivals().length }} Herkünfte</span>
             </h3>
 
             @if (arrivals().length === 0) {
@@ -228,5 +228,68 @@
                 }
             }
         </div>
+    }
+</section>
+
+<section class="aircraft">
+    <h3>
+        <i class="pi pi-send" aria-hidden="true"></i>
+        Flugzeugtypen
+        @if (aircraftList().length > 0) {
+            <span class="connections__count">{{ aircraftList().length }}</span>
+        }
+    </h3>
+
+    @if (loadingAircraft()) {
+        <div class="vbars">
+            @for (bar of [0, 1, 2, 3, 4, 5]; track bar) {
+                <div class="vbars__col">
+                    <p-skeleton width="1.4rem" height="6rem" />
+                    <p-skeleton width="2.5rem" height="0.75rem" />
+                </div>
+            }
+        </div>
+    } @else if (aircraftError(); as error) {
+        <p class="connections__message connections__message--error">{{ error }}</p>
+    } @else if (aircraftList().length === 0) {
+        <p class="connections__message">Keine Flugzeugtypen im Zeitraum.</p>
+    } @else {
+        <div class="vbars" aria-label="Top Flugzeugtypen">
+            @for (item of aircraftTop(); track item.aircraft.code) {
+                <div class="vbars__col" [title]="aircraftLabel(item.aircraft)">
+                    <span class="vbars__value">{{ item.count }}</span>
+                    <span class="vbars__track">
+                        <span
+                            class="vbars__fill"
+                            [style.height.%]="aircraftBarPercent(item.count)"
+                        ></span>
+                    </span>
+                    <span class="vbars__label">{{ item.aircraft.code }}</span>
+                </div>
+            }
+        </div>
+
+        @if (aircraftRest().length > 0) {
+            <button type="button" class="connections__toggle" (click)="toggleAircraftList()">
+                <i
+                    class="pi"
+                    [class.pi-chevron-down]="!showAircraftList()"
+                    [class.pi-chevron-up]="showAircraftList()"
+                    aria-hidden="true"
+                ></i>
+                {{ showAircraftList() ? 'Weniger anzeigen' : 'Mehr anzeigen' }}
+            </button>
+
+            @if (showAircraftList()) {
+                <ul class="connections__list">
+                    @for (item of aircraftRest(); track item.aircraft.code) {
+                        <li>
+                            <span class="connections__connection">{{ aircraftLabel(item.aircraft) }}</span>
+                            <span class="connections__badge">{{ item.count }}</span>
+                        </li>
+                    }
+                </ul>
+            }
+        }
     }
 </section>

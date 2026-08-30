@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { AirportAircraft } from '../models/aircraft';
 import { AirportAirlines } from '../models/airline';
 import { Airport } from '../models/airport';
 import { AirportConnections, ConnectionRange } from '../models/connection';
@@ -24,6 +25,13 @@ export class AirportService {
     public getAirlines(icao: string, range: ConnectionRange): Observable<AirportAirlines> {
         return this.http.get<AirportAirlines>(
             `/api/airports/${encodeURIComponent(icao)}/airlines`,
+            { params: { range } },
+        );
+    }
+
+    public getAircraft(icao: string, range: ConnectionRange): Observable<AirportAircraft> {
+        return this.http.get<AirportAircraft>(
+            `/api/airports/${encodeURIComponent(icao)}/aircraft`,
             { params: { range } },
         );
     }

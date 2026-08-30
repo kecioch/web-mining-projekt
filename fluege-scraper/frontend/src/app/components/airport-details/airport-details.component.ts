@@ -5,6 +5,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule } from 'primeng/table';
 
+import { Aircraft, AircraftCount, AirportAircraft } from '../../models/aircraft';
 import { Airline, AirportAirlines } from '../../models/airline';
 import { Airport } from '../../models/airport';
 import { AirportConnections, ConnectionCount, ConnectionRange } from '../../models/connection';
@@ -42,6 +43,8 @@ const PIE_CENTER = 100;
 const PIE_RADIUS_OUTER = 90;
 const PIE_RADIUS_INNER = 52;
 
+const AIRCRAFT_TOP_COUNT = 6;
+
 @Component({
     selector: 'app-airport-details',
     imports: [ButtonModule, FormsModule, SelectButtonModule, SkeletonModule, TableModule],
@@ -56,12 +59,16 @@ export class AirportDetailsComponent {
     readonly airlines = input<AirportAirlines | null>(null);
     readonly loadingAirlines = input(false);
     readonly airlinesError = input<string | null>(null);
+    readonly aircraft = input<AirportAircraft | null>(null);
+    readonly loadingAircraft = input(false);
+    readonly aircraftError = input<string | null>(null);
     readonly range = input<ConnectionRange>('7d');
     readonly rangeChange = output<ConnectionRange>();
 
     protected readonly hoveredAirline = signal<number | null>(null);
     protected readonly showDeparturesList = signal(false);
     protected readonly showArrivalsList = signal(false);
+    protected readonly showAircraftList = signal(false);
 
     protected readonly rangeOptions: RangeOption[] = [
         { label: '24 h', value: '24h' },
@@ -186,6 +193,29 @@ export class AirportDetailsComponent {
     protected airlineLabel(airline: Airline): string {
         const code = airline.iata ?? airline.icao;
         return airline.name ? `${airline.name} (${code})` : code;
+    }
+
+    protected readonly aircraftList = computed<AircraftCount[]>(
+        () => this.aircraft()?.aircraft ?? [],
+    );
+    protected readonly aircraftTop = computed<AircraftCount[]>(() =>
+        this.aircraftList().slice(0, AIRCRAFT_TOP_COUNT),
+    );
+    protected readonly aircraftRest = computed<AircraftCount[]>(() =>
+        this.aircraftList().slice(AIRCRAFT_TOP_COUNT),
+    );
+
+    protected toggleAircraftList(): void {
+        this.showAircraftList.update((value) => !value);
+    }
+
+    protected aircraftLabel(aircraft: Aircraft): string {
+        return aircraft.type ? aircraft.type : aircraft.code;
+    }
+
+    protected aircraftBarPercent(count: number): number {
+        const max = this.aircraftTop()[0]?.count ?? 0;
+        return max > 0 ? Math.round((count / max) * 100) : 0;
     }
 
     private donutPath(startAngle: number, endAngle: number): string {
