@@ -32,6 +32,63 @@
     <i class="pi pi-external-link" aria-hidden="true"></i>
 </a>
 
+<section class="airlines">
+    <h3>
+        <i class="pi pi-building" aria-hidden="true"></i>
+        Top Airlines
+    </h3>
+
+    @if (loadingAirlines()) {
+        <div class="airlines__chart">
+            <p-skeleton shape="circle" size="12rem" />
+            <p-skeleton width="10rem" height="1rem" />
+        </div>
+    } @else if (airlinesError(); as error) {
+        <p class="connections__message connections__message--error">{{ error }}</p>
+    } @else if (airlineSlices().length === 0) {
+        <p class="connections__message">Keine Airline-Daten im Zeitraum.</p>
+    } @else {
+        <div class="airlines__chart">
+            <svg
+                class="pie"
+                viewBox="0 0 200 200"
+                role="img"
+                aria-label="Verteilung der Airlines"
+            >
+                @for (slice of airlineSlices(); track slice.key; let i = $index) {
+                    <path
+                        [attr.d]="slice.path"
+                        [attr.fill]="slice.color"
+                        class="pie__slice"
+                        [class.pie__slice--active]="hoveredAirline() === i"
+                        [class.pie__slice--dimmed]="
+                            hoveredAirline() !== null && hoveredAirline() !== i
+                        "
+                        tabindex="0"
+                        (mouseenter)="onAirlineHover(i)"
+                        (mouseleave)="onAirlineHover(null)"
+                        (focus)="onAirlineHover(i)"
+                        (blur)="onAirlineHover(null)"
+                    >
+                        <title>{{ slice.label }} — {{ slice.percent }}%</title>
+                    </path>
+                }
+            </svg>
+
+            <p class="airlines__caption" aria-live="polite">
+                @if (hoveredAirlineSlice(); as slice) {
+                    <span class="airlines__caption-label">{{ slice.label }}</span>
+                    <span class="airlines__caption-value">{{ slice.percent }}%</span>
+                } @else {
+                    <span class="airlines__caption-hint">
+                        Zeige auf ein Segment für Details
+                    </span>
+                }
+            </p>
+        </div>
+    }
+</section>
+
 <section class="connections">
     <div class="connections__range">
         <span class="connections__range-label">Zeitraum</span>
@@ -47,7 +104,20 @@
     </div>
 
     @if (loadingConnections()) {
-        <p class="connections__message">Verbindungen werden geladen...</p>
+        @for (group of [0, 1]; track group) {
+            <div class="connections__group">
+                <p-skeleton width="8rem" height="1.25rem" styleClass="connections__skeleton-title" />
+                <div class="bars">
+                    @for (bar of [0, 1, 2]; track bar) {
+                        <div class="bars__row">
+                            <p-skeleton height="0.9rem" />
+                            <p-skeleton height="0.6rem" borderRadius="999px" />
+                            <p-skeleton width="2rem" height="0.9rem" />
+                        </div>
+                    }
+                </div>
+            </div>
+        }
     } @else if (connectionsError(); as error) {
         <p class="connections__message connections__message--error">{{ error }}</p>
     } @else {
@@ -76,14 +146,32 @@
                     }
                 </div>
 
-                <ul class="connections__list">
-                    @for (item of departuresRest(); track item.connection.icao) {
-                        <li>
-                            <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
-                            <span class="connections__badge">{{ item.count }}</span>
-                        </li>
+                @if (departuresRest().length > 0) {
+                    <button
+                        type="button"
+                        class="connections__toggle"
+                        (click)="toggleDeparturesList()"
+                    >
+                        <i
+                            class="pi"
+                            [class.pi-chevron-down]="!showDeparturesList()"
+                            [class.pi-chevron-up]="showDeparturesList()"
+                            aria-hidden="true"
+                        ></i>
+                        {{ showDeparturesList() ? 'Weniger anzeigen' : 'Mehr anzeigen' }}
+                    </button>
+
+                    @if (showDeparturesList()) {
+                        <ul class="connections__list">
+                            @for (item of departuresRest(); track item.connection.icao) {
+                                <li>
+                                    <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
+                                    <span class="connections__badge">{{ item.count }}</span>
+                                </li>
+                            }
+                        </ul>
                     }
-                </ul>
+                }
             }
         </div>
 
@@ -112,14 +200,32 @@
                     }
                 </div>
 
-                <ul class="connections__list">
-                    @for (item of arrivalsRest(); track item.connection.icao) {
-                        <li>
-                            <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
-                            <span class="connections__badge">{{ item.count }}</span>
-                        </li>
+                @if (arrivalsRest().length > 0) {
+                    <button
+                        type="button"
+                        class="connections__toggle"
+                        (click)="toggleArrivalsList()"
+                    >
+                        <i
+                            class="pi"
+                            [class.pi-chevron-down]="!showArrivalsList()"
+                            [class.pi-chevron-up]="showArrivalsList()"
+                            aria-hidden="true"
+                        ></i>
+                        {{ showArrivalsList() ? 'Weniger anzeigen' : 'Mehr anzeigen' }}
+                    </button>
+
+                    @if (showArrivalsList()) {
+                        <ul class="connections__list">
+                            @for (item of arrivalsRest(); track item.connection.icao) {
+                                <li>
+                                    <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
+                                    <span class="connections__badge">{{ item.count }}</span>
+                                </li>
+                            }
+                        </ul>
                     }
-                </ul>
+                }
             }
         </div>
     }

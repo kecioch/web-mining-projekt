@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 
+import { AirlineService } from '../services/airline.service.js';
 import { AirportService } from '../services/airport.service.js';
 import { ConnectionService, isConnectionRange } from '../services/connection.service.js';
 
@@ -7,6 +8,7 @@ export class AirportController {
     constructor(
         private readonly airportService = new AirportService(),
         private readonly connectionService = new ConnectionService(),
+        private readonly airlineService = new AirlineService(),
     ) {}
 
     public async getAll(_request: Request, response: Response, next: NextFunction): Promise<void> {
@@ -50,6 +52,30 @@ export class AirportController {
 
             const connections = await this.connectionService.getConnections(icao, range);
             response.status(200).json(connections);
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    public async getAirlines(
+        request: Request,
+        response: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        try {
+            const rawIcao = request.params['icao'];
+            const icao = Array.isArray(rawIcao) ? rawIcao[0] : rawIcao;
+
+            if (!icao) {
+                response.status(400).json({ message: 'icao ist erforderlich.' });
+                return;
+            }
+
+            const rangeParam = request.query['range'];
+            const range = isConnectionRange(rangeParam) ? rangeParam : '7d';
+
+            const airlines = await this.airlineService.getAirlines(icao, range);
+            response.status(200).json(airlines);
         } catch (error) {
             next(error);
         }

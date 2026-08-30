@@ -247,7 +247,7 @@ export class AirportMapService {
 
             const tooltip = document.createElement('span');
             tooltip.textContent = `${airport.name} (${airport.icao ?? '-'})`;
-            airportMarker.bindTooltip(tooltip, { direction: 'center' });
+            airportMarker.bindTooltip(tooltip, { direction: 'right' });
             airportMarker.on('click', () => this.onSelect(airport));
             renderedMarkers += 1;
         }
@@ -398,7 +398,7 @@ export class AirportMapService {
                 html: hostElement,
                 iconSize: [58, 30],
                 iconAnchor: [29, 15],
-                tooltipAnchor: [0, 0],
+                tooltipAnchor: [38, 0],
             }),
         };
     }

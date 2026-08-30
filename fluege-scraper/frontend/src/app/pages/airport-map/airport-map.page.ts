@@ -6,6 +6,7 @@ import { DrawerModule } from 'primeng/drawer';
 import { take } from 'rxjs';
 
 import { AirportDetailsComponent } from '../../components/airport-details/airport-details.component';
+import { AirportAirlines } from '../../models/airline';
 import { Airport } from '../../models/airport';
 import { AirportConnections, ConnectionRange } from '../../models/connection';
 import { AirportMapService, AirportMapTheme } from '../../services/airport-map.service';
@@ -28,6 +29,9 @@ export class AirportMapPage implements OnDestroy {
     protected readonly connections = signal<AirportConnections | null>(null);
     protected readonly loadingConnections = signal(false);
     protected readonly connectionsError = signal<string | null>(null);
+    protected readonly airlines = signal<AirportAirlines | null>(null);
+    protected readonly loadingAirlines = signal(false);
+    protected readonly airlinesError = signal<string | null>(null);
     protected readonly range = signal<ConnectionRange>('7d');
     protected readonly airportCount = signal(0);
     protected readonly loadingAirports = signal(true);
@@ -60,6 +64,7 @@ export class AirportMapPage implements OnDestroy {
         const airport = this.selectedAirport();
         if (airport) {
             this.loadConnections(airport);
+            this.loadAirlines(airport);
         }
     }
 
@@ -75,6 +80,8 @@ export class AirportMapPage implements OnDestroy {
         this.selectedAirport.set(null);
         this.connections.set(null);
         this.connectionsError.set(null);
+        this.airlines.set(null);
+        this.airlinesError.set(null);
         this.airportMapService.clearConnections();
         this.airportMapService.resetAirports();
     }
@@ -107,6 +114,7 @@ export class AirportMapPage implements OnDestroy {
         this.drawerVisible.set(true);
         this.airportMapService.focusAirport(airport);
         this.loadConnections(airport);
+        this.loadAirlines(airport);
     }
 
     private loadConnections(airport: Airport): void {
@@ -135,6 +143,34 @@ export class AirportMapPage implements OnDestroy {
                 error: () => {
                     this.loadingConnections.set(false);
                     this.connectionsError.set('Die Verbindungen konnten nicht geladen werden.');
+                },
+            });
+    }
+
+    private loadAirlines(airport: Airport): void {
+        this.airlines.set(null);
+        this.airlinesError.set(null);
+
+        if (!airport.icao) {
+            return;
+        }
+
+        this.loadingAirlines.set(true);
+
+        this.airportService
+            .getAirlines(airport.icao, this.range())
+            .pipe(take(1))
+            .subscribe({
+                next: (airlines) => {
+                    if (this.selectedAirport()?.icao !== airport.icao) {
+                        return;
+                    }
+                    this.airlines.set(airlines);
+                    this.loadingAirlines.set(false);
+                },
+                error: () => {
+                    this.loadingAirlines.set(false);
+                    this.airlinesError.set('Die Airlines konnten nicht geladen werden.');
                 },
             });
     }

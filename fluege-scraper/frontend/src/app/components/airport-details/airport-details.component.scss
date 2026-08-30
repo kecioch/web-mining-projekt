@@ -64,12 +64,44 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+
+        ::ng-deep .p-selectbutton {
+            display: flex;
+            width: 100%;
+        }
+
+        ::ng-deep .p-selectbutton .p-togglebutton {
+            flex: 1 1 0;
+        }
     }
 
     &__range-label {
         font-size: 0.85rem;
         font-weight: 600;
         color: var(--p-text-muted-color);
+    }
+
+    &__toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.75rem;
+        padding: 0;
+        background: none;
+        border: none;
+        color: var(--p-primary-color);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+
+        i {
+            font-size: 0.8rem;
+        }
+    }
+
+    &__skeleton-title {
+        display: block;
+        margin-bottom: 0.75rem;
     }
 
     &__group h3 {
@@ -137,6 +169,76 @@
 
         &--error {
             color: var(--p-red-500);
+        }
+    }
+}
+
+.airlines {
+    margin-top: 1.75rem;
+
+    h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0 0 0.75rem;
+        font-size: 1rem;
+
+        i {
+            color: #8b5cf6;
+        }
+    }
+
+    &__chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    &__caption {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        margin: 0;
+        min-height: 1.5rem;
+        text-align: center;
+    }
+
+    &__caption-label {
+        font-weight: 600;
+    }
+
+    &__caption-value {
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        color: var(--p-text-muted-color);
+    }
+
+    &__caption-hint {
+        color: var(--p-text-muted-color);
+        font-size: 0.9rem;
+    }
+}
+
+.pie {
+    width: 12rem;
+    max-width: 100%;
+    height: auto;
+
+    &__slice {
+        cursor: pointer;
+        outline: none;
+        transform-origin: 100px 100px;
+        transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+
+        &--active {
+            transform: scale(1.04);
+        }
+
+        &--dimmed {
+            opacity: 0.35;
         }
     }
 }
