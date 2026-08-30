@@ -60,6 +60,12 @@ export class AirportDetailsComponent {
     protected readonly arrivalsTop3 = computed<ConnectionCount[]>(() =>
         this.arrivals().slice(0, 3),
     );
+    protected readonly departuresRest = computed<ConnectionCount[]>(() =>
+        this.departures().slice(3),
+    );
+    protected readonly arrivalsRest = computed<ConnectionCount[]>(() =>
+        this.arrivals().slice(3),
+    );
 
     protected onRangeChange(value: ConnectionRange | null): void {
         if (value) {

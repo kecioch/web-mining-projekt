@@ -77,7 +77,7 @@
                 </div>
 
                 <ul class="connections__list">
-                    @for (item of departures(); track item.connection.icao) {
+                    @for (item of departuresRest(); track item.connection.icao) {
                         <li>
                             <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
                             <span class="connections__badge">{{ item.count }}</span>
@@ -113,7 +113,7 @@
                 </div>
 
                 <ul class="connections__list">
-                    @for (item of arrivals(); track item.connection.icao) {
+                    @for (item of arrivalsRest(); track item.connection.icao) {
                         <li>
                             <span class="connections__connection">{{ connectionLabel(item.connection) }}</span>
                             <span class="connections__badge">{{ item.count }}</span>
