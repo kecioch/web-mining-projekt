@@ -33,7 +33,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install importer dependency
-        run: python -m pip install requests
+        run: python -m pip install requests beautifulsoup4
 
       - name: Import completed Scrapy Cloud jobs into Supabase
         env:

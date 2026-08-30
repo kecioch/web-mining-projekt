@@ -5,10 +5,12 @@ import os
 import sys
 
 from flight_mapping_service import FlightMappingService
+from iata_lookup_service import IataLookupService
 from supabase_client import SupabaseClient, natural_key
 from zyte_client import ZyteClient
 
 
+SCRAPED_BY = "ZYTE_AIRPORT_FLIGHTS"
 JOB_SEPARATOR = "=" * 72
 RESULT_SEPARATOR = "#" * 72
 SPIDER_NAMES = {
@@ -112,6 +114,7 @@ def import_job(
     zyte: ZyteClient,
     database: SupabaseClient,
     mapper: FlightMappingService,
+    iata_lookup: IataLookupService,
 ) -> dict[str, int]:
     """Verarbeitet einen Zyte-Job vollständig und markiert ihn erst nach Erfolg."""
     job_id = job.get("id")
@@ -126,15 +129,30 @@ def import_job(
     collected = {"airports": {}, "airlines": {}, "aircraft": {}}
     unmatched = {"Airports": set(), "Airlines": set(), "Aircraft": set()}
     skipped = 0
-    item_count = 0
+    items = list(zyte.iter_items(job_id))
+    item_count = len(items)
 
-    for item in zyte.iter_items(job_id):
-        item_count += 1
+    if item_count == 0:
+        raise RuntimeError(f"Job {job_id} enthält keine Items und bleibt db-pending")
+
+    # Fehlende IATA-Codes vor dem eigentlichen Mapping automatisch auflösen.
+    auto_collected = {"airports": {}, "airlines": {}, "aircraft": {}}
+    mapper.collect_lookups(
+        auto_collected,
+        iata_lookup.resolve(mapper.unresolved_references(items)),
+    )
+    auto_missing = mapper.missing_lookups(auto_collected)
+    if not dry_run:
+        database.upsert_lookups(auto_missing)
+    mapper.register_lookups(auto_missing)
+
+    for item in items:
         result = mapper.map_item(item)
         if result is None:
             skipped += 1
             continue
         table, row, lookups = result
+        row["scraped_by"] = SCRAPED_BY
         mapped[table].append(row)
         mapper.collect_lookups(collected, lookups)
 
@@ -148,13 +166,14 @@ def import_job(
         if item.get("aircraft_model") and not row.get("aircraft_code"):
             unmatched["Aircraft"].add(str(item["aircraft_model"]))
 
-    if item_count == 0:
-        raise RuntimeError(f"Job {job_id} enthält keine Items und bleibt db-pending")
-
-    missing = mapper.missing_lookups(collected)
+    remaining_missing = mapper.missing_lookups(collected)
+    missing = {
+        table: auto_missing[table] + remaining_missing[table]
+        for table in collected
+    }
     if not dry_run:
-        database.upsert_lookups(missing)
-    mapper.register_lookups(missing)
+        database.upsert_lookups(remaining_missing)
+    mapper.register_lookups(remaining_missing)
 
     inserted = 0
     duplicates = 0
@@ -203,13 +222,14 @@ def main() -> int:
         return 0
 
     mapper = FlightMappingService(database.load_reference_rows())
+    iata_lookup = IataLookupService()
     failures = []
     totals = {"items": 0, "new": 0, "existing": 0, "incomplete": 0}
     ordered_jobs = list(reversed(jobs))
     for position, job in enumerate(ordered_jobs, start=1):
         print_job_header(job, position, len(ordered_jobs), dry_run)
         try:
-            stats = import_job(job, dry_run, zyte, database, mapper)
+            stats = import_job(job, dry_run, zyte, database, mapper, iata_lookup)
             for key in totals:
                 totals[key] += stats[key]
         except Exception as exc:  # Jobs unabhängig weiterverarbeiten

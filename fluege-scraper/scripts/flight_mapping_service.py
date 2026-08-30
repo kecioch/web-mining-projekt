@@ -47,7 +47,10 @@ class FlightMappingService:
     """
 
     def __init__(self, reference_rows: dict[str, list[dict]]):
-        self.references = self._build_references(reference_rows)
+        self.reference_rows = {
+            table: list(rows) for table, rows in reference_rows.items()
+        }
+        self.references = self._build_references(self.reference_rows)
 
     @staticmethod
     def _build_references(rows: dict[str, list[dict]]) -> dict:
@@ -203,6 +206,29 @@ class FlightMappingService:
             return model
         return None
 
+    def unresolved_references(self, items: list[dict]) -> dict:
+        """Sammelt nur IATA- und Namenswerte, die lokal noch nicht auflösbar sind."""
+        airports: dict[str, set[str]] = {}
+        airlines: dict[tuple[str | None, str | None], dict] = {}
+        for item in items:
+            airport_iata = normalize_code(item.get("counterpart_iata_code"))
+            if (
+                airport_iata
+                and not normalize_code(item.get("counterpart_icao_code"))
+                and not self._resolve_airport(item)[0]
+            ):
+                airports.setdefault(airport_iata, set()).add(
+                    str(item.get("counterpart_airport_name") or "")
+                )
+
+            airline_code = normalize_code(item.get("airline_iata_code"))
+            airline_name = item.get("airline_name") or None
+            if (airline_code or airline_name) and not self._resolve_airline(item)[0]:
+                key = (airline_code, normalize_name(airline_name))
+                airlines[key] = {"code": airline_code, "name": airline_name}
+
+        return {"airports": airports, "airlines": list(airlines.values())}
+
     def map_item(self, item: dict) -> tuple[str, dict, dict] | None:
         """Erzeugt Flugzeile und benötigte Stammdaten aus einem Zyte-Item."""
         movement = str(item.get("movement_type") or "").lower()
@@ -331,5 +357,17 @@ class FlightMappingService:
     def register_lookups(self, rows_by_table: dict[str, list[dict]]) -> None:
         """Übernimmt neu gespeicherte Schlüssel in den laufenden Mapping-Kontext."""
         for table, rows in rows_by_table.items():
-            key_field, reference_key = LOOKUP_SPECS[table]
-            self.references[reference_key].update(row[key_field] for row in rows)
+            key_field, _ = LOOKUP_SPECS[table]
+            known = {
+                normalize_code(row.get(key_field)): row
+                for row in self.reference_rows[table]
+                if normalize_code(row.get(key_field))
+            }
+            for row in rows:
+                key = normalize_code(row.get(key_field))
+                if key and key not in known:
+                    clean = dict(row)
+                    clean[key_field] = key
+                    self.reference_rows[table].append(clean)
+                    known[key] = clean
+        self.references = self._build_references(self.reference_rows)
