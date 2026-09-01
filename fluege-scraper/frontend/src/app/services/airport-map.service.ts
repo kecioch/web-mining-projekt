@@ -409,16 +409,19 @@ export class AirportMapService {
     }
 
     private createBaseLayer(theme: AirportMapTheme): TileLayer {
-        const style = theme === 'dark' ? 'dark_all' : 'light_all';
+        const style = theme === 'dark' ? 'alidade_smooth_dark' : 'osm_bright';
 
-        return tileLayer(`https://{s}.basemaps.cartocdn.com/${style}/{z}/{x}/{y}{r}.png`, {
-            maxZoom: 19,
-            minZoom: 3,
-            noWrap: true,
-            bounds: latLngBounds([-85, -180], [85, 180]),
-            attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        });
+        return tileLayer(
+            `https://tiles.stadiamaps.com/tiles/${style}/{z}/{x}/{y}{r}.png`,
+            {
+                maxZoom: 10,
+                minZoom: 3,
+                noWrap: true,
+                bounds: latLngBounds([-85, -180], [85, 180]),
+                attribution:
+                    '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            },
+        );
     }
 
     private hasValidCoordinates(
