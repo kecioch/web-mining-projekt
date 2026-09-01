@@ -125,7 +125,9 @@ class MunichAirportFlightsSpider(scrapy.Spider):
         # Die MUC-Spalte enthält nur HH:MM. Für die Datenbank ergänzen wir
         # den Flugtag und die Zeitzone des Flughafens.
         scheduled = self.to_muc_datetime(scheduled_raw, service_date)
-        reported = self.to_muc_datetime(reported_raw, service_date)
+        reported = self.to_muc_datetime(
+            reported_raw, service_date, reference=scheduled
+        )
         other_time = self.first_time(self.text(other_cell.xpath(".//text()").getall()))
         delay = self.delay_minutes(scheduled, reported)
         status_raw = self.text(status_cell.xpath(".//text()").getall()) or None
@@ -133,33 +135,55 @@ class MunichAirportFlightsSpider(scrapy.Spider):
                         or airline_cell.css(".info-content::text").get()
                         or self.text(airline_cell.xpath(".//text()").getall()) or None)
         counterpart = {"name": counterpart_name, "iata": counterpart_iata, "icao": None}
-        origin = self.airport if movement_type == "departure" else counterpart
-        destination = counterpart if movement_type == "departure" else self.airport
+        flight_id = row.attrib.get("data-flight-id")
         details_href = row.css('a[href*="flugdetailseite"]::attr(href)').get()
 
         return FlightMovementItem(
             observed_at_utc=datetime.now(timezone.utc).isoformat(),
-            service_date=service_date, movement_type=movement_type,
-            airport_name=self.airport["name"], airport_iata_code=self.airport["iata"],
+            service_date=service_date,
+            movement_type=movement_type,
+            airport_name=self.airport["name"],
+            airport_iata_code=self.airport["iata"],
             airport_icao_code=self.airport["icao"],
             counterpart_airport_name=counterpart["name"],
-            counterpart_iata_code=counterpart["iata"], counterpart_icao_code=None,
-            origin_airport_name=origin["name"], origin_iata_code=origin["iata"],
-            origin_icao_code=origin["icao"], destination_airport_name=destination["name"],
-            destination_iata_code=destination["iata"], destination_icao_code=destination["icao"],
-            flight_number=flight_number, scheduled_time_local=scheduled,
-            reported_time_local=reported, delay_minutes=delay,
-            scheduled_departure_local=scheduled if movement_type == "departure" else other_time,
-            actual_departure_local=reported if movement_type == "departure" else None,
+            counterpart_iata_code=counterpart["iata"],
+            counterpart_icao_code=counterpart["icao"],
+            via_airport_names=[],
+            via_airport_iata_codes=[],
+            source_flight_id=flight_id,
+            flight_number=flight_number,
+            scheduled_departure_at=(
+                scheduled if movement_type == "departure" else None
+            ),
+            reported_departure_at=(
+                reported if movement_type == "departure" else None
+            ),
             departure_delay_minutes=delay if movement_type == "departure" else None,
-            scheduled_arrival_local=scheduled if movement_type == "arrival" else other_time,
-            actual_arrival_local=reported if movement_type == "arrival" else None,
+            scheduled_arrival_at=(
+                scheduled if movement_type == "arrival" else None
+            ),
+            reported_arrival_at=(
+                reported if movement_type == "arrival" else None
+            ),
             arrival_delay_minutes=delay if movement_type == "arrival" else None,
-            local_timezone="Europe/Berlin", status=self.normalize_status(status_raw),
-            status_raw=status_raw, airline_name=airline_name.strip() if airline_name else None,
+            flight_duration_raw=None,
+            local_timezone="Europe/Berlin",
+            status=self.normalize_status(status_raw),
+            status_raw=status_raw,
+            airline_name=airline_name.strip() if airline_name else None,
+            airline_iata_code=self.parse_airline_iata_code(flight_number),
+            codeshare_flight_numbers=[],
             aircraft_model=aircraft_model,
+            aircraft_registration=None,
             terminal=self.text(area_cell.xpath(".//text()").getall()) or None,
-            detail_fields={"flight_id": row.attrib.get("data-flight-id")},
+            airport_hall=None,
+            check_in_counter=None,
+            gate=None,
+            baggage_belts=[],
+            arrival_exit=None,
+            detail_fields={"counterpart_scheduled_time_raw": other_time},
+            detail_scrape_status="not_requested",
+            source_updated_at=None,
             details_url=response.urljoin(details_href) if details_href else None,
             source_url=response.url,
         )
@@ -185,6 +209,11 @@ class MunichAirportFlightsSpider(scrapy.Spider):
         return match.group(1).strip(), match.group(2).strip() if match.group(2) else None
 
     @staticmethod
+    def parse_airline_iata_code(flight_number):
+        match = re.match(r"^([A-Z0-9]{2})\s*\d", flight_number or "")
+        return match.group(1) if match else None
+
+    @staticmethod
     def parse_airport(value):
         match = re.match(r"\s*(.*?)\s*\(([A-Z]{3})\)\s*$", value or "")
         return (match.group(1), match.group(2)) if match else (value or None, None)
@@ -194,13 +223,21 @@ class MunichAirportFlightsSpider(scrapy.Spider):
         match = re.search(r"\b(?:[01]\d|2[0-3]):[0-5]\d\b", value or "")
         return match.group(0) if match else None
 
-    def to_muc_datetime(self, time_value, service_date):
+    def to_muc_datetime(self, time_value, service_date, reference=None):
         if not time_value or not service_date:
             return None
         try:
-            return datetime.fromisoformat(
+            value = datetime.fromisoformat(
                 f"{service_date}T{time_value}"
-            ).replace(tzinfo=self.local_timezone).isoformat(timespec="seconds")
+            ).replace(tzinfo=self.local_timezone)
+            if reference:
+                reference_value = datetime.fromisoformat(reference)
+                difference = value - reference_value
+                if difference < timedelta(hours=-12):
+                    value += timedelta(days=1)
+                elif difference > timedelta(hours=12):
+                    value -= timedelta(days=1)
+            return value.isoformat(timespec="seconds")
         except ValueError:
             return time_value
 

@@ -48,59 +48,62 @@ class AirlineItem(scrapy.Item):
     country = scrapy.Field()
     iata_code = scrapy.Field()
     icao_code = scrapy.Field()
-    callsign = scrapy.Field()
+
     airline_url = scrapy.Field()
     list_source_url = scrapy.Field()
     source_url = scrapy.Field()
 
 
 class FlightMovementItem(scrapy.Item):
-    observed_at_utc = scrapy.Field()
-    service_date = scrapy.Field()
-    movement_type = scrapy.Field()
+    observed_at_utc = scrapy.Field()  # Abrufzeitpunkt UTC
+    service_date = scrapy.Field()  # Lokaler Flugtag
+    movement_type = scrapy.Field()  # Bewegungsrichtung
 
-    airport_name = scrapy.Field()
-    airport_iata_code = scrapy.Field()
-    airport_icao_code = scrapy.Field()
-    counterpart_airport_name = scrapy.Field()
-    counterpart_iata_code = scrapy.Field()
-    counterpart_icao_code = scrapy.Field()
+    airport_name = scrapy.Field()  # Beobachteter Flughafen
+    airport_iata_code = scrapy.Field()  # Flughafen-IATA-Code
+    airport_icao_code = scrapy.Field()  # Flughafen-ICAO-Code
 
-    origin_airport_name = scrapy.Field()
-    origin_iata_code = scrapy.Field()
-    origin_icao_code = scrapy.Field()
-    destination_airport_name = scrapy.Field()
-    destination_iata_code = scrapy.Field()
-    destination_icao_code = scrapy.Field()
+    counterpart_airport_name = scrapy.Field()  # Gegenflughafenname
+    counterpart_iata_code = scrapy.Field()  # Gegenflughafen-IATA-Code
+    counterpart_icao_code = scrapy.Field()  # Gegenflughafen-ICAO-Code
 
-    flight_number = scrapy.Field()
-    callsign = scrapy.Field()
-    scheduled_time_local = scrapy.Field()
-    reported_time_local = scrapy.Field()
-    delay_minutes = scrapy.Field()
-    delay_text = scrapy.Field()
-    scheduled_departure_local = scrapy.Field()
-    actual_departure_local = scrapy.Field()
-    departure_delay_minutes = scrapy.Field()
-    departure_delay_text = scrapy.Field()
-    scheduled_arrival_local = scrapy.Field()
-    actual_arrival_local = scrapy.Field()
-    arrival_delay_minutes = scrapy.Field()
-    arrival_delay_text = scrapy.Field()
-    flight_duration_raw = scrapy.Field()
-    local_timezone = scrapy.Field()
-    status = scrapy.Field()
-    status_raw = scrapy.Field()
+    via_airport_names = scrapy.Field()  # Zwischenstopp-Namen
+    via_airport_iata_codes = scrapy.Field()  # Zwischenstopp-IATA-Codes
 
-    airline_name = scrapy.Field()
-    departure_details_raw = scrapy.Field()
-    arrival_details_raw = scrapy.Field()
-    aircraft_model = scrapy.Field()
-    aircraft_registration = scrapy.Field()
-    terminal = scrapy.Field()
-    gate = scrapy.Field()
-    detail_fields = scrapy.Field()
-    detail_scrape_status = scrapy.Field()
+    source_flight_id = scrapy.Field()  # Quelleninterne Flug-ID
+    flight_number = scrapy.Field()  # Öffentliche Flugnummer
 
-    details_url = scrapy.Field()
-    source_url = scrapy.Field()
+    scheduled_departure_at = scrapy.Field()  # Geplanter Abflug
+    reported_departure_at = scrapy.Field()  # Gemeldeter Abflug
+    departure_delay_minutes = scrapy.Field()  # Abflugabweichung Minuten
+
+    scheduled_arrival_at = scrapy.Field()  # Geplante Ankunft
+    reported_arrival_at = scrapy.Field()  # Gemeldete Ankunft
+    arrival_delay_minutes = scrapy.Field()  # Ankunftsabweichung Minuten
+
+    flight_duration_raw = scrapy.Field()  # Flugdauer Originalwert
+    local_timezone = scrapy.Field()  # Lokale Zeitzone
+
+    status = scrapy.Field()  # Vereinheitlichter Status
+    status_raw = scrapy.Field()  # Originaler Status
+
+    airline_name = scrapy.Field()  # Fluggesellschaftsname
+    airline_iata_code = scrapy.Field()  # Airline-IATA-Code
+    codeshare_flight_numbers = scrapy.Field()  # Codeshare-Flugnummern
+
+    aircraft_model = scrapy.Field()  # Flugzeugmodell
+    aircraft_registration = scrapy.Field()  # Flugzeugkennzeichen
+
+    terminal = scrapy.Field()  # Flughafenterminal
+    airport_hall = scrapy.Field()  # Flughafenhalle
+    check_in_counter = scrapy.Field()  # Check-in-Schalter
+    gate = scrapy.Field()  # Flugsteig
+    baggage_belts = scrapy.Field()  # Gepäckbänder
+    arrival_exit = scrapy.Field()  # Ankunftsausgang
+
+    detail_fields = scrapy.Field()  # Weitere Quelldaten
+    detail_scrape_status = scrapy.Field()  # Status Detailabruf
+
+    source_updated_at = scrapy.Field()  # Quellenaktualisierung
+    details_url = scrapy.Field()  # Flugdetailseite
+    source_url = scrapy.Field()  # Abrufquelle

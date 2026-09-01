@@ -62,34 +62,34 @@ Die Befehle werden aus dem Verzeichnis `scraper/` ausgeführt:
 
 ```powershell
 ..\.venv\Scripts\python.exe -m scrapy crawl frankfurt_airport_flights `
-  -a movement_type=both `
-  -a service_date=2026-08-20 `
-  -a start_time=00:00 `
+  -a movement_type=departure `
+  -a service_date=2026-08-27 `
+  -a start_time=12:00 `
   -a end_time=23:59 `
   -a max_pages=50 `
   -a per_page=50 `
-  -O ..\data\output\EDDF_2026-08-20_TEST123.json
+  -O ..\data\output\EDDF_2026-08-27_dep.json
 ```
 
 ## Munich Airport (HTML)
 
 ```powershell
 ..\.venv\Scripts\python.exe -m scrapy crawl munich_airport_flights `
-  -a movement_type=both `
-  -a service_date=2026-08-20 `
+  -a movement_type=departure `
+  -a service_date=2026-08-27 `
   -a max_pages=50 `
   -a per_page=50 `
-  -O ..\data\output\EDDM_2026-08-20_TEST.json
+  -O ..\data\output\EDDM_2026-08-27_dep.json
 ```
 
 ## Berlin Brandenburg Airport (JSON)
 
 ```powershell
 ..\.venv\Scripts\python.exe -m scrapy crawl berlin_airport_flights `
-  -a movement_type=both `
-  -a service_date=2026-08-20 `
-  -a start_time=00:00 `
+  -a movement_type=arrival `
+  -a service_date=2026-08-27 `
+  -a start_time=10:00 `
   -a end_time=23:59 `
   -a max_pages=50 `
   -a per_page=50 `
-  -O ..\data\output\EDDB_2026-08-20_TEST.json
+  -O ..\data\output\EDDB_2026-08-27_arr.json

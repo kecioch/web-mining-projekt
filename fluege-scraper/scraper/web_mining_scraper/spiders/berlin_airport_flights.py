@@ -145,15 +145,22 @@ class BerlinAirportFlightsSpider(scrapy.Spider):
         )
 
     def build_item(self, record, movement_type, source_url):
-        scheduled = (
-            record.get("arr_scheduled_time")
+        scheduled_departure = record.get("dep_scheduled_time") or (
+            record.get("scheduled_time")
+            if movement_type == "departure"
+            else None
+        )
+        reported_departure = record.get("dep_estimated_time")
+        scheduled_arrival = record.get("arr_scheduled_time") or (
+            record.get("scheduled_time")
             if movement_type == "arrival"
-            else record.get("dep_scheduled_time")
-        ) or record.get("scheduled_time")
-        reported = (
-            record.get("arr_estimated_time")
+            else None
+        )
+        reported_arrival = record.get("arr_estimated_time")
+        scheduled_at_airport = (
+            scheduled_arrival
             if movement_type == "arrival"
-            else record.get("dep_estimated_time")
+            else scheduled_departure
         )
         counterpart = {
             "name": (
@@ -168,67 +175,63 @@ class BerlinAirportFlightsSpider(scrapy.Spider):
             ),
             "icao": None,
         }
-        origin = counterpart if movement_type == "arrival" else self.airport
-        destination = self.airport if movement_type == "arrival" else counterpart
-        delay = self.delay_minutes(scheduled, reported)
         status_raw = record.get("flight_status_label")
         flight_id = record.get("id")
 
         return FlightMovementItem(
             observed_at_utc=datetime.now(timezone.utc).isoformat(),
-            service_date=self.extract_date(scheduled) or self.service_date,
+            service_date=(
+                self.extract_date(scheduled_at_airport) or self.service_date
+            ),
             movement_type=movement_type,
             airport_name=self.airport["name"],
             airport_iata_code=self.airport["iata"],
             airport_icao_code=self.airport["icao"],
             counterpart_airport_name=counterpart["name"],
             counterpart_iata_code=counterpart["iata"],
-            counterpart_icao_code=None,
-            origin_airport_name=origin["name"],
-            origin_iata_code=origin["iata"],
-            origin_icao_code=origin["icao"],
-            destination_airport_name=destination["name"],
-            destination_iata_code=destination["iata"],
-            destination_icao_code=destination["icao"],
+            counterpart_icao_code=counterpart["icao"],
+            via_airport_names=self.as_list(record.get("via_airport_names")),
+            via_airport_iata_codes=self.as_list(
+                record.get("via_airport_iata_codes")
+            ),
+            source_flight_id=(
+                str(flight_id) if flight_id is not None else None
+            ),
             flight_number=record.get("flight_number"),
-            scheduled_time_local=scheduled,
-            reported_time_local=reported,
-            delay_minutes=delay,
-            scheduled_departure_local=record.get("dep_scheduled_time"),
-            actual_departure_local=record.get("dep_estimated_time"),
+            scheduled_departure_at=scheduled_departure,
+            reported_departure_at=reported_departure,
             departure_delay_minutes=self.delay_minutes(
-                record.get("dep_scheduled_time"), record.get("dep_estimated_time")
+                scheduled_departure, reported_departure
             ),
-            scheduled_arrival_local=record.get("arr_scheduled_time"),
-            actual_arrival_local=record.get("arr_estimated_time"),
+            scheduled_arrival_at=scheduled_arrival,
+            reported_arrival_at=reported_arrival,
             arrival_delay_minutes=self.delay_minutes(
-                record.get("arr_scheduled_time"), record.get("arr_estimated_time")
+                scheduled_arrival, reported_arrival
             ),
+            flight_duration_raw=None,
             local_timezone="Europe/Berlin",
             status=self.normalize_status(record.get("flight_status_id") or status_raw),
             status_raw=status_raw,
             airline_name=record.get("airline_name"),
-            departure_details_raw=record.get("dep_airport_name"),
-            arrival_details_raw=record.get("arr_airport_name"),
+            airline_iata_code=record.get("airline_code"),
+            codeshare_flight_numbers=self.as_list(record.get("code_shares")),
             aircraft_model=record.get("aircraft_type"),
-            aircraft_registration=record.get("aircraft_reg"),
-            terminal=record.get("terminal"),
-            gate=record.get("gate"),
+            aircraft_registration=record.get("aircraft_reg") or None,
+            terminal=record.get("terminal") or None,
+            airport_hall=None,
+            check_in_counter=record.get("checkin_counter") or None,
+            gate=record.get("gate") or None,
+            baggage_belts=self.as_list(record.get("arr_belt")),
+            arrival_exit=record.get("arr_exit") or None,
             detail_fields={
-                "id": flight_id,
-                "airline_code": record.get("airline_code"),
-                "codeshares": record.get("code_shares") or [],
-                "via_airport_names": record.get("via_airport_names") or [],
-                "via_airport_iata_codes": (
-                    record.get("via_airport_iata_codes") or []
-                ),
-                "check_in": record.get("checkin_counter"),
-                "arrival_belt": record.get("arr_belt"),
-                "arrival_exit": record.get("arr_exit"),
+                "flight_status_code": record.get("flight_status"),
+                "flight_status_color": record.get("flight_status_color"),
                 "gate_show_time": record.get("gate_show_time"),
                 "passport_control": record.get("passport_control"),
-                "source_updated_at": record.get("updated_at"),
+                "map_urls": record.get("map_url"),
             },
+            detail_scrape_status="not_requested",
+            source_updated_at=record.get("updated_at"),
             details_url=(
                 "https://ber.berlin-airport.de/de/fliegen/"
                 f"abfluege-ankuenfte/flugdetails.html?flightId={flight_id}"
@@ -284,6 +287,12 @@ class BerlinAirportFlightsSpider(scrapy.Spider):
             return int(value)
         except (TypeError, ValueError):
             return None
+
+    @staticmethod
+    def as_list(value):
+        if value in (None, ""):
+            return []
+        return value if isinstance(value, list) else [value]
 
     @staticmethod
     def extract_date(value):
