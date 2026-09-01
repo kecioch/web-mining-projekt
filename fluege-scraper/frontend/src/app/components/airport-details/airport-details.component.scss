@@ -7,50 +7,257 @@
     overflow-x: hidden;
 }
 
-.airport-heading {
+.airport-sticky {
     position: sticky;
-    top: 0;
-    z-index: 2;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin: -1.25rem 0 1.5rem;
-    padding-top: 1.25rem;
-    padding-bottom: 0.85rem;
+    z-index: 5;
+    top: -1.25rem;
+    margin: -1.25rem -1.25rem 0;
+    padding: 1rem 1.25rem 0.9rem;
     background: var(--p-drawer-background, var(--p-content-background, #ffffff));
+    border-bottom: 1px solid var(--p-content-border-color, #e2e8f0);
+    box-shadow: 0 0.45rem 1rem rgb(15 23 42 / 8%);
+}
 
-    h2,
-    p {
-        margin: 0;
+.airport-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    &__identity {
+        min-width: 0;
     }
 
-    p {
+    h2 {
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.25;
+    }
+
+    &__website {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
         margin-top: 0.35rem;
         color: var(--p-text-muted-color);
+        font-size: 0.85rem;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            color: var(--p-primary-color);
+            text-decoration: underline;
+        }
+
+        i {
+            font-size: 0.7rem;
+        }
     }
 }
 
 .airport-code {
     display: inline-grid;
-    min-width: 4rem;
-    min-height: 4rem;
+    min-width: 3.35rem;
+    min-height: 3.35rem;
     place-items: center;
     color: var(--p-orange-950);
     background: var(--p-orange-300);
     border-radius: var(--p-border-radius-md);
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 800;
 }
 
-.wikipedia-link {
-    margin-top: 1.25rem;
-    text-decoration: none;
+.airport-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin: 0.7rem 0;
 
-    &:hover,
-    &:focus,
-    &:active,
-    &:visited {
-        text-decoration: none;
+    div {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.38rem 0.6rem;
+        background: var(--p-content-hover-background);
+        border-radius: var(--p-border-radius-sm);
+    }
+
+    dt {
+        color: var(--p-text-muted-color);
+        font-size: 0.7rem;
+        font-weight: 600;
+    }
+
+    dd {
+        margin: 0;
+        font-size: 0.82rem;
+        font-weight: 750;
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+.range-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    &__label {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 0.35rem;
+        color: var(--p-text-muted-color);
+        font-size: 0.78rem;
+        font-weight: 600;
+
+        i {
+            font-size: 0.75rem;
+        }
+    }
+
+    ::ng-deep .p-selectbutton {
+        display: flex;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    ::ng-deep .p-selectbutton .p-togglebutton {
+        flex: 1 1 0;
+        padding: 0.35rem 0.4rem;
+        font-size: 0.76rem;
+    }
+}
+
+.delay-analysis {
+    margin-top: 1.75rem;
+
+    &__skeleton-chart {
+        display: block;
+        margin-top: 1rem;
+    }
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+
+    h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+        font-size: 1rem;
+
+        i {
+            color: #ef4444;
+        }
+    }
+}
+
+.delay-kpis {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+
+    > p-card {
+        min-width: 0;
+    }
+}
+
+.delay-kpi__label,
+.delay-kpis small {
+    color: var(--p-text-muted-color);
+    font-size: 0.75rem;
+}
+
+.delay-kpis strong {
+    font-size: 1.3rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.delay-summary-cards {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.delay-summary-card__metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+
+    div {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+
+    span,
+    small {
+        color: var(--p-text-muted-color);
+        font-size: 0.72rem;
+    }
+
+    strong {
+        font-size: 1.15rem;
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+:host ::ng-deep {
+    .delay-kpi {
+        height: 100%;
+
+        .p-card-body {
+            height: 100%;
+            padding: 0.75rem;
+        }
+
+        .p-card-content {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+    }
+
+    .delay-summary-card {
+        .p-card-body {
+            padding: 0.85rem;
+        }
+
+        .p-card-title {
+            margin-bottom: 0.65rem;
+            font-size: 0.9rem;
+        }
+
+        .p-card-content {
+            padding: 0;
+        }
+    }
+
+    .analysis-chart-card {
+        margin-top: 1rem;
+
+        .p-card-body {
+            padding: 0.85rem;
+        }
+
+        .p-card-title {
+            font-size: 0.9rem;
+        }
+
+        .p-card-content {
+            padding: 0;
+        }
+    }
+
+    .analysis-message {
+        width: 100%;
+        margin-top: 1rem;
     }
 }
 
@@ -59,27 +266,6 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-
-    &__range {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-
-        ::ng-deep .p-selectbutton {
-            display: flex;
-            width: 100%;
-        }
-
-        ::ng-deep .p-selectbutton .p-togglebutton {
-            flex: 1 1 0;
-        }
-    }
-
-    &__range-label {
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: var(--p-text-muted-color);
-    }
 
     &__toggle {
         display: inline-flex;

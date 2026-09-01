@@ -1,36 +1,144 @@
-<header class="airport-heading">
-    <span class="airport-code">{{ airport().icao }}</span>
-    <div>
-        <h2>{{ airport().name }}</h2>
-        <p>{{ 'Keine Ortsangabe vorhanden' }}</p>
+<div class="airport-sticky">
+    <header class="airport-heading">
+        <span class="airport-code">{{ airport().icao }}</span>
+        <div class="airport-heading__identity">
+            <h2>{{ airport().name }}</h2>
+            @if (airport().website_url; as websiteUrl) {
+                <a
+                    class="airport-heading__website"
+                    [href]="websiteUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Offizielle Webseite
+                    <i class="pi pi-external-link" aria-hidden="true"></i>
+                </a>
+            }
+        </div>
+    </header>
+
+    <dl class="airport-facts" aria-label="Flughafenkennungen">
+        <div>
+            <dt>ICAO</dt>
+            <dd>{{ airport().icao }}</dd>
+        </div>
+        <div>
+            <dt>IATA</dt>
+            <dd>{{ airport().iata ?? '-' }}</dd>
+        </div>
+    </dl>
+
+    <div class="range-selector">
+        <span class="range-selector__label">
+            <i class="pi pi-calendar" aria-hidden="true"></i>
+            Zeitraum
+        </span>
+        <p-selectButton
+            [options]="rangeOptions"
+            optionLabel="label"
+            optionValue="value"
+            [allowEmpty]="false"
+            [ngModel]="range()"
+            (onChange)="onRangeChange($event.value)"
+            size="small"
+        />
     </div>
-</header>
+</div>
 
-<p-table [value]="detailRows()" size="small" stripedRows>
-    <ng-template #header>
-        <tr>
-            <th>Merkmal</th>
-            <th>Wert</th>
-        </tr>
-    </ng-template>
-    <ng-template #body let-detail>
-        <tr>
-            <td>{{ detail.label }}</td>
-            <td>{{ detail.value }}</td>
-        </tr>
-    </ng-template>
-</p-table>
+<section class="delay-analysis">
+    <div class="section-heading">
+        <h3>
+            <i class="pi pi-clock" aria-hidden="true"></i>
+            Verspätungsanalyse
+        </h3>
+        @if (delayPeriod(); as period) {
+            <p-tag [value]="period" severity="secondary" [rounded]="true" />
+        }
+    </div>
 
-<a
-    pButton
-    class="wikipedia-link"
-    [href]="airport().website_url"
-    target="_blank"
-    rel="noopener noreferrer"
->
-    <span pButtonLabel>Webseite öffnen</span>
-    <i class="pi pi-external-link" aria-hidden="true"></i>
-</a>
+    @if (loadingDelayAnalysis()) {
+        <div class="delay-kpis">
+            @for (card of [0, 1, 2, 3]; track card) {
+                <p-card styleClass="delay-kpi">
+                    <p-skeleton width="5rem" height="0.8rem" />
+                    <p-skeleton width="4rem" height="1.6rem" />
+                    <p-skeleton width="6rem" height="0.7rem" />
+                </p-card>
+            }
+        </div>
+        <p-skeleton width="100%" height="14rem" styleClass="delay-analysis__skeleton-chart" />
+    } @else if (delayAnalysisError(); as error) {
+        <p-message severity="error" [text]="error" styleClass="analysis-message" />
+    } @else if (delayAnalysis(); as analysis) {
+        @if (analysis.summary.flightCount === 0) {
+            <p-message
+                severity="secondary"
+                text="Keine Verspätungsdaten im Zeitraum."
+                styleClass="analysis-message"
+            />
+        } @else {
+            <div class="delay-summary-cards">
+                @for (summary of delaySummaries(); track summary.key) {
+                    <p-card [header]="summary.label" styleClass="delay-summary-card">
+                        <div class="delay-summary-card__metrics">
+                            <div>
+                                <span>Flüge insgesamt</span>
+                                <strong>{{ formatNumber(summary.metric.flightCount) }}</strong>
+                                <small>
+                                    {{ formatNumber(summary.metric.cancelledFlightCount) }} annulliert
+                                </small>
+                            </div>
+                            <div>
+                                <span>Auswertbar</span>
+                                <strong>{{ formatNumber(summary.metric.evaluatedFlightCount) }}</strong>
+                                <small>{{ formatPercent(summary.metric.coverageRate) }} Abdeckung</small>
+                            </div>
+                            <div>
+                                <span>Verspätet</span>
+                                <strong>{{ formatNumber(summary.metric.delayedFlightCount) }}</strong>
+                                <small>
+                                    {{ formatPercent(summary.metric.delayRate) }} über
+                                    {{ analysis.delayThresholdMinutes }} min
+                                </small>
+                            </div>
+                            <div>
+                                <span>Ø Verspätung</span>
+                                <strong>{{ formatMinutes(summary.metric.averageDelayMinutes) }}</strong>
+                                <small>je auswertbarem Flug</small>
+                            </div>
+                        </div>
+                    </p-card>
+                }
+            </div>
+
+            <p-card header="Verspätungsquote pro Tag" styleClass="analysis-chart-card">
+                <p-chart
+                    type="line"
+                    [data]="delayRateChart()"
+                    [options]="delayRateChartOptions"
+                    height="14rem"
+                    ariaLabel="Verspätungsquote pro Tag für Ankünfte und Abflüge"
+                />
+            </p-card>
+
+            <p-card header="Durchschnittliche Verspätung pro Tag" styleClass="analysis-chart-card">
+                <p-chart
+                    type="line"
+                    [data]="averageDelayChart()"
+                    [options]="averageDelayChartOptions"
+                    height="14rem"
+                    ariaLabel="Durchschnittliche Verspätung pro Tag für Ankünfte und Abflüge"
+                />
+            </p-card>
+
+            <p-message
+                severity="secondary"
+                text="Die Verspätungsquote berücksichtigt nur nicht annullierte Flüge mit vorhandenem Verspätungswert."
+                styleClass="analysis-message"
+            />
+        }
+    }
+</section>
 
 <section class="airlines">
     <h3>
@@ -90,19 +198,6 @@
 </section>
 
 <section class="connections">
-    <div class="connections__range">
-        <span class="connections__range-label">Zeitraum</span>
-        <p-selectButton
-            [options]="rangeOptions"
-            optionLabel="label"
-            optionValue="value"
-            [allowEmpty]="false"
-            [ngModel]="range()"
-            (onChange)="onRangeChange($event.value)"
-            size="small"
-        />
-    </div>
-
     @if (loadingConnections()) {
         @for (group of [0, 1]; track group) {
             <div class="connections__group">

@@ -1,23 +1,28 @@
 import { Component, computed, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
+import type { ChartData, ChartOptions } from 'chart.js';
+import { CardModule } from 'primeng/card';
+import { ChartModule } from 'primeng/chart';
+import { MessageModule } from 'primeng/message';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { SkeletonModule } from 'primeng/skeleton';
-import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
 
 import { Aircraft, AircraftCount, AirportAircraft } from '../../models/aircraft';
 import { Airline, AirportAirlines } from '../../models/airline';
 import { Airport } from '../../models/airport';
 import { AirportConnections, ConnectionCount, ConnectionRange } from '../../models/connection';
-
-interface AirportDetailRow {
-    label: string;
-    value: string;
-}
+import { AirportDelayAnalysis, DelayMetric } from '../../models/delay-analysis';
 
 interface RangeOption {
     label: string;
     value: ConnectionRange;
+}
+
+interface DelaySummaryView {
+    key: 'all' | 'arrival' | 'departure';
+    label: string;
+    metric: DelayMetric;
 }
 
 interface AirlineSlice {
@@ -29,14 +34,7 @@ interface AirlineSlice {
     isOther: boolean;
 }
 
-const AIRLINE_COLORS = [
-    '#2563eb',
-    '#f97316',
-    '#10b981',
-    '#a855f7',
-    '#ef4444',
-    '#eab308',
-];
+const AIRLINE_COLORS = ['#2563eb', '#f97316', '#10b981', '#a855f7', '#ef4444', '#eab308'];
 const AIRLINE_OTHER_COLOR = '#94a3b8';
 const AIRLINE_MIN_PERCENT = 5;
 const PIE_CENTER = 100;
@@ -44,10 +42,24 @@ const PIE_RADIUS_OUTER = 90;
 const PIE_RADIUS_INNER = 52;
 
 const AIRCRAFT_TOP_COUNT = 6;
+const NUMBER_FORMAT = new Intl.NumberFormat('de-DE');
+const DATE_FORMAT = new Intl.DateTimeFormat('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    timeZone: 'UTC',
+});
 
 @Component({
     selector: 'app-airport-details',
-    imports: [ButtonModule, FormsModule, SelectButtonModule, SkeletonModule, TableModule],
+    imports: [
+        CardModule,
+        ChartModule,
+        FormsModule,
+        MessageModule,
+        SelectButtonModule,
+        SkeletonModule,
+        TagModule,
+    ],
     templateUrl: './airport-details.component.html',
     styleUrl: './airport-details.component.scss',
 })
@@ -62,6 +74,9 @@ export class AirportDetailsComponent {
     readonly aircraft = input<AirportAircraft | null>(null);
     readonly loadingAircraft = input(false);
     readonly aircraftError = input<string | null>(null);
+    readonly delayAnalysis = input<AirportDelayAnalysis | null>(null);
+    readonly loadingDelayAnalysis = input(false);
+    readonly delayAnalysisError = input<string | null>(null);
     readonly range = input<ConnectionRange>('7d');
     readonly rangeChange = output<ConnectionRange>();
 
@@ -70,22 +85,48 @@ export class AirportDetailsComponent {
     protected readonly showArrivalsList = signal(false);
     protected readonly showAircraftList = signal(false);
 
+    protected readonly delaySummaries = computed<DelaySummaryView[]>(() => {
+        const analysis = this.delayAnalysis();
+        if (!analysis) {
+            return [];
+        }
+
+        return [
+            { key: 'all', label: 'Gesamt', metric: analysis.summary },
+            {
+                key: 'arrival',
+                label: 'Ankunft',
+                metric: analysis.arrivalSummary ?? this.aggregateDirection(analysis, 'arrival'),
+            },
+            {
+                key: 'departure',
+                label: 'Abflug',
+                metric: analysis.departureSummary ?? this.aggregateDirection(analysis, 'departure'),
+            },
+        ];
+    });
+    protected readonly delayPeriod = computed(() => {
+        const period = this.delayAnalysis()?.period;
+        if (!period) {
+            return null;
+        }
+        return `${this.formatDate(period.from)} – ${this.formatDate(period.to)}`;
+    });
+    protected readonly delayRateChart = computed<ChartData<'line'>>(() =>
+        this.createChartData((metric) => metric.delayRate),
+    );
+    protected readonly averageDelayChart = computed<ChartData<'line'>>(() =>
+        this.createChartData((metric) => metric.averageDelayMinutes),
+    );
+    protected readonly delayRateChartOptions = this.createChartOptions('%', 100);
+    protected readonly averageDelayChartOptions = this.createChartOptions('min');
+
     protected readonly rangeOptions: RangeOption[] = [
         { label: '24 h', value: '24h' },
         { label: '7 Tage', value: '7d' },
         { label: '30 Tage', value: '30d' },
         { label: 'Gesamt', value: 'all' },
     ];
-
-    protected readonly detailRows = computed<AirportDetailRow[]>(() => {
-        const airport = this.airport();
-
-        return [
-            { label: 'ICAO', value: airport.icao ?? '-' },
-            { label: 'IATA', value: airport.iata ?? '-' },
-            { label: 'Name', value: airport.name ?? '-' },
-        ];
-    });
 
     protected readonly departures = computed<ConnectionCount[]>(
         () => this.connections()?.departures ?? [],
@@ -102,9 +143,7 @@ export class AirportDetailsComponent {
     protected readonly departuresRest = computed<ConnectionCount[]>(() =>
         this.departures().slice(3),
     );
-    protected readonly arrivalsRest = computed<ConnectionCount[]>(() =>
-        this.arrivals().slice(3),
-    );
+    protected readonly arrivalsRest = computed<ConnectionCount[]>(() => this.arrivals().slice(3));
 
     protected onRangeChange(value: ConnectionRange | null): void {
         if (value) {
@@ -216,6 +255,129 @@ export class AirportDetailsComponent {
     protected aircraftBarPercent(count: number): number {
         const max = this.aircraftTop()[0]?.count ?? 0;
         return max > 0 ? Math.round((count / max) * 100) : 0;
+    }
+
+    protected formatNumber(value: number): string {
+        return NUMBER_FORMAT.format(value);
+    }
+
+    protected formatPercent(value: number | null): string {
+        return value === null ? '–' : `${value.toFixed(1).replace('.', ',')} %`;
+    }
+
+    protected formatMinutes(value: number | null): string {
+        return value === null ? '–' : `${value.toFixed(1).replace('.', ',')} min`;
+    }
+
+    private aggregateDirection(
+        analysis: AirportDelayAnalysis,
+        direction: 'arrival' | 'departure',
+    ): DelayMetric {
+        const metrics = analysis.daily.flatMap((day) => (day[direction] ? [day[direction]] : []));
+        const flightCount = metrics.reduce((sum, metric) => sum + metric.flightCount, 0);
+        const evaluatedFlightCount = metrics.reduce(
+            (sum, metric) => sum + metric.evaluatedFlightCount,
+            0,
+        );
+        const delayedFlightCount = metrics.reduce(
+            (sum, metric) => sum + metric.delayedFlightCount,
+            0,
+        );
+        const cancelledFlightCount = metrics.reduce(
+            (sum, metric) => sum + metric.cancelledFlightCount,
+            0,
+        );
+        const totalDelayMinutes = metrics.reduce(
+            (sum, metric) => sum + (metric.averageDelayMinutes ?? 0) * metric.evaluatedFlightCount,
+            0,
+        );
+
+        return {
+            flightCount,
+            evaluatedFlightCount,
+            delayedFlightCount,
+            cancelledFlightCount,
+            coverageRate: this.percentage(evaluatedFlightCount, flightCount),
+            delayRate: this.percentage(delayedFlightCount, evaluatedFlightCount),
+            averageDelayMinutes:
+                evaluatedFlightCount > 0 ? totalDelayMinutes / evaluatedFlightCount : null,
+        };
+    }
+
+    private percentage(value: number, total: number): number | null {
+        return total > 0 ? (value / total) * 100 : null;
+    }
+
+    private createChartData(getter: (metric: DelayMetric) => number | null): ChartData<'line'> {
+        const daily = this.delayAnalysis()?.daily ?? [];
+        return {
+            labels: daily.map((day) => this.formatDate(day.date)),
+            datasets: [
+                {
+                    label: 'Ankunft',
+                    data: daily.map((day) => (day.arrival ? getter(day.arrival) : null)),
+                    borderColor: '#3b82f6',
+                    backgroundColor: '#3b82f6',
+                    tension: 0.3,
+                    spanGaps: true,
+                },
+                {
+                    label: 'Abflug',
+                    data: daily.map((day) => (day.departure ? getter(day.departure) : null)),
+                    borderColor: '#f97316',
+                    backgroundColor: '#f97316',
+                    tension: 0.3,
+                    spanGaps: true,
+                },
+            ],
+        };
+    }
+
+    private createChartOptions(unit: '%' | 'min', max?: number): ChartOptions<'line'> {
+        return {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { intersect: false, mode: 'index' },
+            plugins: {
+                legend: {
+                    labels: { usePointStyle: true, boxWidth: 8, boxHeight: 8 },
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) =>
+                            `${context.dataset.label}: ${this.formatChartValue(context.parsed.y, unit)}`,
+                    },
+                },
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { autoSkip: true, maxTicksLimit: 5, maxRotation: 0 },
+                },
+                y: {
+                    beginAtZero: true,
+                    max,
+                    ticks: {
+                        callback: (value) => `${value} ${unit}`,
+                    },
+                },
+            },
+        };
+    }
+
+    private formatDate(value: string): string {
+        if (!value) {
+            return '';
+        }
+        return DATE_FORMAT.format(new Date(`${value}T00:00:00Z`));
+    }
+
+    private formatChartValue(value: number | null, unit: '%' | 'min'): string {
+        if (value === null) {
+            return '–';
+        }
+
+        return `${value.toFixed(1).replace('.', ',')} ${unit}`;
     }
 
     private donutPath(startAngle: number, endAngle: number): string {

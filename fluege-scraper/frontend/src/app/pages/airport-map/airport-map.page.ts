@@ -10,6 +10,7 @@ import { AirportAircraft } from '../../models/aircraft';
 import { AirportAirlines } from '../../models/airline';
 import { Airport } from '../../models/airport';
 import { AirportConnections, ConnectionRange } from '../../models/connection';
+import { AirportDelayAnalysis } from '../../models/delay-analysis';
 import { AirportMapService, AirportMapTheme } from '../../services/airport-map.service';
 import { AirportService } from '../../services/airport.service';
 
@@ -36,6 +37,9 @@ export class AirportMapPage implements OnDestroy {
     protected readonly aircraft = signal<AirportAircraft | null>(null);
     protected readonly loadingAircraft = signal(false);
     protected readonly aircraftError = signal<string | null>(null);
+    protected readonly delayAnalysis = signal<AirportDelayAnalysis | null>(null);
+    protected readonly loadingDelayAnalysis = signal(false);
+    protected readonly delayAnalysisError = signal<string | null>(null);
     protected readonly range = signal<ConnectionRange>('7d');
     protected readonly airportCount = signal(0);
     protected readonly loadingAirports = signal(true);
@@ -70,6 +74,7 @@ export class AirportMapPage implements OnDestroy {
             this.loadConnections(airport);
             this.loadAirlines(airport);
             this.loadAircraft(airport);
+            this.loadDelayAnalysis(airport);
         }
     }
 
@@ -89,6 +94,8 @@ export class AirportMapPage implements OnDestroy {
         this.airlinesError.set(null);
         this.aircraft.set(null);
         this.aircraftError.set(null);
+        this.delayAnalysis.set(null);
+        this.delayAnalysisError.set(null);
         this.airportMapService.clearConnections();
         this.airportMapService.resetAirports();
     }
@@ -123,6 +130,7 @@ export class AirportMapPage implements OnDestroy {
         this.loadConnections(airport);
         this.loadAirlines(airport);
         this.loadAircraft(airport);
+        this.loadDelayAnalysis(airport);
     }
 
     private loadConnections(airport: Airport): void {
@@ -207,6 +215,35 @@ export class AirportMapPage implements OnDestroy {
                 error: () => {
                     this.loadingAircraft.set(false);
                     this.aircraftError.set('Die Flugzeugtypen konnten nicht geladen werden.');
+                },
+            });
+    }
+
+    private loadDelayAnalysis(airport: Airport): void {
+        this.delayAnalysis.set(null);
+        this.delayAnalysisError.set(null);
+
+        if (!airport.icao) {
+            return;
+        }
+
+        this.loadingDelayAnalysis.set(true);
+        this.airportService
+            .getDelayAnalysis(airport.icao, this.range())
+            .pipe(take(1))
+            .subscribe({
+                next: (analysis) => {
+                    if (this.selectedAirport()?.icao !== airport.icao) {
+                        return;
+                    }
+                    this.delayAnalysis.set(analysis);
+                    this.loadingDelayAnalysis.set(false);
+                },
+                error: () => {
+                    this.loadingDelayAnalysis.set(false);
+                    this.delayAnalysisError.set(
+                        'Die Verspätungsanalyse konnte nicht geladen werden.',
+                    );
                 },
             });
     }

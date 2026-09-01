@@ -11,3 +11,7 @@ airportRouter.get('/tracked', airportController.getTracked.bind(airportControlle
 airportRouter.get('/:icao/connections', airportController.getConnections.bind(airportController));
 airportRouter.get('/:icao/airlines', airportController.getAirlines.bind(airportController));
 airportRouter.get('/:icao/aircraft', airportController.getAircraft.bind(airportController));
+airportRouter.get(
+    '/:icao/delay-analysis',
+    airportController.getDelayAnalysis.bind(airportController),
+);

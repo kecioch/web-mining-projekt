@@ -6,6 +6,7 @@ import { AirportAircraft } from '../models/aircraft';
 import { AirportAirlines } from '../models/airline';
 import { Airport } from '../models/airport';
 import { AirportConnections, ConnectionRange } from '../models/connection';
+import { AirportDelayAnalysis } from '../models/delay-analysis';
 
 @Injectable({ providedIn: 'root' })
 export class AirportService {
@@ -32,6 +33,16 @@ export class AirportService {
     public getAircraft(icao: string, range: ConnectionRange): Observable<AirportAircraft> {
         return this.http.get<AirportAircraft>(
             `/api/airports/${encodeURIComponent(icao)}/aircraft`,
+            { params: { range } },
+        );
+    }
+
+    public getDelayAnalysis(
+        icao: string,
+        range: ConnectionRange,
+    ): Observable<AirportDelayAnalysis> {
+        return this.http.get<AirportDelayAnalysis>(
+            `/api/airports/${encodeURIComponent(icao)}/delay-analysis`,
             { params: { range } },
         );
     }
