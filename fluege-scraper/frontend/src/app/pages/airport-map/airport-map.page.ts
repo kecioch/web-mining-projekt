@@ -143,13 +143,14 @@ export class AirportMapPage implements OnDestroy {
         }
 
         this.loadingConnections.set(true);
+        const range = this.range();
 
         this.airportService
-            .getConnections(airport.icao, this.range())
+            .getConnections(airport.icao, range)
             .pipe(take(1))
             .subscribe({
                 next: (connections) => {
-                    if (this.selectedAirport()?.icao !== airport.icao) {
+                    if (!this.isCurrentRequest(airport, range)) {
                         return;
                     }
                     this.connections.set(connections);
@@ -157,6 +158,9 @@ export class AirportMapPage implements OnDestroy {
                     this.loadingConnections.set(false);
                 },
                 error: () => {
+                    if (!this.isCurrentRequest(airport, range)) {
+                        return;
+                    }
                     this.loadingConnections.set(false);
                     this.connectionsError.set('Die Verbindungen konnten nicht geladen werden.');
                 },
@@ -172,19 +176,23 @@ export class AirportMapPage implements OnDestroy {
         }
 
         this.loadingAirlines.set(true);
+        const range = this.range();
 
         this.airportService
-            .getAirlines(airport.icao, this.range())
+            .getAirlines(airport.icao, range)
             .pipe(take(1))
             .subscribe({
                 next: (airlines) => {
-                    if (this.selectedAirport()?.icao !== airport.icao) {
+                    if (!this.isCurrentRequest(airport, range)) {
                         return;
                     }
                     this.airlines.set(airlines);
                     this.loadingAirlines.set(false);
                 },
                 error: () => {
+                    if (!this.isCurrentRequest(airport, range)) {
+                        return;
+                    }
                     this.loadingAirlines.set(false);
                     this.airlinesError.set('Die Airlines konnten nicht geladen werden.');
                 },
@@ -200,19 +208,23 @@ export class AirportMapPage implements OnDestroy {
         }
 
         this.loadingAircraft.set(true);
+        const range = this.range();
 
         this.airportService
-            .getAircraft(airport.icao, this.range())
+            .getAircraft(airport.icao, range)
             .pipe(take(1))
             .subscribe({
                 next: (aircraft) => {
-                    if (this.selectedAirport()?.icao !== airport.icao) {
+                    if (!this.isCurrentRequest(airport, range)) {
                         return;
                     }
                     this.aircraft.set(aircraft);
                     this.loadingAircraft.set(false);
                 },
                 error: () => {
+                    if (!this.isCurrentRequest(airport, range)) {
+                        return;
+                    }
                     this.loadingAircraft.set(false);
                     this.aircraftError.set('Die Flugzeugtypen konnten nicht geladen werden.');
                 },
@@ -228,23 +240,31 @@ export class AirportMapPage implements OnDestroy {
         }
 
         this.loadingDelayAnalysis.set(true);
+        const range = this.range();
         this.airportService
-            .getDelayAnalysis(airport.icao, this.range())
+            .getDelayAnalysis(airport.icao, range)
             .pipe(take(1))
             .subscribe({
                 next: (analysis) => {
-                    if (this.selectedAirport()?.icao !== airport.icao) {
+                    if (!this.isCurrentRequest(airport, range)) {
                         return;
                     }
                     this.delayAnalysis.set(analysis);
                     this.loadingDelayAnalysis.set(false);
                 },
                 error: () => {
+                    if (!this.isCurrentRequest(airport, range)) {
+                        return;
+                    }
                     this.loadingDelayAnalysis.set(false);
                     this.delayAnalysisError.set(
                         'Die Verspätungsanalyse konnte nicht geladen werden.',
                     );
                 },
             });
+    }
+
+    private isCurrentRequest(airport: Airport, range: ConnectionRange): boolean {
+        return this.selectedAirport()?.icao === airport.icao && this.range() === range;
     }
 }

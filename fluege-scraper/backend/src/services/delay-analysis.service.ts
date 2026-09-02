@@ -6,14 +6,10 @@ import type {
 } from '../domain/delay-analysis.js';
 import type { DelayAnalysisRepository } from '../repositories/delay-analysis.repository.js';
 import { SupabaseDelayAnalysisRepository } from '../repositories/supabase-delay-analysis.repository.js';
+import { AnalysisPeriodService } from './analysis-period.service.js';
 import type { ConnectionRange } from './connection.service.js';
 
 const DELAY_THRESHOLD_MINUTES = 15;
-const RANGE_DAYS: Record<Exclude<ConnectionRange, 'all'>, number> = {
-    '24h': 1,
-    '7d': 7,
-    '30d': 30,
-};
 
 interface MetricTotals {
     flightCount: number;
@@ -26,26 +22,30 @@ interface MetricTotals {
 export class DelayAnalysisService {
     constructor(
         private readonly delayAnalysisRepository: DelayAnalysisRepository = new SupabaseDelayAnalysisRepository(),
+        private readonly analysisPeriodService: AnalysisPeriodService = new AnalysisPeriodService(),
     ) {}
 
     public async getAnalysis(
         airportIcao: string,
         range: ConnectionRange,
     ): Promise<AirportDelayAnalysis> {
-        const rows = await this.delayAnalysisRepository.findByAirport(airportIcao.toUpperCase());
-        const latestDate = rows.at(-1)?.analysisDate ?? null;
-        const fromDate = latestDate ? this.rangeStart(latestDate, range) : null;
-        const filteredRows = fromDate ? rows.filter((row) => row.analysisDate >= fromDate) : rows;
-        const firstRow = filteredRows[0];
-        const lastRow = filteredRows.at(-1);
-        const arrivalRows = filteredRows.filter((row) => row.flightDirection === 'ARRIVAL');
-        const departureRows = filteredRows.filter((row) => row.flightDirection === 'DEPARTURE');
+        const normalizedIcao = airportIcao.toUpperCase();
+        const from = await this.analysisPeriodService.getFromTimestamp(normalizedIcao, range);
+        const rows = await this.delayAnalysisRepository.findByAirport(
+            normalizedIcao,
+            from,
+            DELAY_THRESHOLD_MINUTES,
+        );
+        const firstRow = rows[0];
+        const lastRow = rows.at(-1);
+        const arrivalRows = rows.filter((row) => row.flightDirection === 'ARRIVAL');
+        const departureRows = rows.filter((row) => row.flightDirection === 'DEPARTURE');
 
         return {
-            summary: this.toMetric(this.sumRows(filteredRows)),
+            summary: this.toMetric(this.sumRows(rows)),
             arrivalSummary: this.toMetric(this.sumRows(arrivalRows)),
             departureSummary: this.toMetric(this.sumRows(departureRows)),
-            daily: this.toDaily(filteredRows),
+            daily: this.toDaily(rows),
             period:
                 firstRow && lastRow
                     ? {
@@ -55,16 +55,6 @@ export class DelayAnalysisService {
                     : null,
             delayThresholdMinutes: DELAY_THRESHOLD_MINUTES,
         };
-    }
-
-    private rangeStart(latestDate: string, range: ConnectionRange): string | null {
-        if (range === 'all') {
-            return null;
-        }
-
-        const date = new Date(`${latestDate}T00:00:00Z`);
-        date.setUTCDate(date.getUTCDate() - (RANGE_DAYS[range] - 1));
-        return date.toISOString().slice(0, 10);
     }
 
     private toDaily(rows: DelayAnalysisRow[]): DailyDelayAnalysis[] {
@@ -109,13 +99,18 @@ export class DelayAnalysisService {
     }
 
     private toMetric(totals: MetricTotals): DelayMetric {
+        const onTimeFlightCount = totals.evaluatedFlightCount - totals.delayedFlightCount;
+
         return {
             flightCount: totals.flightCount,
             evaluatedFlightCount: totals.evaluatedFlightCount,
+            onTimeFlightCount,
             delayedFlightCount: totals.delayedFlightCount,
             cancelledFlightCount: totals.cancelledFlightCount,
             coverageRate: this.percentage(totals.evaluatedFlightCount, totals.flightCount),
+            onTimeRate: this.percentage(onTimeFlightCount, totals.evaluatedFlightCount),
             delayRate: this.percentage(totals.delayedFlightCount, totals.evaluatedFlightCount),
+            cancellationRate: this.percentage(totals.cancelledFlightCount, totals.flightCount),
             averageDelayMinutes:
                 totals.evaluatedFlightCount > 0
                     ? this.round(totals.totalDelayMinutes / totals.evaluatedFlightCount)

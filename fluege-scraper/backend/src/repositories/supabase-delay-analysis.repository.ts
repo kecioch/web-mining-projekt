@@ -17,19 +17,21 @@ interface SupabaseDelayAnalysisRow {
 export class SupabaseDelayAnalysisRepository implements DelayAnalysisRepository {
     constructor(private readonly client?: SupabaseClient) {}
 
-    public async findByAirport(airportIcao: string): Promise<DelayAnalysisRow[]> {
+    public async findByAirport(
+        airportIcao: string,
+        from: Date | null,
+        delayThresholdMinutes: number,
+    ): Promise<DelayAnalysisRow[]> {
         const client = this.client ?? getSupabaseClient();
-        const { data, error } = await client
-            .from('airport_analysis')
-            .select(
-                'analysis_date, flight_direction, flight_count, evaluated_flight_count, delayed_flight_count, cancelled_flight_count, total_delay_minutes',
-            )
-            .eq('airport_icao', airportIcao)
-            .order('analysis_date', { ascending: true });
+        const { data, error } = await client.rpc('airport_delay_analysis', {
+            p_icao: airportIcao,
+            p_from: from ? from.toISOString() : null,
+            p_delay_threshold: delayThresholdMinutes,
+        });
 
         if (error) {
             throw new Error(
-                `Supabase-Request of table "airport_analysis" failed: ${error.message}`,
+                `Supabase-RPC "airport_delay_analysis" failed: ${error.message}`,
             );
         }
 

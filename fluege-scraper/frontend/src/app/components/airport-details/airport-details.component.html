@@ -77,33 +77,74 @@
                 styleClass="analysis-message"
             />
         } @else {
+            <div class="delay-view-selector">
+                <span id="delay-view-label" class="delay-view-selector__label">Ansicht</span>
+                <p-selectButton
+                    [options]="delaySummaryOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    [allowEmpty]="false"
+                    [ngModel]="selectedDelaySummaryKey()"
+                    (onChange)="onDelaySummaryChange($event.value)"
+                    size="small"
+                    ariaLabelledBy="delay-view-label"
+                />
+            </div>
+
             <div class="delay-summary-cards">
-                @for (summary of delaySummaries(); track summary.key) {
+                @if (selectedDelaySummary(); as summary) {
                     <p-card [header]="summary.label" styleClass="delay-summary-card">
                         <div class="delay-summary-card__metrics">
                             <div>
                                 <span>Flüge insgesamt</span>
                                 <strong>{{ formatNumber(summary.metric.flightCount) }}</strong>
-                                <small>
-                                    {{ formatNumber(summary.metric.cancelledFlightCount) }} annulliert
-                                </small>
                             </div>
                             <div>
                                 <span>Auswertbar</span>
-                                <strong>{{ formatNumber(summary.metric.evaluatedFlightCount) }}</strong>
-                                <small>{{ formatPercent(summary.metric.coverageRate) }} Abdeckung</small>
+                                <strong>{{
+                                    formatNumber(summary.metric.evaluatedFlightCount)
+                                }}</strong>
+                                <small
+                                    >{{
+                                        formatPercent(summary.metric.coverageRate)
+                                    }}
+                                    Abdeckung</small
+                                >
+                            </div>
+                            <div>
+                                <span>Pünktlich</span>
+                                <strong>{{
+                                    formatNumber(summary.metric.onTimeFlightCount)
+                                }}</strong>
+                                <small>
+                                    {{ formatPercent(summary.metric.onTimeRate) }} der auswertbaren
+                                    Flüge
+                                </small>
                             </div>
                             <div>
                                 <span>Verspätet</span>
-                                <strong>{{ formatNumber(summary.metric.delayedFlightCount) }}</strong>
+                                <strong>{{
+                                    formatNumber(summary.metric.delayedFlightCount)
+                                }}</strong>
                                 <small>
                                     {{ formatPercent(summary.metric.delayRate) }} über
                                     {{ analysis.delayThresholdMinutes }} min
                                 </small>
                             </div>
                             <div>
+                                <span>Annulliert</span>
+                                <strong>{{
+                                    formatNumber(summary.metric.cancelledFlightCount)
+                                }}</strong>
+                                <small>
+                                    {{ formatPercent(summary.metric.cancellationRate) }} aller Flüge
+                                </small>
+                            </div>
+                            <div>
                                 <span>Ø Verspätung</span>
-                                <strong>{{ formatMinutes(summary.metric.averageDelayMinutes) }}</strong>
+                                <strong>{{
+                                    formatMinutes(summary.metric.averageDelayMinutes)
+                                }}</strong>
                                 <small>je auswertbarem Flug</small>
                             </div>
                         </div>
@@ -111,31 +152,39 @@
                 }
             </div>
 
-            <p-card header="Verspätungsquote pro Tag" styleClass="analysis-chart-card">
+            <p-card
+                [header]="
+                    'Anteil der Flüge mit mehr als ' +
+                    analysis.delayThresholdMinutes +
+                    ' Minuten Verspätung pro Tag'
+                "
+                styleClass="analysis-chart-card"
+            >
                 <p-chart
                     type="line"
                     [data]="delayRateChart()"
                     [options]="delayRateChartOptions"
                     height="14rem"
-                    ariaLabel="Verspätungsquote pro Tag für Ankünfte und Abflüge"
+                    [ariaLabel]="
+                        'Anteil der Flüge mit mehr als ' +
+                        analysis.delayThresholdMinutes +
+                        ' Minuten Verspätung pro Tag für Ankünfte und Abflüge'
+                    "
                 />
             </p-card>
 
-            <p-card header="Durchschnittliche Verspätung pro Tag" styleClass="analysis-chart-card">
+            <p-card
+                header="Ø Verspätungsminuten je auswertbarem Flug pro Tag"
+                styleClass="analysis-chart-card"
+            >
                 <p-chart
                     type="line"
                     [data]="averageDelayChart()"
                     [options]="averageDelayChartOptions"
                     height="14rem"
-                    ariaLabel="Durchschnittliche Verspätung pro Tag für Ankünfte und Abflüge"
+                    ariaLabel="Durchschnittliche Verspätungsminuten je auswertbarem Flug pro Tag für Ankünfte und Abflüge"
                 />
             </p-card>
-
-            <p-message
-                severity="secondary"
-                text="Die Verspätungsquote berücksichtigt nur nicht annullierte Flüge mit vorhandenem Verspätungswert."
-                styleClass="analysis-message"
-            />
         }
     }
 </section>

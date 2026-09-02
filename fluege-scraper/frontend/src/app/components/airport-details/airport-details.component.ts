@@ -25,6 +25,8 @@ interface DelaySummaryView {
     metric: DelayMetric;
 }
 
+type DelaySummaryKey = DelaySummaryView['key'];
+
 interface AirlineSlice {
     key: string;
     label: string;
@@ -46,6 +48,10 @@ const NUMBER_FORMAT = new Intl.NumberFormat('de-DE');
 const DATE_FORMAT = new Intl.DateTimeFormat('de-DE', {
     day: '2-digit',
     month: '2-digit',
+    timeZone: 'UTC',
+});
+const WEEKDAY_FORMAT = new Intl.DateTimeFormat('de-DE', {
+    weekday: 'short',
     timeZone: 'UTC',
 });
 
@@ -84,6 +90,13 @@ export class AirportDetailsComponent {
     protected readonly showDeparturesList = signal(false);
     protected readonly showArrivalsList = signal(false);
     protected readonly showAircraftList = signal(false);
+    protected readonly selectedDelaySummaryKey = signal<DelaySummaryKey>('all');
+
+    protected readonly delaySummaryOptions: { label: string; value: DelaySummaryKey }[] = [
+        { label: 'Gesamt', value: 'all' },
+        { label: 'Ankünfte', value: 'arrival' },
+        { label: 'Abflüge', value: 'departure' },
+    ];
 
     protected readonly delaySummaries = computed<DelaySummaryView[]>(() => {
         const analysis = this.delayAnalysis();
@@ -95,16 +108,22 @@ export class AirportDetailsComponent {
             { key: 'all', label: 'Gesamt', metric: analysis.summary },
             {
                 key: 'arrival',
-                label: 'Ankunft',
+                label: 'Ankünfte',
                 metric: analysis.arrivalSummary ?? this.aggregateDirection(analysis, 'arrival'),
             },
             {
                 key: 'departure',
-                label: 'Abflug',
+                label: 'Abflüge',
                 metric: analysis.departureSummary ?? this.aggregateDirection(analysis, 'departure'),
             },
         ];
     });
+    protected readonly selectedDelaySummary = computed<DelaySummaryView | null>(
+        () =>
+            this.delaySummaries().find(
+                (summary) => summary.key === this.selectedDelaySummaryKey(),
+            ) ?? null,
+    );
     protected readonly delayPeriod = computed(() => {
         const period = this.delayAnalysis()?.period;
         if (!period) {
@@ -148,6 +167,12 @@ export class AirportDetailsComponent {
     protected onRangeChange(value: ConnectionRange | null): void {
         if (value) {
             this.rangeChange.emit(value);
+        }
+    }
+
+    protected onDelaySummaryChange(value: DelaySummaryKey | null): void {
+        if (value) {
+            this.selectedDelaySummaryKey.set(value);
         }
     }
 
@@ -279,6 +304,10 @@ export class AirportDetailsComponent {
             (sum, metric) => sum + metric.evaluatedFlightCount,
             0,
         );
+        const onTimeFlightCount = metrics.reduce(
+            (sum, metric) => sum + metric.onTimeFlightCount,
+            0,
+        );
         const delayedFlightCount = metrics.reduce(
             (sum, metric) => sum + metric.delayedFlightCount,
             0,
@@ -295,10 +324,13 @@ export class AirportDetailsComponent {
         return {
             flightCount,
             evaluatedFlightCount,
+            onTimeFlightCount,
             delayedFlightCount,
             cancelledFlightCount,
             coverageRate: this.percentage(evaluatedFlightCount, flightCount),
+            onTimeRate: this.percentage(onTimeFlightCount, evaluatedFlightCount),
             delayRate: this.percentage(delayedFlightCount, evaluatedFlightCount),
+            cancellationRate: this.percentage(cancelledFlightCount, flightCount),
             averageDelayMinutes:
                 evaluatedFlightCount > 0 ? totalDelayMinutes / evaluatedFlightCount : null,
         };
@@ -311,7 +343,7 @@ export class AirportDetailsComponent {
     private createChartData(getter: (metric: DelayMetric) => number | null): ChartData<'line'> {
         const daily = this.delayAnalysis()?.daily ?? [];
         return {
-            labels: daily.map((day) => this.formatDate(day.date)),
+            labels: daily.map((day) => this.formatChartDate(day.date)),
             datasets: [
                 {
                     label: 'Ankunft',
@@ -370,6 +402,16 @@ export class AirportDetailsComponent {
             return '';
         }
         return DATE_FORMAT.format(new Date(`${value}T00:00:00Z`));
+    }
+
+    private formatChartDate(value: string): string {
+        if (!value) {
+            return '';
+        }
+
+        const date = new Date(`${value}T00:00:00Z`);
+        const weekday = WEEKDAY_FORMAT.format(date).replace(/\.$/, '');
+        return `${DATE_FORMAT.format(date)} (${weekday})`;
     }
 
     private formatChartValue(value: number | null, unit: '%' | 'min'): string {
