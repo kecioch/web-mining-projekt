@@ -30,6 +30,35 @@ def analysis_date() -> date:
     return datetime.now(ZoneInfo("Europe/Berlin")).date() - timedelta(days=1)
 
 
+def analyzed_airports(database: SupabaseClient, target_date: date) -> list[str]:
+    """Formatiert die Flughäfen, für die Analysezeilen geschrieben wurden."""
+    analysis_rows = database.fetch_all(
+        "airport_analysis",
+        "airport_icao",
+        order="airport_icao",
+        equal_filters={"analysis_date": target_date.isoformat()},
+    )
+    airport_codes = {
+        str(row.get("airport_icao") or "").strip().upper()
+        for row in analysis_rows
+        if row.get("airport_icao")
+    }
+    if not airport_codes:
+        return []
+
+    airport_names = {
+        str(row.get("icao") or "").strip().upper(): str(
+            row.get("name") or ""
+        ).strip()
+        for row in database.fetch_all("airports", "icao,name", order="icao")
+        if row.get("icao")
+    }
+    return [
+        f"{airport_names[code]} ({code})" if airport_names.get(code) else code
+        for code in sorted(airport_codes)
+    ]
+
+
 def main() -> None:
     target_date = analysis_date()
     try:
@@ -44,6 +73,7 @@ def main() -> None:
             f"Dry Run: Flughafenanalyse für {target_date.isoformat()} "
             f"mit Verspätungsgrenze > {threshold} Minuten würde gestartet."
         )
+        print("Flughäfen werden beim tatsächlichen Lauf aus den Flugdaten ermittelt.")
         return
 
     database = SupabaseClient(
@@ -57,10 +87,17 @@ def main() -> None:
             "p_delay_threshold": threshold,
         },
     )
+    airports = analyzed_airports(database, target_date)
     print(
         f"Flughafenanalyse für {target_date.isoformat()} abgeschlossen: "
         f"{row_count} Datensätze erstellt."
     )
+    print(f"Flughäfen ({len(airports)}):")
+    if airports:
+        for airport in airports:
+            print(f"  - {airport}")
+    else:
+        print("  - keine")
 
 
 if __name__ == "__main__":

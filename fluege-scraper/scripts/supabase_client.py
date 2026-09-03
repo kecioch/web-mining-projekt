@@ -57,7 +57,11 @@ class SupabaseClient:
         return response.json()
 
     def fetch_all(
-        self, table: str, columns: str, order: str | None = None
+        self,
+        table: str,
+        columns: str,
+        order: str | None = None,
+        equal_filters: dict[str, str] | None = None,
     ) -> list[dict]:
         """Lädt eine vollständige Tabelle seitenweise über die Supabase-REST-API."""
         rows = []
@@ -70,6 +74,10 @@ class SupabaseClient:
             }
             if order:
                 params["order"] = order
+            if equal_filters:
+                params.update(
+                    {column: f"eq.{value}" for column, value in equal_filters.items()}
+                )
             response = requests.get(
                 self._endpoint(table),
                 params=params,
