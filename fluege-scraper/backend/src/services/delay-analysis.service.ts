@@ -3,6 +3,8 @@ import type {
     DailyDelayAnalysis,
     DelayAnalysisRow,
     DelayMetric,
+    HourlyDelayAnalysis,
+    HourlyDelayAnalysisRow,
 } from '../domain/delay-analysis.js';
 import type { DelayAnalysisRepository } from '../repositories/delay-analysis.repository.js';
 import { SupabaseDelayAnalysisRepository } from '../repositories/supabase-delay-analysis.repository.js';
@@ -41,11 +43,23 @@ export class DelayAnalysisService {
         const arrivalRows = rows.filter((row) => row.flightDirection === 'ARRIVAL');
         const departureRows = rows.filter((row) => row.flightDirection === 'DEPARTURE');
 
+        const hourly =
+            range === '24h' && from
+                ? this.toHourly(
+                      await this.delayAnalysisRepository.findHourlyByAirport(
+                          normalizedIcao,
+                          from,
+                          DELAY_THRESHOLD_MINUTES,
+                      ),
+                  )
+                : undefined;
+
         return {
             summary: this.toMetric(this.sumRows(rows)),
             arrivalSummary: this.toMetric(this.sumRows(arrivalRows)),
             departureSummary: this.toMetric(this.sumRows(departureRows)),
             daily: this.toDaily(rows),
+            ...(hourly ? { hourly } : {}),
             period:
                 firstRow && lastRow
                     ? {
@@ -54,6 +68,40 @@ export class DelayAnalysisService {
                       }
                     : null,
             delayThresholdMinutes: DELAY_THRESHOLD_MINUTES,
+        };
+    }
+
+    private toHourly(rows: HourlyDelayAnalysisRow[]): HourlyDelayAnalysis[] {
+        const byHour = new Map<string, HourlyDelayAnalysis>();
+
+        for (const row of rows) {
+            const bucket = byHour.get(row.bucketStart) ?? {
+                hour: row.bucketStart,
+                arrival: null,
+                departure: null,
+            };
+            const metric = this.toMetric(this.sumRows([this.hourlyRowToDailyRow(row)]));
+
+            if (row.flightDirection === 'ARRIVAL') {
+                bucket.arrival = metric;
+            } else {
+                bucket.departure = metric;
+            }
+            byHour.set(row.bucketStart, bucket);
+        }
+
+        return [...byHour.values()];
+    }
+
+    private hourlyRowToDailyRow(row: HourlyDelayAnalysisRow): DelayAnalysisRow {
+        return {
+            analysisDate: row.bucketStart,
+            flightDirection: row.flightDirection,
+            flightCount: row.flightCount,
+            evaluatedFlightCount: row.evaluatedFlightCount,
+            delayedFlightCount: row.delayedFlightCount,
+            cancelledFlightCount: row.cancelledFlightCount,
+            totalDelayMinutes: row.totalDelayMinutes,
         };
     }
 

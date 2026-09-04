@@ -1,4 +1,4 @@
-import type { DelayAnalysisRow } from '../domain/delay-analysis.js';
+import type { DelayAnalysisRow, HourlyDelayAnalysisRow } from '../domain/delay-analysis.js';
 
 export interface DelayAnalysisRepository {
     findByAirport(
@@ -6,4 +6,10 @@ export interface DelayAnalysisRepository {
         from: Date | null,
         delayThresholdMinutes: number,
     ): Promise<DelayAnalysisRow[]>;
+
+    findHourlyByAirport(
+        airportIcao: string,
+        from: Date,
+        delayThresholdMinutes: number,
+    ): Promise<HourlyDelayAnalysisRow[]>;
 }

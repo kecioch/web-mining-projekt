@@ -19,11 +19,18 @@ export interface DailyDelayAnalysis {
     departure: DelayMetric | null;
 }
 
+export interface HourlyDelayAnalysis {
+    hour: string;
+    arrival: DelayMetric | null;
+    departure: DelayMetric | null;
+}
+
 export interface AirportDelayAnalysis {
     summary: DelayMetric;
     arrivalSummary: DelayMetric;
     departureSummary: DelayMetric;
     daily: DailyDelayAnalysis[];
+    hourly?: HourlyDelayAnalysis[];
     period: {
         from: string;
         to: string;
@@ -33,6 +40,16 @@ export interface AirportDelayAnalysis {
 
 export interface DelayAnalysisRow {
     analysisDate: string;
+    flightDirection: FlightDirection;
+    flightCount: number;
+    evaluatedFlightCount: number;
+    delayedFlightCount: number;
+    cancelledFlightCount: number;
+    totalDelayMinutes: number;
+}
+
+export interface HourlyDelayAnalysisRow {
+    bucketStart: string;
     flightDirection: FlightDirection;
     flightCount: number;
     evaluatedFlightCount: number;

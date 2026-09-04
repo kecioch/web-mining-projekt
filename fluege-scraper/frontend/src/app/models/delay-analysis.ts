@@ -17,11 +17,18 @@ export interface DailyDelayAnalysis {
     departure: DelayMetric | null;
 }
 
+export interface HourlyDelayAnalysis {
+    hour: string;
+    arrival: DelayMetric | null;
+    departure: DelayMetric | null;
+}
+
 export interface AirportDelayAnalysis {
     summary: DelayMetric;
     arrivalSummary?: DelayMetric;
     departureSummary?: DelayMetric;
     daily: DailyDelayAnalysis[];
+    hourly?: HourlyDelayAnalysis[];
     period: {
         from: string;
         to: string;
