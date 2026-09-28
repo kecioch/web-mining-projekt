@@ -1,6 +1,7 @@
 """Wiederverwendbarer REST-Client für Supabase."""
 
 from datetime import datetime, timezone
+from itertools import groupby
 
 import requests
 
@@ -207,19 +208,23 @@ class SupabaseClient:
         headers = dict(self.headers)
         if prefer:
             headers["Prefer"] = prefer
+        # PostgREST verlangt identische Felder innerhalb eines JSON-Arrays.
+        # Fehlende Felder bleiben ausgelassen, damit DB-Defaults erhalten bleiben.
+        # Nur benachbarte Zeilen gruppieren, um die Schreibreihenfolge zu bewahren.
         for start in range(0, len(rows), BATCH_SIZE):
-            response = requests.request(
-                method,
-                self._endpoint(table),
-                params=params,
-                headers=headers,
-                json=rows[start : start + BATCH_SIZE],
-                timeout=60,
-            )
-            try:
-                response.raise_for_status()
-            except requests.HTTPError as exc:
-                raise RuntimeError(
-                    f"Supabase-Schreibzugriff auf {table} fehlgeschlagen "
-                    f"({response.status_code}): {response.text[:2000]}"
-                ) from exc
+            for _, group in groupby(rows[start : start + BATCH_SIZE], key=frozenset):
+                response = requests.request(
+                    method,
+                    self._endpoint(table),
+                    params=params,
+                    headers=headers,
+                    json=list(group),
+                    timeout=60,
+                )
+                try:
+                    response.raise_for_status()
+                except requests.HTTPError as exc:
+                    raise RuntimeError(
+                        f"Supabase-Schreibzugriff auf {table} fehlgeschlagen "
+                        f"({response.status_code}): {response.text[:2000]}"
+                    ) from exc
