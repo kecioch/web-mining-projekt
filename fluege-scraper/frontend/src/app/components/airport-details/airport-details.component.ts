@@ -54,6 +54,17 @@ const WEEKDAY_FORMAT = new Intl.DateTimeFormat('de-DE', {
     weekday: 'short',
     timeZone: 'UTC',
 });
+const HOUR_FORMAT = new Intl.DateTimeFormat('de-DE', {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'UTC',
+});
+
+interface DelayChartPoint {
+    label: string;
+    arrival: DelayMetric | null;
+    departure: DelayMetric | null;
+}
 
 @Component({
     selector: 'app-airport-details',
@@ -131,14 +142,52 @@ export class AirportDetailsComponent {
         }
         return `${this.formatDate(period.from)} – ${this.formatDate(period.to)}`;
     });
+    protected readonly isHourly = computed<boolean>(
+        () => (this.delayAnalysis()?.hourly?.length ?? 0) > 0,
+    );
+    protected readonly chartPeriodLabel = computed<string>(() =>
+        this.isHourly() ? 'pro Stunde' : 'pro Tag',
+    );
+    private readonly chartPoints = computed<DelayChartPoint[]>(() => {
+        const analysis = this.delayAnalysis();
+        if (!analysis) {
+            return [];
+        }
+
+        const hourly = analysis.hourly;
+        if (hourly && hourly.length > 0) {
+            return hourly.map((bucket) => ({
+                label: this.formatChartHour(bucket.hour),
+                arrival: bucket.arrival,
+                departure: bucket.departure,
+            }));
+        }
+
+        return analysis.daily.map((day) => ({
+            label: this.formatChartDate(day.date),
+            arrival: day.arrival,
+            departure: day.departure,
+        }));
+    });
     protected readonly delayRateChart = computed<ChartData<'line'>>(() =>
         this.createChartData((metric) => metric.delayRate),
     );
     protected readonly averageDelayChart = computed<ChartData<'line'>>(() =>
         this.createChartData((metric) => metric.averageDelayMinutes),
     );
-    protected readonly delayRateChartOptions = this.createChartOptions('%', 100);
-    protected readonly averageDelayChartOptions = this.createChartOptions('min');
+    protected readonly delayRateChartOptions = this.createChartOptions(
+        '%',
+        100,
+        (metric) =>
+            `${this.formatNumber(metric.delayedFlightCount)}/${this.formatNumber(
+                metric.evaluatedFlightCount,
+            )}`,
+    );
+    protected readonly averageDelayChartOptions = this.createChartOptions(
+        'min',
+        undefined,
+        (metric) => `${this.formatNumber(metric.evaluatedFlightCount)}`,
+    );
 
     protected readonly rangeOptions: RangeOption[] = [
         { label: '24 h', value: '24h' },
@@ -341,13 +390,13 @@ export class AirportDetailsComponent {
     }
 
     private createChartData(getter: (metric: DelayMetric) => number | null): ChartData<'line'> {
-        const daily = this.delayAnalysis()?.daily ?? [];
+        const points = this.chartPoints();
         return {
-            labels: daily.map((day) => this.formatChartDate(day.date)),
+            labels: points.map((point) => point.label),
             datasets: [
                 {
                     label: 'Ankunft',
-                    data: daily.map((day) => (day.arrival ? getter(day.arrival) : null)),
+                    data: points.map((point) => (point.arrival ? getter(point.arrival) : null)),
                     borderColor: '#3b82f6',
                     backgroundColor: '#3b82f6',
                     tension: 0.3,
@@ -355,7 +404,9 @@ export class AirportDetailsComponent {
                 },
                 {
                     label: 'Abflug',
-                    data: daily.map((day) => (day.departure ? getter(day.departure) : null)),
+                    data: points.map((point) =>
+                        point.departure ? getter(point.departure) : null,
+                    ),
                     borderColor: '#f97316',
                     backgroundColor: '#f97316',
                     tension: 0.3,
@@ -365,7 +416,11 @@ export class AirportDetailsComponent {
         };
     }
 
-    private createChartOptions(unit: '%' | 'min', max?: number): ChartOptions<'line'> {
+    private createChartOptions(
+        unit: '%' | 'min',
+        max?: number,
+        countLabel?: (metric: DelayMetric) => string,
+    ): ChartOptions<'line'> {
         return {
             responsive: true,
             maintainAspectRatio: false,
@@ -376,8 +431,19 @@ export class AirportDetailsComponent {
                 },
                 tooltip: {
                     callbacks: {
-                        label: (context) =>
-                            `${context.dataset.label}: ${this.formatChartValue(context.parsed.y, unit)}`,
+                        label: (context) => {
+                            const base = `${context.dataset.label}: ${this.formatChartValue(context.parsed.y, unit)}`;
+                            if (!countLabel || !this.isHourly()) {
+                                return base;
+                            }
+
+                            const point = this.chartPoints()[context.dataIndex];
+                            const metric =
+                                context.datasetIndex === 0
+                                    ? point?.arrival
+                                    : point?.departure;
+                            return metric ? `${base} (${countLabel(metric)})` : base;
+                        },
                     },
                 },
             },
@@ -412,6 +478,18 @@ export class AirportDetailsComponent {
         const date = new Date(`${value}T00:00:00Z`);
         const weekday = WEEKDAY_FORMAT.format(date).replace(/\.$/, '');
         return `${DATE_FORMAT.format(date)} (${weekday})`;
+    }
+
+    private formatChartHour(value: string): string {
+        if (!value) {
+            return '';
+        }
+
+        // Der Backend-Zeitstempel ist bereits Berliner Ortszeit (ohne Zeitzone),
+        // daher wird er als UTC interpretiert, um die Stunde unverändert anzuzeigen.
+        const normalized = value.includes('T') ? value : value.replace(' ', 'T');
+        const date = new Date(`${normalized}Z`);
+        return `${HOUR_FORMAT.format(date)} Uhr`;
     }
 
     private formatChartValue(value: number | null, unit: '%' | 'min'): string {

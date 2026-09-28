@@ -156,7 +156,8 @@
                 [header]="
                     'Anteil der Flüge mit mehr als ' +
                     analysis.delayThresholdMinutes +
-                    ' Minuten Verspätung pro Tag'
+                    ' Minuten Verspätung ' +
+                    chartPeriodLabel()
                 "
                 styleClass="analysis-chart-card"
             >
@@ -168,13 +169,15 @@
                     [ariaLabel]="
                         'Anteil der Flüge mit mehr als ' +
                         analysis.delayThresholdMinutes +
-                        ' Minuten Verspätung pro Tag für Ankünfte und Abflüge'
+                        ' Minuten Verspätung ' +
+                        chartPeriodLabel() +
+                        ' für Ankünfte und Abflüge'
                     "
                 />
             </p-card>
 
             <p-card
-                header="Ø Verspätungsminuten je auswertbarem Flug pro Tag"
+                [header]="'Ø Verspätungsminuten je auswertbarem Flug ' + chartPeriodLabel()"
                 styleClass="analysis-chart-card"
             >
                 <p-chart
@@ -182,7 +185,11 @@
                     [data]="averageDelayChart()"
                     [options]="averageDelayChartOptions"
                     height="14rem"
-                    ariaLabel="Durchschnittliche Verspätungsminuten je auswertbarem Flug pro Tag für Ankünfte und Abflüge"
+                    [ariaLabel]="
+                        'Durchschnittliche Verspätungsminuten je auswertbarem Flug ' +
+                        chartPeriodLabel() +
+                        ' für Ankünfte und Abflüge'
+                    "
                 />
             </p-card>
         }
